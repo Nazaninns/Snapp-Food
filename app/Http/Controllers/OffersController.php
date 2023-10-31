@@ -21,7 +21,9 @@ class OffersController extends Controller
 
     public function store(OfferCodeRequest $offerCodeRequest)
     {
-        OfferCode::query()->create($offerCodeRequest->validated());
+        $validated=$offerCodeRequest->validated();
+        $validated['code']=uniqid();
+        OfferCode::query()->create($validated);
         return redirect()->route('admin.offer.index');
     }
 
