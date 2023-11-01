@@ -22,7 +22,7 @@ class OfferCodeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'percent'=>['integer','required','between:1,2']
+            'percent'=>['integer','required','between:10,80']
         ];
     }
 }

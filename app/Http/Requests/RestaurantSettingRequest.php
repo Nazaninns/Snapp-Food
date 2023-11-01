@@ -23,12 +23,12 @@ class RestaurantSettingRequest extends FormRequest
     {
         return [
             'name'=>['required','string'],
-            //'type'=>['integer','required'],
+            'type'=>['required'],
             'phone'=>['string','required'],
             'address'=>['string','required'],
-            'image'=>['string','required'],
-            'delivery'=>['integer','required'],
-            'open_close'=>['boolean','required'],
+            //'image'=>['string','required'],
+            //'delivery'=>['integer','required'],
+            //'open_close'=>['boolean','required'],
         ];
     }
 }

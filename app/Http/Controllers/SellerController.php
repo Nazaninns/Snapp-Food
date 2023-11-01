@@ -13,6 +13,9 @@ class SellerController extends Controller
 {
     public function dashboard()
     {
+        if (Auth::user()->restaurant==null)
+            return redirect()->route('seller.profile');
+
         $user=Auth::user();
         return view('seller.dashboard',compact('user'));
     }
@@ -25,16 +28,21 @@ class SellerController extends Controller
 
     public function profileStore(ResturantProfileRequest $request)
     {
-        Restaurant::query()->create($request->validated());
+        $validated=$request->validated();
+        $validated['user_id']=Auth::id();
+        Restaurant::query()->create($validated);
         return redirect()->route('seller.dashboard');
     }
     public function restaurantSetting()
     {
-        return view('seller.setting');
+        $restaurant=Auth::user()->restaurant;
+        $restaurantCategories=RestaurantCategory::all();
+        return view('seller.setting',compact('restaurant','restaurantCategories'));
     }
 
     public function updateSetting(RestaurantSettingRequest $request,Restaurant $restaurant)
     {
+        $types=$request->validated()['type'];
         $restaurant->update($request->validated());
         return redirect()->route('seller.dashboard');
     }

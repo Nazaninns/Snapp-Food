@@ -23,7 +23,7 @@ class ResturantProfileRequest extends FormRequest
     {
         return [
             'name'=>['required','string'],
-            'type'=>['integer','required'],
+            //'type'=>['integer','required'],
             'phone'=>['string','required'],
             'address'=>['string','required'],
             'account_number'=>['required','string']

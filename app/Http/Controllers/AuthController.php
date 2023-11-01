@@ -17,12 +17,17 @@ class AuthController extends Controller
 
     public function loginSubmit(LoginRequest $request)
     {
-        if (Auth::attempt($request->validated())){
+
+        if (Auth::attempt($request->validated())) {
             session()->regenerate();
-           return redirect()->route('home');
+            if (Auth::user()->role == 3)
+                $dashboard = 'admin.dashboard';
+            if (Auth::user()->role == 2)
+                $dashboard = 'seller.dashboard';
+            return redirect()->route($dashboard);
         }
         return back()->withErrors([
-            'email'=>['invalid login ']
+            'email' => ['invalid login ']
         ]);
     }
 
@@ -33,9 +38,21 @@ class AuthController extends Controller
 
     public function registerSubmit(RegisterRequest $request)
     {
-        $validated=$request->validated();
+        $validated = $request->validated();
         //$validated['role']=2;
         User::query()->create($validated);
+        return redirect()->route('login');
+    }
+
+    public function home()
+    {
+        return view('home');
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        session()->invalidate();
         return redirect()->route('login');
     }
 }

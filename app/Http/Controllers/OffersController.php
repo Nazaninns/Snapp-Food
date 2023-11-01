@@ -11,7 +11,7 @@ class OffersController extends Controller
     public function index()
     {
         $offers=OfferCode::all();
-        return view('admin.offer.index');
+        return view('admin.offer.index',compact('offers'));
     }
 
     public function create()
@@ -27,9 +27,9 @@ class OffersController extends Controller
         return redirect()->route('admin.offer.index');
     }
 
-    public function delete(OfferCode $offerCode)
+    public function delete(OfferCode $offer)
     {
-        $offerCode->delete();
+        $offer->delete();
         return redirect()->route('admin.offer.index');
     }
 }

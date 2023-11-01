@@ -15,8 +15,8 @@ class FoodController extends Controller
      */
     public function index()
     {
-        $food=Food::all();
-        return view('seller.food.index',compact('food'));
+        $foods=Food::all();
+        return view('seller.food.index',compact('foods'));
     }
 
     /**
@@ -35,7 +35,7 @@ class FoodController extends Controller
         $validated=$request->validated();
         $validated['restaurant_id']=Auth::user()->restaurant->id;
         Food::query()->create($validated);
-        return redirect()->route('seller.food.index');
+        return redirect()->route('food.index');
     }
 
     /**
@@ -60,7 +60,7 @@ class FoodController extends Controller
     public function update(FoodRequest $request, Food $food)
     {
         $food->update($request->validated());
-        return redirect()->route('seller.food.index');
+        return redirect()->route('food.index');
     }
 
     /**
@@ -69,6 +69,6 @@ class FoodController extends Controller
     public function destroy(Food $food)
     {
         $food->delete();
-        return redirect()->route('seller.food.index');
+        return redirect()->route('food.index');
     }
 }
