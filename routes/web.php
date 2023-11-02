@@ -30,8 +30,7 @@ Route::post('register', [AuthController::class, 'registerSubmit'])->name('regist
 Route::middleware('auth')->get('logout',[AuthController::class,'logout'])->name('logout');
 
 //admin
-// middleware('role:admin')
-Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
+Route::middleware('auth')->middleware('role:admin')->prefix('admin')->name('admin.')->group(function () {
     Route::get('dashboard',AdminController::class)->name('dashboard');
     Route::resource('food_category', FoodCategoryController::class);
     Route::resource('restaurant_category', RestaurantCategoryController::class);
@@ -42,8 +41,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
 });
 
 //seller
-// middleware('role:seller')
-Route::middleware('auth')->prefix('seller')->group(function (){
+Route::middleware('auth')->middleware('role:seller')->prefix('seller')->group(function (){
     Route::get('dashboard',[\App\Http\Controllers\SellerController::class,'dashboard'])->name('seller.dashboard');
     Route::get('profile',[\App\Http\Controllers\SellerController::class,'restaurantProfile'])->name('seller.profile');
     Route::post('profile',[\App\Http\Controllers\SellerController::class,'profileStore'])->name('seller.storeProfile');
