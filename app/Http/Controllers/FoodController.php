@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\FoodRequest;
 use App\Models\Food;
+use App\Models\FoodCategory;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +16,7 @@ class FoodController extends Controller
      */
     public function index()
     {
-        $foods=Food::all();
+        $foods=Food::paginate(8);
         return view('seller.food.index',compact('foods'));
     }
 
@@ -24,7 +25,8 @@ class FoodController extends Controller
      */
     public function create()
     {
-        return view('seller.food.create');
+        $foodCategories=FoodCategory::all();
+        return view('seller.food.create',compact('foodCategories'));
     }
 
     /**
@@ -51,7 +53,8 @@ class FoodController extends Controller
      */
     public function edit(Food $food)
     {
-        return view('seller.food.edit',compact('food'));
+        $foodCategories=FoodCategory::all();
+        return view('seller.food.edit',compact('food','foodCategories'));
     }
 
     /**
@@ -71,4 +74,7 @@ class FoodController extends Controller
         $food->delete();
         return redirect()->route('food.index');
     }
+
+    // public function partySubmit(Request $request,Food $food){}
+    // public function partyDestroy(Request $request,Food $food){}
 }

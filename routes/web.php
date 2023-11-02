@@ -22,12 +22,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
 Route::get('login', [AuthController::class, 'login'])->name('login');
 Route::post('login', [AuthController::class, 'loginSubmit'])->name('login.submit');
 Route::get('register', [AuthController::class, 'register'])->name('register');
 Route::post('register', [AuthController::class, 'registerSubmit'])->name('register.submit');
 Route::middleware('auth')->get('logout',[AuthController::class,'logout'])->name('logout');
+
 //admin
+// middleware('role:admin')
 Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::get('dashboard',AdminController::class)->name('dashboard');
     Route::resource('food_category', FoodCategoryController::class);
@@ -37,12 +40,15 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::post('offer/create', [OffersController::class, 'store'])->name('offer.store');
     Route::delete('offer/delete/{offer}', [OffersController::class, 'delete'])->name('offer.delete');
 });
+
 //seller
+// middleware('role:seller')
 Route::middleware('auth')->prefix('seller')->group(function (){
     Route::get('dashboard',[\App\Http\Controllers\SellerController::class,'dashboard'])->name('seller.dashboard');
     Route::get('profile',[\App\Http\Controllers\SellerController::class,'restaurantProfile'])->name('seller.profile');
     Route::post('profile',[\App\Http\Controllers\SellerController::class,'profileStore'])->name('seller.storeProfile');
     Route::get('setting',[\App\Http\Controllers\SellerController::class,'restaurantSetting'])->name('seller.setting');
-    Route::post('setting',[\App\Http\Controllers\SellerController::class,'updateSetting'])->name('seller.updateSetting');
+    Route::post('setting/{restaurant}',[\App\Http\Controllers\SellerController::class,'updateSetting'])->name('seller.updateSetting');
     Route::resource('food',\App\Http\Controllers\FoodController::class);
+    // Route::post('food/{food}/party',[\App\Http\Controllers\FoodController::class,'partyStore'])->name('food.party.submit');
 });

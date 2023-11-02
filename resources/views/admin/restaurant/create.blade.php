@@ -65,14 +65,18 @@
 </div>
 <div class="container">
     <!-- Food Card Creation Form -->
-    <form action="{{route('admin.restaurant_category.store')}}" method="post" class="food-form">
+    <form action="{{route('admin.restaurant_category.store')}}" method="post" class="food-form" enctype="multipart/form-data">
         @csrf
         <label for="name">Restaurant Name</label>
         <input type="text" id="name" name="name" placeholder="Enter food name" >
-
+        @error('name')
+        {{$message}}
+        @enderror
         <label for="image">Restaurant Image </label>
-        <input type="text" id="image" name="image" placeholder="Upload food image " >
-
+        <input type="file" id="image" name="image" placeholder="Upload food image " >
+        @error('image')
+        {{$message}}
+        @enderror
 
         <button style="margin-top:10px" type="submit">Create </button>
     </form>

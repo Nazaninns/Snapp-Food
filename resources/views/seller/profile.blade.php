@@ -65,20 +65,17 @@
                         @enderror
                         <div>
                             <label  class="block mb-1 mt-2 text-sm text-gray-600 dark:text-gray-200">Type</label>
-                            <div class="mb-2">
-                                <label for="fast_food" class=" mb-2 text-sm text-gray-600 dark:text-gray-200">fast food</label>
-                                <input type="checkbox" name="type" id="fast_food"  class=" ms-1 px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
-                                <label for="sea_food" class=" mb-2 text-sm text-gray-600 dark:text-gray-200">sea food</label>
-                                <input type="checkbox" name="type" id="sea_food"  class=" ms-1 px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
-                                <label for="persian" class=" mb-2 text-sm text-gray-600 dark:text-gray-200">fastfood</label>
-                                <input type="checkbox" name="type" id="persian"  class=" ms-1 px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
-                                <label for="salad" class=" mb-2 text-sm text-gray-600 dark:text-gray-200">salad</label>
-                                <input type="checkbox" name="type" id="salad"  class=" ms-1 px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
-                                <label for="international" class=" mb-2 text-sm text-gray-600 dark:text-gray-200">international</label>
-                                <input type="checkbox" name="type" id="international" placeholder="enter your restaurant type" class=" ms-1 px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
 
+                            <div class="mb-2">
+                                @foreach($categories as $category)
+                                <label for="fast_food" class=" mb-2 text-sm text-gray-600 dark:text-gray-200">{{$category->name}}</label>
+                                <input type="checkbox" name="type[]" id="fast_food" value="{{$category->id}}"  class=" ms-1 px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                                @endforeach
                             </div>
-                             </div>
+                            @error('type')
+                            {{$message}}
+                            @enderror
+                        </div>
                         <div>
                             <label for="phone" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">phone</label>
                             <input type="text" name="phone" id="phone" placeholder="enter your phone number" class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
@@ -114,7 +111,7 @@
             </div>
         </div>
     </div>
-</div>
+    </div>
 </body>
 </html>
 

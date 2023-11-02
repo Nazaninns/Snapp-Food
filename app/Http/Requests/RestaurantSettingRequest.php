@@ -26,9 +26,14 @@ class RestaurantSettingRequest extends FormRequest
             'type'=>['required'],
             'phone'=>['string','required'],
             'address'=>['string','required'],
+            'type' => ['array'],
             //'image'=>['string','required'],
             //'delivery'=>['integer','required'],
             //'open_close'=>['boolean','required'],
+            // ----
+            // 'start_time' => ['required' , 'string'],
+            // 'end_time' => ['required' , 'string'],
+            // 'shipping_cost' =>['required','numeric']
         ];
     }
 }

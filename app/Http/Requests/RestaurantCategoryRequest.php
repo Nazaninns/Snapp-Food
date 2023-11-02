@@ -23,7 +23,7 @@ class RestaurantCategoryRequest extends FormRequest
     {
         return [
             'name'=>['required','string'],
-            'image'=>['string']
+            'image'=>['required','file']
         ];
     }
 }

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @vite('resources/css/app.css')
     <title>Restaurant Categories</title>
 
     <style>
@@ -62,14 +63,15 @@
             <path fill="white" d="M0 0h48v48H0z" mask="url(#ipSAdd0)"/>
         </svg>
     </a>
-
 </div>
+
+
 <div class="container">
     <!-- Restaurant Categories -->
     @foreach($restaurantCategories as  $category)
         <div class="category-card">
             <h2>{{$category->name}}</h2>
-            <img style="width: 10rem" src="{{$category->image}}">
+            <img style="width: 10rem" src="{{asset('storage/'.$category->image)}}">
             <br>
             <a href="{{route('admin.restaurant_category.show',['restaurant_category'=>$category])}}">Show</a>
             <a href="{{route('admin.restaurant_category.edit',['restaurant_category'=>$category])}}">edit</a>
@@ -84,6 +86,9 @@
 
     @endforeach
 
+</div>
+<div class="container">
+<div style="width: 23rem">{{$restaurantCategories->links()}}</div>
 </div>
 </body>
 </html>

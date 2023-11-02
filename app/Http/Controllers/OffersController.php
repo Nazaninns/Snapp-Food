@@ -10,7 +10,7 @@ class OffersController extends Controller
 {
     public function index()
     {
-        $offers=OfferCode::all();
+        $offers=OfferCode::paginate(6);
         return view('admin.offer.index',compact('offers'));
     }
 

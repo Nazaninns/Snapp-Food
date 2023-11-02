@@ -24,8 +24,8 @@ class FoodRequest extends FormRequest
         return [
             'name'=>['required','string'],
             'ingredients'=>['required','string'],
-            'price'=>['integer','required'],
-            'image'=>['string','required'],
+            'price'=>['numeric','required'],
+            'image'=>['required'],
             'food_category_id'=>['integer','required'],
         ];
     }

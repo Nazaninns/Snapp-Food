@@ -65,25 +65,39 @@
 </div>
 <div class="container">
     <!-- Food Card Creation Form -->
-    <form action="{{route('food.update',$food)}}" method="post" class="food-form">
+    <form action="{{route('food.update',$food)}}" method="post" class="food-form" enctype="multipart/form-data">
         @csrf
         @method('PATCH')
         <label for="foodName">Food Name</label>
         <input type="text" id="foodName" name="name" value="{{$food->name}}" >
-
+        @error('name')
+        {{$message}}
+        @enderror
         <label for="foodDescription">Food Ingredients</label>
         <input id="foodDescription" name="ingredients" value="{{$food->ingredients}}" >
-
+        @error('ingredients')
+        {{$message}}
+        @enderror
         <label for="foodImage">Food Image </label>
-        <input type="text" id="foodImage" name="image" value="{{$food->image}}" >
-
+        <input type="file" id="foodImage" name="image" value="{{$food->image}}" >
+        @error('image')
+        {{$message}}
+        @enderror
         <label for="foodPrice">Food Price</label>
         <input type="text" id="foodPrice" name="price" value="{{$food->price}}" >
-
+        @error('price')
+        {{$message}}
+        @enderror
         <label for="foodPrice">Food category id</label>
-        <input type="text" id="foodPrice" name="food_category_id" value="{{$food->food_category_id}}">
-
-        <button type="submit">Save</button>
+        <select id="foodPrice" name="food_category_id"  >
+            @foreach($foodCategories as $category)
+                <option value="{{$category->id}}">{{$category->name}}</option>
+            @endforeach
+        </select><br>
+        @error('food_category_id')
+        {{$message}}
+        @enderror
+        <button style="margin-top: 10px" type="submit">Save</button>
     </form>
 </div>
 </body>

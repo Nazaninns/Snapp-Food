@@ -54,7 +54,7 @@
                 </div>
 
                 <div class="mt-8">
-                    <form action="{{route('seller.updateSetting')}}" method="post">
+                    <form action="{{route('seller.updateSetting',$restaurant)}}" method="post">
                         @csrf
                         <div>
                             <label for="name" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Name</label>
@@ -96,6 +96,27 @@
                         @error('account_number')
                         {{$message}}
                         @enderror
+                        {{-- <div>
+                            <label for="start" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Start Time</label>
+                            <input type="text" name="start_time" id="start" value="{{$restaurant?->start_time}}" class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                        </div>
+                        @error('shipping_cost')
+                        {{$message}}
+                        @enderror --}}
+                        {{-- <div>
+                            <label for="end" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">End Time</label>
+                            <input type="text" name="end_time" id="end" value="{{$restaurant?->end_time}}" class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                        </div>
+                        @error('shipping_cost')
+                        {{$message}}
+                        @enderror --}}
+                        {{-- <div>
+                            <label for="shipping" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Shipping Cost</label>
+                            <input type="numeric" name="shipping_cost" id="shipping" value="{{$restaurant?->shipping_cost}}" class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                        </div>
+                        @error('shipping_cost')
+                        {{$message}}
+                        @enderror --}}
                         <div class="mt-6">
                             <button type="submit"
                                     class="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50">

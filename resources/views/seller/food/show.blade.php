@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Food Detail</title>
+    @vite('resources/css/app.css')
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -12,7 +13,7 @@
             background-color: #fff;
         }
         .header {
-            background-color: #3498db;
+            background-color: #111827;
             color: #fff;
             display: flex;
             justify-content: space-between;
@@ -34,16 +35,21 @@
 </head>
 <body>
 <div class="header">
-    <h1>Food Detail</h1>
+    <a style="margin-top: 20px" href="{{back()->getTargetUrl()}}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 1024 1024">
+            <path fill="white" d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64z"/>
+            <path fill="white"
+                  d="m237.248 512l265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312L237.248 512z"/>
+        </svg>
+    </a>
+    <h1 class="text-3xl mt-2">Food Detail</h1>
+    <div></div>
 </div>
 <div class="container">
     <!-- Food Details Card -->
     <div class="food-card">
-        <h2>Spaghetti Carbonara</h2>
-        <img src="https://example.com/spaghetti.jpg" alt="Spaghetti Carbonara">
-        <p>Delicious pasta with eggs, cheese, and pancetta. Served with a creamy carbonara sauce.</p>
-        <p>Price: $12.99</p>
-        <button>Order Now</button>
+        <h2>{{$food->name}}</h2>
+        <img style="width: full" src="{{asset('storage/'.$food->image)}}" >
     </div>
 </div>
 </body>

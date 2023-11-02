@@ -48,7 +48,7 @@
     <!-- Food Details Card -->
     <div class="food-card">
         <h2>{{$restaurantCategory->name}}</h2>
-        <img src="{{$restaurantCategory->image}}" >
+        <img src="{{asset('storage/'.$restaurantCategory->image)}}" >
     </div>
 </div>
 </body>

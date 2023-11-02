@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restaurant Menu</title>
+    @vite('resources/css/app.css')
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -69,7 +70,7 @@
             <h2>{{$food->name}}</h2>
             <p>{{$food->ingredients}}</p>
             <p>{{$food->price}}</p>
-            <p>{{$food->image}}</p>
+            <img style="width: 10rem" src="{{asset('storage/'.$food->image)}}">
             <a href="{{route('food.show',$food)}}">Show</a>
             <a  href="{{route('food.edit',$food)}}">
                edit
@@ -79,10 +80,19 @@
                 @method('DELETE')
                 <button>delete</button>
             </form>
+            {{-- @php $partyRout = ('is_party')? 'food.party.submit':'food.party.destroy'; @endphp --}}
+            {{-- @php $iconCollor = ('is_party')? 'red':'gray'; @endphp --}}
+            {{-- <form action="{{rout($partyRout,$food)}}" method="post">
+                <button type='submit'>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="none" stroke="{{$iconCollor}}" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="m9 15l6-6"/><circle cx="9.5" cy="9.5" r=".5" fill="{{$iconCollor}}"/><circle cx="14.5" cy="14.5" r=".5" fill="red"/><path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0-18 0"/></g></svg>
+                </button>
+            </form> --}}
         </div>
 
     @endforeach
 </div>
-
+<div class="container">
+    <div style="width: 23rem">{{$foods->links()}}</div>
+</div>
 </body>
 </html>

@@ -60,31 +60,45 @@
                   d="m237.248 512l265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312L237.248 512z"/>
         </svg>
     </a>
-    <h1>Create Food Card</h1>
+    <h1 >Create Food Card</h1>
     <div></div>
 </div>
 <div class="container">
     <!-- Food Card Creation Form -->
 
-    <form action="{{route('food.store')}}" method="post" class="food-form">
+    <form action="{{route('food.store')}}" method="post" class="food-form" enctype="multipart/form-data">
         @csrf
 
         <label for="foodName">Food Name</label>
         <input type="text" id="foodName" name="name" placeholder="Enter food name" >
-
+        @error('name')
+        {{$message}}
+        @enderror
         <label for="foodDescription">Food Ingredients</label>
         <input id="foodDescription" name="ingredients" placeholder="Enter food ingredients" >
-
+        @error('ingredients')
+        {{$message}}
+        @enderror
         <label for="foodImage">Food Image </label>
-        <input type="text" id="foodImage" name="image" placeholder="Enter Food image " >
-
+        <input type="file" id="foodImage" name="image" placeholder="Enter Food image " >
+        @error('image')
+        {{$message}}
+        @enderror
         <label for="foodPrice">Food Price</label>
         <input type="text" id="foodPrice" name="price" placeholder="Enter food price" >
-
+        @error('price')
+        {{$message}}
+        @enderror
         <label for="foodPrice">Food category id</label>
-        <input type="text" id="foodPrice" name="food_category_id" placeholder="Enter food category id" >
-
-        <button type="submit">Create Food Card</button>
+        <select id="foodPrice" name="food_category_id"  >
+            @foreach($foodCategories as $category)
+            <option value="{{$category->id}}">{{$category->name}}</option>
+            @endforeach
+        </select><br>
+        @error('food_category_id')
+        {{$message}}
+        @enderror
+        <button style="margin-top: 10px" type="submit">Create Food Card</button>
     </form>
 </div>
 </body>

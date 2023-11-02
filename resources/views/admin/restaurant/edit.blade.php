@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Food Card</title>
+    <title>Edit Food Card</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -65,7 +65,7 @@
 </div>
 <div class="container">
     <!-- Food Card Creation Form -->
-    <form class="food-form" action="{{route('admin.restaurant_category.update',$restaurantCategory)}}" method="post">
+    <form class="food-form" action="{{route('admin.restaurant_category.update',$restaurantCategory)}}" method="post" enctype="multipart/form-data">
         @csrf
         @method('PATCH')
         <label for="foodName">Restaurant Name</label>
@@ -73,7 +73,7 @@
 
 
         <label for="foodImage">Restaurant Image </label>
-        <input type="text" id="foodImage" name="image" value="{{$restaurantCategory->image}}" required>
+        <input type="file" id="foodImage" name="image" value="{{$restaurantCategory->image}}" required>
 
 
         <button type="submit">Submit</button>

@@ -30,7 +30,23 @@ class AuthController extends Controller
             'email' => ['invalid login ']
         ]);
     }
+/*
+    public function loginSubmit(LoginRequest $request)
+    {
 
+        if (Auth::attempt($request->validated())) {
+            session()->regenerate();
+            if (Auth::user()->hasRole('admin'))
+                $dashboard = 'admin.dashboard';
+            if (Auth::user()->hasRole('seller'))
+                $dashboard = 'seller.dashboard';
+            return redirect()->route($dashboard);
+        }
+        return back()->withErrors([
+            'email' => ['invalid login ']
+        ]);
+    }
+*/
     public function register()
     {
         return view('register');
@@ -40,7 +56,8 @@ class AuthController extends Controller
     {
         $validated = $request->validated();
         //$validated['role']=2;
-        User::query()->create($validated);
+        $user = User::query()->create($validated);
+        // $user->assignRole('seller');
         return redirect()->route('login');
     }
 

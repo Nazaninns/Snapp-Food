@@ -26,7 +26,8 @@ class ResturantProfileRequest extends FormRequest
             //'type'=>['integer','required'],
             'phone'=>['string','required'],
             'address'=>['string','required'],
-            'account_number'=>['required','string']
+            'account_number'=>['required','string'],
+            'type' => ['array']
         ];
     }
 }

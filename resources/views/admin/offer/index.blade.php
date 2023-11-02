@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Restaurant Categories</title>
+    <title>offer</title>
+    @vite('resources/css/app.css')
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -73,6 +74,9 @@
         </form>
     </div>
     @endforeach
+</div>
+<div class="container">
+    <div style="width: 23rem">{{$offers->links()}}</div>
 </div>
 </body>
 </html>

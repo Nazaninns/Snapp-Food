@@ -68,7 +68,7 @@
     <form method="post" action="{{route('admin.offer.store')}}" class="food-form">
         @csrf
         <label for="percent">Percent</label>
-        <input type="text" id="percent" name="percent" placeholder="Enter your percent" >
+        <input type="number"  id="percent" name="percent" placeholder="Enter your percent" >
 
         <button type="submit">Create</button>
     </form>
