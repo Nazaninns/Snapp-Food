@@ -47,6 +47,7 @@
 </div>
 <div class="container">
     <!-- Food Details Card -->
+
     <div class="food-card">
         <h2>{{$food->name}}</h2>
         <img style="width: full" src="{{asset('storage/'.$food->image)}}" >

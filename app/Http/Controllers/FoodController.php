@@ -16,8 +16,16 @@ class FoodController extends Controller
      */
     public function index()
     {
-        $foods=Food::paginate(8);
-        return view('seller.food.index',compact('foods'));
+        if (\request()->get('sort') == 'asc')
+            $foods = Food::query()->orderBy('name')->paginate(4);
+        elseif (\request()->get('sort') == 'desc')
+            $foods = Food::query()->orderByDesc('name')->paginate(4);
+        else
+        $foods = Food::query()->paginate(4);
+        if (\request()->get('filter')!== null)
+            $foods=Food::query()->where('food_category_id',\request()->get('filter'))->paginate(4);
+        $foodCategories = FoodCategory::all();
+        return view('seller.food.index', compact('foods', 'foodCategories'));
     }
 
     /**
@@ -25,8 +33,8 @@ class FoodController extends Controller
      */
     public function create()
     {
-        $foodCategories=FoodCategory::all();
-        return view('seller.food.create',compact('foodCategories'));
+        $foodCategories = FoodCategory::all();
+        return view('seller.food.create', compact('foodCategories'));
     }
 
     /**
@@ -34,8 +42,8 @@ class FoodController extends Controller
      */
     public function store(FoodRequest $request)
     {
-        $validated=$request->validated();
-        $validated['restaurant_id']=Auth::user()->restaurant->id;
+        $validated = $request->validated();
+        $validated['restaurant_id'] = Auth::user()->restaurant->id;
         Food::query()->create($validated);
         return redirect()->route('food.index');
     }
@@ -45,7 +53,7 @@ class FoodController extends Controller
      */
     public function show(Food $food)
     {
-        return view('seller.food.show',compact('food'));
+        return view('seller.food.show', compact('food'));
     }
 
     /**
@@ -53,8 +61,8 @@ class FoodController extends Controller
      */
     public function edit(Food $food)
     {
-        $foodCategories=FoodCategory::all();
-        return view('seller.food.edit',compact('food','foodCategories'));
+        $foodCategories = FoodCategory::all();
+        return view('seller.food.edit', compact('food', 'foodCategories'));
     }
 
     /**

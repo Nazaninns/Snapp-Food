@@ -27,7 +27,6 @@
             margin: 0 auto;
             padding: 20px;
             display: flex;
-            flex-wrap: wrap;
             justify-content: space-between;
         }
 
@@ -63,6 +62,28 @@
         </svg>
     </a>
 </div>
+<div class="container w-full">
+    <form action="" >
+<select name="sort">
+    <option value="" selected disabled>Sort by name</option>
+    <option value="asc">ascending</option>
+    <option value="desc">descending</option>
+</select>
+    <button type="submit">Submit</button>
+    </form>
+    <form action="">
+        <select name="filter">
+            <option value="" selected disabled>Filter by category</option>
+            @foreach($foodCategories as $category)
+            <option value="{{$category->id}}">{{$category->name}}</option>
+            @endforeach
+        </select>
+        <button type="submit">Submit</button>
+        </form>
+
+
+
+</div>
 <div class="container">
     <!-- Restaurant Categories -->
     @foreach($foods as $food)
@@ -92,6 +113,7 @@
     @endforeach
 </div>
 <div class="container">
+
     <div style="width: 23rem">{{$foods->links()}}</div>
 </div>
 </body>
