@@ -125,8 +125,6 @@
                         </div>
 
                     </form>
-
-                    <p class="mt-6 text-sm text-center text-gray-400">already have an account ? <a href="{{route('login.submit')}}" class="text-blue-500 focus:outline-none focus:underline hover:underline">Login</a>.</p>
                 </div>
             </div>
         </div>

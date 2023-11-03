@@ -17,13 +17,16 @@ class FoodController extends Controller
     public function index()
     {
         if (\request()->get('sort') == 'asc')
-            $foods = Food::query()->orderBy('name')->paginate(4);
+            $foods =Food::query()->where(['restaurant_id'=>Auth::user()->restaurant->id])->orderBy('name')->paginate(4);
         elseif (\request()->get('sort') == 'desc')
-            $foods = Food::query()->orderByDesc('name')->paginate(4);
+            $foods = Food::query()->where(['restaurant_id'=>Auth::user()->restaurant->id])->orderByDesc('name')->paginate(4);
         else
-        $foods = Food::query()->paginate(4);
+        $foods = Food::query()->where(['restaurant_id'=>Auth::user()->restaurant->id])->paginate(4);
         if (\request()->get('filter')!== null)
-            $foods=Food::query()->where('food_category_id',\request()->get('filter'))->paginate(4);
+            $foods=Food::query()->where([
+                'food_category_id'=>\request()->get('filter'),
+                'restaurant_id'=>Auth::user()->restaurant->id
+                ])->paginate(4);
         $foodCategories = FoodCategory::all();
         return view('seller.food.index', compact('foods', 'foodCategories'));
     }
