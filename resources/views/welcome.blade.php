@@ -176,7 +176,7 @@
 
     <!-- Image Section -->
     <div class="text-center">
-        <img src="delicious-pizza-indoors.jpg"  alt="Food Image" class="max-w-full mt-8" />
+        <img src="../delicious-pizza-indoors.jpg"  alt="Food Image" class="max-w-full mt-8" />
     </div>
 </div>
 
