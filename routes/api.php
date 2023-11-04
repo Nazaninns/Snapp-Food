@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\api\AddressController;
 use App\Http\Controllers\api\AuthController;
 use App\Http\Controllers\api\CartController;
 use App\Http\Controllers\api\CommentController;
@@ -23,15 +24,22 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::post('login',[AuthController::class,'login'])->name('login');
-Route::post('register',[AuthController::class,'register'])->name('register');
-Route::middleware('auth:sanctum')->group(function (){
-Route::post('logout',[AuthController::class,'logout'])->name('logout');
-Route::apiResource('addresses',UserController::class);
-Route::get('restaurants',[RestaurantController::class,'index'])->name('restaurants.index');
-Route::get('restaurants/{restaurant}',[RestaurantController::class,'show'])->name('restaurants.show');
-Route::get('restaurants/{restaurant}/food',[FoodController::class,'index'])->name('food.index');
-Route::apiResource('carts',CartController::class);
-Route::get('comments',[CommentController::class,'index'])->name('comments.index');
-Route::post('comments',[CommentController::class,'store'])->name('comments.store');
+Route::post('login', [AuthController::class, 'login'])->name('login');
+Route::post('register', [AuthController::class, 'register'])->name('register');
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+//user
+    Route::apiResource('addresses', AddressController::class);
+    Route::post('addresses/{address}', [AddressController::class,'current']);
+//restaurants
+    Route::get('restaurants', [RestaurantController::class, 'index'])->name('restaurants.index');
+    Route::get('restaurants/{restaurant}', [RestaurantController::class, 'show'])->name('restaurants.show');
+//food
+    Route::get('restaurants/{restaurant}/food', [FoodController::class, 'index'])->name('food.index');
+//carts
+    Route::apiResource('carts', CartController::class);
+//comments
+    Route::get('comments', [CommentController::class, 'index'])->name('comments.index');
+    Route::post('comments', [CommentController::class, 'store'])->name('comments.store');
 });
