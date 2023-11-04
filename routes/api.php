@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\api\AuthController;
 use App\Http\Controllers\api\CartController;
+use App\Http\Controllers\api\CommentController;
 use App\Http\Controllers\api\FoodController;
 use App\Http\Controllers\Api\RestaurantController;
 use App\Http\Controllers\Api\UserController;
@@ -24,10 +25,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 Route::post('login',[AuthController::class,'login'])->name('login');
 Route::post('register',[AuthController::class,'register'])->name('register');
+Route::middleware('auth:sanctum')->group(function (){
+Route::post('logout',[AuthController::class,'logout'])->name('logout');
 Route::apiResource('addresses',UserController::class);
 Route::get('restaurants',[RestaurantController::class,'index'])->name('restaurants.index');
 Route::get('restaurants/{restaurant}',[RestaurantController::class,'show'])->name('restaurants.show');
 Route::get('restaurants/{restaurant}/food',[FoodController::class,'index'])->name('food.index');
 Route::apiResource('carts',CartController::class);
-Route::get('comments',[\App\Http\Controllers\api\CommentController::class,'index'])->name('comments.index');
-Route::post('comments',[\App\Http\Controllers\api\CommentController::class,'store'])->name('comments.store');
+Route::get('comments',[CommentController::class,'index'])->name('comments.index');
+Route::post('comments',[CommentController::class,'store'])->name('comments.store');
+});
