@@ -67,7 +67,7 @@
 
 
 <div class="container">
-    <!-- Restaurant Categories -->
+    <!-- RestaurantCollection Categories -->
     @foreach($restaurantCategories as  $category)
         <div class="category-card">
             <h2>{{$category->name}}</h2>

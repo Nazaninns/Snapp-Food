@@ -103,7 +103,7 @@
 
 </div>
 <div class="container">
-    <!-- Restaurant Categories -->
+    <!-- RestaurantCollection Categories -->
     @foreach($foods as $food)
         <div class="category-card">
             <div class="flex justify-between">

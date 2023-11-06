@@ -61,7 +61,7 @@
     </a>
 </div>
 <div class="container">
-    <!-- Restaurant Categories -->
+    <!-- RestaurantCollection Categories -->
 
     @foreach($foodCategories as  $category)
         <div class="category-card">

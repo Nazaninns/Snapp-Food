@@ -73,11 +73,11 @@
 <body class="">
 {{--<div class="flex  >--}}
 {{--<div class=" flex flex-col  justify-center   header">--}}
-{{--    <div class="flex flex-col" >My Restaurant</div>--}}
+{{--    <div class="flex flex-col" >My RestaurantCollection</div>--}}
 {{--</div>--}}
 {{--    <div class="flex  justify-end ">--}}
-{{--        <!-- Restaurant Settings Button -->--}}
-{{--        <button class="settings-button">Restaurant Settings</button>--}}
+{{--        <!-- RestaurantCollection Settings Button -->--}}
+{{--        <button class="settings-button">RestaurantCollection Settings</button>--}}
 {{--        <!-- Logout Button -->--}}
 {{--        <button class="logout-button">Logout</button>--}}
 {{--    </div>--}}
