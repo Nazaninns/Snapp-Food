@@ -3,14 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\OfferCodeRequest;
-use App\Models\OfferCode;
+use App\Models\DiscountCode;
 use Illuminate\Http\Request;
 
 class OffersController extends Controller
 {
     public function index()
     {
-        $offers=OfferCode::paginate(6);
+        $offers=DiscountCode::paginate(6);
         return view('admin.offer.index',compact('offers'));
     }
 
@@ -23,11 +23,11 @@ class OffersController extends Controller
     {
         $validated=$offerCodeRequest->validated();
         $validated['code']=uniqid();
-        OfferCode::query()->create($validated);
+        DiscountCode::query()->create($validated);
         return redirect()->route('admin.offer.index');
     }
 
-    public function delete(OfferCode $offer)
+    public function delete(DiscountCode $offer)
     {
         $offer->delete();
         return redirect()->route('admin.offer.index');

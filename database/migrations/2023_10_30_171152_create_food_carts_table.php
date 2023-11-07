@@ -11,11 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('offer_codes', function (Blueprint $table) {
-            $table->id();
-            $table->integer('percent');
-            $table->string('code');
-            $table->timestamps();
+        Schema::create('food_carts', function (Blueprint $table) {
+            $table->foreignId('food_id')->constrained();
+            $table->foreignId('cart_id')->constrained();
+            $table->integer('count');
         });
     }
 
@@ -24,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('offer_codes');
+        Schema::dropIfExists('food_orders');
     }
 };

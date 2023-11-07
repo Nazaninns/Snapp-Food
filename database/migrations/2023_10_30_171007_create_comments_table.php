@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->text('text');
+            $table->integer('score');
             $table->foreignId('user_id')->constrained();
-            $table->foreignId('food_id')->constrained();
+            $table->foreignId('cart_id')->constrained();
             $table->timestamps();
         });
     }

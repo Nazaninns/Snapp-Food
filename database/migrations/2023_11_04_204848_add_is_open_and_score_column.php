@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('restaurants',function (Blueprint $blueprint){
             $blueprint->boolean('is_open')->default(0);
-            $blueprint->integer('score')->nullable();
+            $blueprint->float('score')->nullable();
         });
     }
 

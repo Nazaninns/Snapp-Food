@@ -6,6 +6,7 @@ use App\Casts\ImageCast;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Food extends Model
@@ -33,5 +34,10 @@ protected $casts=[
     public function foodParties():HasMany
     {
         return $this->hasMany(FoodParty::class);
+    }
+
+    public function carts():BelongsToMany
+    {
+        return $this->belongsToMany(Food::class,'food_carts')->withPivot('count');
     }
 }
