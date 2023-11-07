@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('ingredients');
             $table->integer('price');
-            $table->string('image');
+            $table->string('image')->nullable();
             // $table->integer('percent')->nullable()->default(0);
             $table->foreignId('food_category_id')->constrained();
             $table->foreignId('restaurant_id')->constrained();

@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\FoodCategory;
+use App\Models\Restaurant;
+use App\Models\RestaurantCategory;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
@@ -28,7 +31,18 @@ class DatabaseSeeder extends Seeder
             'phone' => '1235465',
             'password' => '123456'
         ]);
-
+        RestaurantCategory::query()->create([
+            'name'=>'aaa',
+        ]);
+        RestaurantCategory::query()->create([
+            'name'=>'bbb',
+        ]);
+        FoodCategory::query()->create([
+            'name'=>'aaa'
+        ]);
+        FoodCategory::query()->create([
+            'name'=>'bbb'
+        ]);
         $this->call([
             RoleSeeder::class,
             PermissionSeeder::class
