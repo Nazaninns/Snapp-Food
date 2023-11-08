@@ -60,12 +60,12 @@
                   d="m237.248 512l265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312L237.248 512z"/>
         </svg>
     </a>
-    <h1>Create Offers</h1>
+    <h1>Create Discount</h1>
     <div></div>
 </div>
 <div class="container">
     <!-- Food Card Creation Form -->
-    <form method="post" action="{{route('admin.offer.store')}}" class="food-form">
+    <form method="post" action="{{route('admin.discount.store')}}" class="food-form">
         @csrf
         <label for="percent">Percent</label>
         <input type="number"  id="percent" name="percent" placeholder="Enter your percent" >

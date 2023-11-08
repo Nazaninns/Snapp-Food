@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>offer</title>
+    <title>discount</title>
     @vite('resources/css/app.css')
     <style>
         body {
@@ -47,8 +47,8 @@
                   d="m237.248 512l265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312L237.248 512z"/>
         </svg>
     </a>
-    <h1>Offers</h1>
-    <a style="margin-top: 14px" href="{{route('admin.offer.create')}}">
+    <h1>Discounts</h1>
+    <a style="margin-top: 14px" href="{{route('admin.discount.create')}}">
         <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
             <mask id="ipSAdd0">
                 <g fill="none" stroke-linejoin="round" stroke-width="4">
@@ -62,12 +62,12 @@
 </div>
 <div class="container">
     <!-- RestaurantCollection Categories -->
-    @foreach($offers as $offer)
+    @foreach($discounts as $discount)
     <div class="category-card">
-        <h2>Offer</h2>
-        <p>{{$offer->percent}}</p>
-        <p>{{$offer->code}}</p>
-        <form action="{{route('admin.offer.delete',$offer)}}" method="post">
+        <h2>Discount</h2>
+        <p>{{$discount->percent}}</p>
+        <p>{{$discount->code}}</p>
+        <form action="{{route('admin.discount.delete',$discount)}}" method="post">
             @csrf
             @method('DELETE')
             <button type="submit">delete</button>
@@ -76,7 +76,7 @@
     @endforeach
 </div>
 <div class="container">
-    <div style="width: 23rem">{{$offers->links()}}</div>
+    <div style="width: 23rem">{{$discounts->links()}}</div>
 </div>
 </body>
 </html>

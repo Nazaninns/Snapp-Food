@@ -22,10 +22,10 @@ class UpdateAddressRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title'=>['string'],
-            'address'=>['email'],
-            'latitude'=>[],
-            'longitude'=>[],
+            'title' => ['string'],
+            'address' => ['email'],
+            'latitude' => ['decimal'],
+            'longitude' => ['decimal'],
         ];
     }
 }

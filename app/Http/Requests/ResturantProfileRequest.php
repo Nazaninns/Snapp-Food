@@ -24,7 +24,7 @@ class ResturantProfileRequest extends FormRequest
         return [
             'name'=>['required','string'],
             //'type'=>['integer','required'],
-            'phone'=>['string','required'],
+            'phone'=>['string','required', 'regex:/^09[0|1|2|3][0-9]{8}$/'],
             'address'=>['string','required'],
             'account_number'=>['required','string'],
             'type' => ['array']

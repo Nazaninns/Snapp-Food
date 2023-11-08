@@ -22,9 +22,9 @@ class RestaurantRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'is_open'=>['boolean'],
-            'type'=>['string'],
-            'score_gt'=>['numeric','between:3,5']
+            'is_open' => ['boolean'],
+            'type' => ['string'],
+            'score_gt' => ['numeric', 'between:3,5']
         ];
     }
 }

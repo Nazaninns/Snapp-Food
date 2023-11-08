@@ -22,8 +22,8 @@ class GetCommentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'restaurant_id'=>['numeric'],
-            'food_id'=>['numeric']
+            'restaurant_id' => ['numeric', 'exists:restaurants,id'],
+            'food_id' => ['numeric', 'exists:food,id']
         ];
     }
 }

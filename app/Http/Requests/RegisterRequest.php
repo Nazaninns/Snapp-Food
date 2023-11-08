@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Password;
 
 class RegisterRequest extends FormRequest
 {
@@ -23,9 +24,9 @@ class RegisterRequest extends FormRequest
     {
         return [
             'name'=>['required','string','between:3,15'],
-            'email'=>['required','email'],
-            'phone'=>['required','string','between:11,11'],
-            'password'=>['required','between:4,15','string']
+            'email'=>['required','email','unique:users'],
+            'phone' => ['required', 'string', 'regex:/^09[0|1|2|3][0-9]{8}$/'],
+            'password' => [Password::default()->mixedCase()->numbers()]
         ];
     }
 }

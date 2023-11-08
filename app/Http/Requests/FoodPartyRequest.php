@@ -22,8 +22,8 @@ class FoodPartyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'count'=>['required','numeric','min:1'],
-            'percent'=>['required','numeric','between:1,90']
+            'count' => ['required', 'numeric', 'min:1'],
+            'percent' => ['required', 'numeric', 'between:1,90']
         ];
     }
 }

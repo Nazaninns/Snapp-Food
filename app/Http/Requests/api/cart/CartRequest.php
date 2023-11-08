@@ -22,8 +22,8 @@ class CartRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'food_id'=>['required','numeric'],
-            'count'=>['required','numeric']
+            'food_id' => ['required', 'numeric', 'exists:food,id'],
+            'count' => ['required', 'numeric', 'min:0']
         ];
     }
 }

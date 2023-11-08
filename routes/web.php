@@ -3,7 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FoodCategoryController;
-use App\Http\Controllers\OffersController;
+use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\RestaurantCategoryController;
 use App\Http\Controllers\SellerController;
 use Illuminate\Support\Facades\Route;
@@ -34,10 +34,10 @@ Route::middleware('auth')->middleware('role:admin')->prefix('admin')->name('admi
     Route::get('dashboard', AdminController::class)->name('dashboard');
     Route::resource('food_category', FoodCategoryController::class);
     Route::resource('restaurant_category', RestaurantCategoryController::class);
-    Route::get('offer', [OffersController::class, 'index'])->name('offer.index');
-    Route::get('offer/create', [OffersController::class, 'create'])->name('offer.create');
-    Route::post('offer/create', [OffersController::class, 'store'])->name('offer.store');
-    Route::delete('offer/delete/{offer}', [OffersController::class, 'delete'])->name('offer.delete');
+    Route::get('discount', [DiscountController::class, 'index'])->name('discount.index');
+    Route::get('discount/create', [DiscountController::class, 'create'])->name('discount.create');
+    Route::post('discount/create', [DiscountController::class, 'store'])->name('discount.store');
+    Route::delete('discount/delete/{discount}', [DiscountController::class, 'delete'])->name('discount.delete');
 });
 
 //seller

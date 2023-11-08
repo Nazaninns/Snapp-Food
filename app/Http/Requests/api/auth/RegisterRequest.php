@@ -3,6 +3,7 @@
 namespace App\Http\Requests\api\auth;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Password;
 
 class RegisterRequest extends FormRequest
 {
@@ -22,10 +23,10 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>['required','string'],
-            'email'=>['required','email'],
-            'phone'=>['required','string'],
-            'password'=>['required','string']
+            'name' => ['required', 'string'],
+            'email' => ['required', 'email', 'unique:users'],
+            'phone' => ['required', 'string', 'regex:/^09[0|1|2|3][0-9]{8}$/'],
+            'password' => [Password::default()->mixedCase()->numbers()]
         ];
     }
 }

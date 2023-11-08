@@ -22,8 +22,8 @@ class RestaurantCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>['required','string'],
-            'image'=>['file']
+            'name' => ['required', 'string', 'unique:restaurant_categories'],
+            'image' => ['file', 'nullable']
         ];
     }
 }

@@ -22,11 +22,11 @@ class FoodRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>['required','string'],
-            'ingredients'=>['required','string'],
-            'price'=>['numeric','required'],
-            'image'=>[],
-            'food_category_id'=>['integer','required'],
+            'name' => ['required', 'string'],
+            'ingredients' => ['required', 'string'],
+            'price' => ['numeric', 'required'],
+            'image' => ['nullable', 'file'],
+            'food_category_id' => ['integer', 'required', 'exists:food_categories,id'],
         ];
     }
 }

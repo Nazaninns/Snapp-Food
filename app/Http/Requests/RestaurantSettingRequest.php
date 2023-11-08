@@ -22,11 +22,10 @@ class RestaurantSettingRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'=>['required','string'],
-            'type'=>['required'],
-            'phone'=>['string','required'],
-            'address'=>['string','required'],
-            'type' => ['array'],
+            'name' => ['required', 'string'],
+            'phone' => ['required', 'string', 'regex:/^09[0|1|2|3][0-9]{8}$/'],
+            'address' => ['required', 'string'],
+            'type' => ['required', 'array'],
             //'image'=>['string','required'],
             //'delivery'=>['integer','required'],
             //'open_close'=>['boolean','required'],
