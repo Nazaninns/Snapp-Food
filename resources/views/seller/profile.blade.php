@@ -41,7 +41,7 @@
     <title>Profile</title>
     @vite('resources/css/app.css')
 </head>
-<body >
+<body>
 <div class="bg-white dark:bg-gray-900">
     <div class="flex justify-center h-screen">
 
@@ -58,60 +58,77 @@
                         @csrf
                         <div>
                             <label for="name" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Name</label>
-                            <input type="text" name="name" id="name" placeholder="enter your restaurant name" class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                            <input type="text" name="name" id="name" placeholder="enter your restaurant name"
+                                   class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
                         </div>
+                        <div class="text-red-600">
                         @error('name')
                         {{$message}}
                         @enderror
+                        </div>
                         <div>
-                            <label  class="block mb-1 mt-2 text-sm text-gray-600 dark:text-gray-200">Type</label>
+                            <label class="block mb-1 mt-2 text-sm text-gray-600 dark:text-gray-200">Type</label>
 
                             <div class="mb-2">
                                 @foreach($categories as $category)
-                                <label for="fast_food" class=" mb-2 text-sm text-gray-600 dark:text-gray-200">{{$category->name}}</label>
-                                <input type="checkbox" name="type[]" id="fast_food" value="{{$category->id}}"  class=" ms-1 px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                                    <label for="fast_food"
+                                           class=" mb-2 text-sm text-gray-600 dark:text-gray-200">{{$category->name}}</label>
+                                    <input type="checkbox" name="type[]" id="fast_food" value="{{$category->id}}"
+                                           class=" ms-1 px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
                                 @endforeach
                             </div>
+                            <div class="text-red-600">
                             @error('type')
                             {{$message}}
                             @enderror
+                            </div>
                         </div>
                         <div>
                             <label for="phone" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">phone</label>
-                            <input type="text" name="phone" id="phone" placeholder="enter your phone number" class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                            <input type="text" name="phone" id="phone" placeholder="enter your phone number"
+                                   class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
                         </div>
+                        <div class="text-red-600">
                         @error('phone')
                         {{$message}}
                         @enderror
-                        <div>
-                            <label for="address" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Address</label>
-                            <input type="text" name="address" id="phone" placeholder="enter your address" class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
                         </div>
+                        <div>
+                            <label for="address"
+                                   class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Address</label>
+                            <input type="text" name="address" id="phone" placeholder="enter your address"
+                                   class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
+                        </div>
+                        <div class="text-red-600">
                         @error('address')
                         {{$message}}
                         @enderror
-                        <div>
-                            <label for="account" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Account Number</label>
-                            <input type="text" name="account_number" id="account" placeholder="enter your account number" class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
                         </div>
+                        <div>
+                            <label for="account" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Account
+                                Number</label>
+                            <input type="text" name="account_number" id="account"
+                                   placeholder="enter your account number"
+                                   class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
+                        </div>
+                        <div class="text-red-600">
                         @error('account_number')
                         {{$message}}
                         @enderror
+                        </div>
                         <div class="mt-6">
                             <button type="submit"
-                                class="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+                                    class="w-full px-4 py-2 tracking-wide text-white transition-colors duration-200 transform bg-blue-500 rounded-md hover:bg-blue-400 focus:outline-none focus:bg-blue-400 focus:ring focus:ring-blue-300 focus:ring-opacity-50">
                                 Save
                             </button>
                         </div>
 
                     </form>
-
-                    <p class="mt-6 text-sm text-center text-gray-400">already have an account ? <a href="{{route('login.submit')}}" class="text-blue-500 focus:outline-none focus:underline hover:underline">Login</a>.</p>
                 </div>
             </div>
         </div>
     </div>
-    </div>
+</div>
 </body>
 </html>
 

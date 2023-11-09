@@ -41,7 +41,7 @@
     <title>Profile</title>
     @vite('resources/css/app.css')
 </head>
-<body >
+<body>
 <div class="bg-white dark:bg-gray-900">
     <div class="flex justify-center h-screen">
 
@@ -58,44 +58,65 @@
                         @csrf
                         <div>
                             <label for="name" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Name</label>
-                            <input type="text" name="name" id="name" value="{{$restaurant->name}}"  class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                            <input type="text" name="name" id="name" value="{{$restaurant->name}}"
+                                   class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
                         </div>
-                        @error('name')
-                        {{$message}}
-                        @enderror
-                        <div>
-                            <label  class="block mb-1 mt-2 text-sm text-gray-600 dark:text-gray-200">Type</label>
-                            <div class="mb-2">
-                                @foreach($restaurantCategories as $category)
-                                <label for="fast_food" class=" mb-2 text-sm text-gray-600 dark:text-gray-200">{{$category->name}}</label>
-                                <input type="checkbox" name="type[]" id="fast_food" value="{{$category->id}}"  class=" ms-1 px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
-                                @endforeach
-                            </div>
-                            @error('type')
+                        <div class="text-red-600">
+                            @error('name')
                             {{$message}}
                             @enderror
                         </div>
                         <div>
+                            <label class="block mb-1 mt-2 text-sm text-gray-600 dark:text-gray-200">Type</label>
+                            <div class="mb-2">
+                                @foreach($restaurantCategories as $category)
+                                    <label for="fast_food"
+                                           class=" mb-2 text-sm text-gray-600 dark:text-gray-200">{{$category->name}}</label>
+                                    <input type="checkbox"
+                                           @if($restaurant->restaurant_categories->contains($category))checked
+                                           @endif  name="type[]" id="fast_food" value="{{$category->id}}"
+                                           class=" ms-1 px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
+                                @endforeach
+                            </div>
+                            <div class="text-red-600">
+                                @error('type')
+                                {{$message}}
+                                @enderror
+                            </div>
+                        </div>
+                        <div>
                             <label for="phone" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">phone</label>
-                            <input type="text" name="phone" id="phone" value="{{$restaurant->phone}}" class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                            <input type="text" name="phone" id="phone" value="{{$restaurant->phone}}"
+                                   class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
                         </div>
-                        @error('phone')
-                        {{$message}}
-                        @enderror
+                        <div class="text-red-600">
+                            @error('phone')
+                            {{$message}}
+                            @enderror
+                        </div>
                         <div>
-                            <label for="address" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Address</label>
-                            <input type="text" name="address" id="phone" value="{{$restaurant->address}}" class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                            <label for="address"
+                                   class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Address</label>
+                            <input type="text" name="address" id="phone" value="{{$restaurant->address}}"
+                                   class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
                         </div>
-                        @error('address')
-                        {{$message}}
-                        @enderror
+                        <div class="text-red-600">
+                            @error('address')
+                            {{$message}}
+                            @enderror
+                        </div>
                         <div>
-                            <label for="account" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Account Number</label>
-                            <input type="text" name="account_number" id="account" value="{{$restaurant->account_number}}" class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                            <label for="account" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Account
+                                Number</label>
+                            <input type="text" name="account_number" id="account"
+                                   value="{{$restaurant->account_number}}"
+                                   class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
                         </div>
-                        @error('account_number')
-                        {{$message}}
-                        @enderror
+                        <div class="text-red-600">
+                            @error('account_number')
+                            {{$message}}
+                            @enderror
+                        </div>
                         {{-- <div>
                             <label for="start" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Start Time</label>
                             <input type="text" name="start_time" id="start" value="{{$restaurant?->start_time}}" class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />

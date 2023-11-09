@@ -70,7 +70,9 @@
         }
     </style>
 </head>
-<body class="">
+<body class=""
+      style="background-size: cover; background-image: url({{asset('holiday2.webp')}}); background-color: rgba(255, 255, 255, 0.5);
+">
 {{--<div class="flex  >--}}
 {{--<div class=" flex flex-col  justify-center   header">--}}
 {{--    <div class="flex flex-col" >My RestaurantCollection</div>--}}
@@ -148,7 +150,7 @@
     <!-- Add more food cards as needed -->
 
     <!-- Reporting Section -->
-    <div>Reporting</div>
+    <div class="text-white">Reporting</div>
     <div class="report-section">
         <h2>Reporting Section</h2>
         <p>Provide your feedback and report any issues here.</p>

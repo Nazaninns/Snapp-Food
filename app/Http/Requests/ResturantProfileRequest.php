@@ -27,7 +27,7 @@ class ResturantProfileRequest extends FormRequest
             'phone'=>['string','required', 'regex:/^09[0|1|2|3][0-9]{8}$/'],
             'address'=>['string','required'],
             'account_number'=>['required','string'],
-            'type' => ['array']
+            'type' => ['required','array']
         ];
     }
 }

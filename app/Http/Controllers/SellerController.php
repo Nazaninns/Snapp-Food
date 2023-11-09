@@ -13,41 +13,40 @@ class SellerController extends Controller
 {
     public function dashboard()
     {
-        if (Auth::user()->restaurant==null)
+        if (Auth::user()->restaurant == null)
             return redirect()->route('seller.profile');
 
-        $user=Auth::user();
-        return view('seller.dashboard',compact('user'));
+        $user = Auth::user();
+        return view('seller.dashboard', compact('user'));
     }
 
     public function restaurantProfile()
     {
-        $categories=RestaurantCategory::all();
-        return view('seller.profile',compact('categories'));
+        $categories = RestaurantCategory::all();
+        return view('seller.profile', compact('categories'));
     }
 
     public function profileStore(ResturantProfileRequest $request)
     {
-        $validated=$request->validated();
-        $types = $validated['type'];
-        unset($validated['type']);
-        $validated['user_id']=Auth::id();
-        $restaurant=Restaurant::query()->create($validated);
+        $validated = $request->validated();
+        $types = $request->validated('type');
+        $validated['user_id'] = Auth::id();
+        $restaurant = Restaurant::query()->create($validated);
         $restaurant->restaurant_categories()->sync($types);
         return redirect()->route('seller.dashboard');
     }
+
     public function restaurantSetting()
     {
-        $restaurant=Auth::user()->restaurant;
-        $restaurantCategories=RestaurantCategory::all();
-        return view('seller.setting',compact('restaurant','restaurantCategories'));
+        $restaurant = Auth::user()->restaurant;
+        $restaurantCategories = RestaurantCategory::all();
+        return view('seller.setting', compact('restaurant', 'restaurantCategories'));
     }
 
-    public function updateSetting(RestaurantSettingRequest $request,Restaurant $restaurant)
+    public function updateSetting(RestaurantSettingRequest $request, Restaurant $restaurant)
     {
-        $validated=$request->validated();
+        $validated = $request->validated();
         $types = $validated['type'];
-        unset($validated['type']);
         $restaurant->update($request->validated());
         $restaurant->restaurant_categories()->sync($types);
         return redirect()->route('seller.dashboard');

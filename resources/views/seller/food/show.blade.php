@@ -31,10 +31,15 @@
             padding: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+
     </style>
 </head>
-<body>
-<div class="header">
+<body style="background: #4b6cb7;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #182848, #4b6cb7);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+">
+<nav class="header">
     <a style="margin-top: 20px" href="{{back()->getTargetUrl()}}">
         <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 1024 1024">
             <path fill="white" d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64z"/>
@@ -44,11 +49,11 @@
     </a>
     <h1 class="text-3xl mt-2">Food Detail</h1>
     <div></div>
-</div>
+</nav>
 <div class="container">
     <!-- Food Details Card -->
 
-    <div class="food-card">
+    <div class="food-card bg-gray-100" >
         <h2>{{$food->name}}</h2>
         <img style="width: full" src="{{asset('storage/'.$food->image)}}" >
     </div>

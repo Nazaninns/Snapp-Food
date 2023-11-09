@@ -38,10 +38,59 @@
             width: 30%;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+        .btn-grad {
+            background-image: linear-gradient(to right, #4b6cb7 0%, #182848  51%, #4b6cb7  100%);
+            margin: 10px;
+            padding: 10px 10px;
+            text-align: center;
+            text-transform: uppercase;
+            transition: 0.5s;
+            background-size: 200% auto;
+            color: white;
+            box-shadow: 0 0 20px #eee;
+            border-radius: 10px;
+        }
+
+        .btn-grad:hover {
+            background-position: right center; /* change the direction of the change here */
+            color: #fff;
+            text-decoration: none;
+        }
+
+
+        .btn-gradd {
+            background-image: linear-gradient(to right, #232526 0%, #414345  51%, #232526  100%);
+            margin: 10px;
+            padding: 10px 10px;
+            font-size: 12px;
+            text-align: center;
+            text-transform: uppercase;
+            transition: 0.5s;
+            background-size: 200% auto;
+            color: white;
+            box-shadow: 0 0 20px #eee;
+            border-radius: 10px;
+            display: block;
+        }
+
+        .btn-gradd:hover {
+            background-position: right center; /* change the direction of the change here */
+            color: #fff;
+            text-decoration: none;
+        }
+
+
     </style>
 </head>
-<body>
-<div class="header">
+<body
+    style="background: #4b6cb7;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #182848, #4b6cb7);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+"
+
+>
+<nav class="header">
     <a style="margin-top: 20px" href="{{back()->getTargetUrl()}}">
         <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 1024 1024">
             <path fill="white" d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64z"/>
@@ -61,27 +110,27 @@
             <path fill="white" d="M0 0h48v48H0z" mask="url(#ipSAdd0)"/>
         </svg>
     </a>
-</div>
+</nav>
 <div class="container w-full flex justify-between ">
 
     <form action="">
         <select style="display: inline" name="sort" id="countries"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                class="btn-grad bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             <option value="" selected disabled>Sort by name</option>
             <option value="asc">ascending</option>
             <option value="desc">descending</option>
         </select>
-        <button type="submit">Submit</button>
+        <button  class="btn-grad bg-gray-700 text-white rounded-xl hover:bg-gray-500 p-2" type="submit">Submit</button>
     </form>
     <form action="">
         <select style="display: inline" name="filter" id="countries"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                class="btn-grad bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block  p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
             <option value="" selected disabled>Filter by category</option>
             @foreach($foodCategories as $category)
                 <option value="{{$category->id}}">{{$category->name}}</option>
             @endforeach
         </select>
-        <button type="submit">Submit</button>
+        <button  class="btn-grad bg-gray-700 text-white rounded-xl hover:bg-gray-500 p-2" type="submit">Submit</button>
     </form>
     {{--    <form action="">--}}
     {{--        <select name="sort">--}}
@@ -105,9 +154,9 @@
 <div class="container">
     <!-- RestaurantCollection Categories -->
     @foreach($foods as $food)
-        <div class="category-card">
+        <div class="category-card bg-gray-300">
             <div class="flex justify-between">
-                <h2>{{$food->name}}</h2>
+                <img style="width: 10rem" src="{{asset('storage/'.$food->image)}}">
                 <div class="flex">
                     <a href="{{route('party',$food)}}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
@@ -129,18 +178,32 @@
                     </a>
                 </div>
             </div>
-            <p>{{$food->ingredients}}</p>
-            <p>{{$food->price}}</p>
-            <img style="width: 10rem" src="{{asset('storage/'.$food->image)}}">
-            <a href="{{route('food.show',$food)}}">Show</a>
-            <a href="{{route('food.edit',$food)}}">
-                edit
-            </a>
-            <form action="{{route('food.destroy',$food)}}" method="post">
-                @csrf
-                @method('DELETE')
-                <button>delete</button>
-            </form>
+            <h2>{{$food->name}}</h2>
+            <p>
+            <p>ingredients:</p>{{$food->ingredients}}</p>
+            <p>
+            <p>price:</p>{{$food->price}}</p>
+            <div class=" flex gap-2.5 mt-2">
+                <a class="btn-gradd border border-gray-700 bg-gray-700 text-white rounded-md px-4 py-2 mt-2
+                        transition duration-500 ease select-none hover:bg-gray-500 focus:outline-none
+                        focus:shadow-outline"
+                   href="{{route('food.show',$food)}}">Show</a>
+                <a class="btn-gradd border border-gray-700 bg-gray-700 text-white rounded-md px-4 py-2 mt-2
+                        transition duration-500 ease select-none hover:bg-gray-500 focus:outline-none
+                        focus:shadow-outline"
+                   href="{{route('food.edit',$food)}}">
+                    edit
+                </a>
+                <form action="{{route('food.destroy',$food)}}" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <button class="btn-gradd border border-gray-700 bg-gray-700 text-white rounded-md px-4 py-2 mt-2
+                        transition duration-500 ease select-none hover:bg-gray-500 focus:outline-none
+                        focus:shadow-outline"
+                    >delete
+                    </button>
+                </form>
+            </div>
             {{-- @php $partyRout = ('is_party')? 'food.party.submit':'food.party.destroy'; @endphp --}}
             {{-- @php $iconCollor = ('is_party')? 'red':'gray'; @endphp --}}
             {{-- <form action="{{rout($partyRout,$food)}}" method="post">

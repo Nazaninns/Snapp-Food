@@ -36,10 +36,36 @@
             width: 30%;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+        .btn-grad {
+            background-image: linear-gradient(to right, #4b6cb7 0%, #182848  51%, #4b6cb7  100%);
+            margin: 10px;
+            padding: 10px 10px;
+            font-size: 13px;
+            text-align: center;
+            text-transform: uppercase;
+            transition: 0.5s;
+            background-size: 200% auto;
+            color: white;
+            box-shadow: 0 0 20px #eee;
+            border-radius: 10px;
+            display: block;
+        }
+
+        .btn-grad:hover {
+            background-position: right center; /* change the direction of the change here */
+            color: #fff;
+            text-decoration: none;
+        }
     </style>
 </head>
-<body>
-<div class="header">
+<body
+    style="background: #4b6cb7;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #182848, #4b6cb7);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+"
+>
+<nav class="header">
     <a style="margin-top: 20px" href="{{back()->getTargetUrl()}}">
         <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 1024 1024">
             <path fill="white" d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64z"/>
@@ -59,23 +85,34 @@
             <path fill="white" d="M0 0h48v48H0z" mask="url(#ipSAdd0)"/>
         </svg>
     </a>
-</div>
+</nav>
 <div class="container">
     <!-- RestaurantCollection Categories -->
 
     @foreach($foodCategories as  $category)
-        <div class="category-card">
+        <div class="category-card bg-gray-50">
+
             <h2>{{$category->name}}</h2>
-            <a href="{{route('admin.food_category.show',['food_category'=>$category])}}">Show</a>
-            <a href="{{route('admin.food_category.edit',['food_category'=>$category])}}">edit</a>
+            <div class="flex gap-2 ">
+            <a style="margin-top: 1.5rem" class="btn-grad border border-gray-700 bg-gray-700 text-white rounded-md px-4 py-2 mt-4
+               transition duration-500 ease select-none hover:bg-gray-500 focus:outline-none
+               focus:shadow-outline"
+                href="{{route('admin.food_category.show',['food_category'=>$category])}}">Show</a>
+            <a style="margin-top: 1.5rem" class="btn-grad border border-gray-700 bg-gray-700 text-white rounded-md px-4 py-2 mt-4
+                        transition duration-500 ease select-none hover:bg-gray-500 focus:outline-none
+                        focus:shadow-outline"
+                href="{{route('admin.food_category.edit',['food_category'=>$category])}}">edit</a>
             <form style="margin-top: 10px"
                   action="{{route('admin.food_category.destroy',['food_category'=>$category])}}"
                   method="post">
                 @csrf
                 @method('DELETE')
-                <button type="submit">delete</button>
+                <button style="margin-top: .85rem"  class="btn-grad border border-gray-700 bg-gray-700 text-white rounded-md px-4 py-2
+                        transition duration-500 ease select-none hover:bg-gray-500 focus:outline-none
+                        focus:shadow-outline"
+                    type="submit">delete</button>
             </form>
-
+            </div>
         </div>
     @endforeach
 </div>

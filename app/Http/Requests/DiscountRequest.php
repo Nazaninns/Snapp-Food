@@ -22,7 +22,7 @@ class DiscountRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'percent' => ['numeric', 'required', 'between:1,80']
+            'percent' => ['numeric', 'required', 'between:1,80'],
         ];
     }
 }

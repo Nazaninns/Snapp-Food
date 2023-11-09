@@ -41,10 +41,11 @@
     <title>Register</title>
     @vite('resources/css/app.css')
 </head>
-<body >
+<body>
 <div class="bg-white dark:bg-gray-900">
     <div class="flex justify-center h-screen">
-        <div class="hidden bg-cover lg:block lg:w-2/3" style="background-image: url({{asset('chef-cooking-food-restaurant-kitchen.jpg') }}) ">
+        <div class="hidden bg-cover lg:block lg:w-2/3"
+             style="background-image: url({{asset('chef-cooking-food-restaurant-kitchen.jpg') }}) ">
             <div class="flex items-center h-full px-20 bg-gray-900 bg-opacity-40">
                 <div>
                     <h2 class="text-4xl font-bold text-white">Snapp Food</h2>
@@ -67,23 +68,50 @@
                         @csrf
                         <div>
                             <label for="name" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Name</label>
-                            <input type="text" name="name" id="name" placeholder="enter your  restaurant name" class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                            <input type="text" name="name" id="name" placeholder="enter your  restaurant name"
+                                   class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
+                            <div class="text-red-600">
+                            @error('name')
+                            {{$message}}
+                            @enderror
+                            </div>
                         </div>
                         <div>
-                            <label for="email" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Email Address</label>
-                            <input type="email" name="email" id="email" placeholder="example@example.com" class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                            <label for="email" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Email
+                                Address</label>
+                            <input type="email" name="email" id="email" placeholder="example@example.com"
+                                   class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
+                            <div class="text-red-600">
+                            @error('email')
+                            {{$message}}
+                            @enderror
+                                </div>
                         </div>
                         <div>
                             <label for="phone" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">phone</label>
-                            <input type="text" name="phone" id="phone" placeholder="enter your phone number" class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                            <input type="text" name="phone" id="phone" placeholder="enter your phone number"
+                                   class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
+                           <div class="text-red-600">
+                            @error('phone')
+                            {{$message}}
+                            @enderror
+                           </div>
                         </div>
                         <div class="mt-6">
                             <div class="flex justify-between mb-2">
                                 <label for="password" class="text-sm text-gray-600 dark:text-gray-200">Password</label>
-                                <a href="#" class="text-sm text-gray-400 focus:text-blue-500 hover:text-blue-500 hover:underline">Forgot password?</a>
+                                <a href="#"
+                                   class="text-sm text-gray-400 focus:text-blue-500 hover:text-blue-500 hover:underline">Forgot
+                                    password?</a>
                             </div>
 
-                            <input type="password" name="password" id="password" placeholder="Your Password" class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40" />
+                            <input type="password" name="password" id="password" placeholder="Your Password"
+                                   class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
+                            <div class="text-red-600">
+                                @error('password')
+                                {{$message}}
+                                @enderror
+                            </div>
                         </div>
 
                         <div class="mt-6">
@@ -95,7 +123,9 @@
 
                     </form>
 
-                    <p class="mt-6 text-sm text-center text-gray-400">already have an account ? <a href="{{route('login.submit')}}" class="text-blue-500 focus:outline-none focus:underline hover:underline">Login</a>.</p>
+                    <p class="mt-6 text-sm text-center text-gray-400">already have an account ? <a
+                            href="{{route('login.submit')}}"
+                            class="text-blue-500 focus:outline-none focus:underline hover:underline">Login</a>.</p>
                 </div>
             </div>
         </div>

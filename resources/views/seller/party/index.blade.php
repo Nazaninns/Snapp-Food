@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @vite('resources/css/app.css')
     <title></title>
     <style>
         body {
@@ -48,7 +49,6 @@
         }
 
         .food-form button {
-            background-color: #3498db;
             color: #fff;
             border: none;
             padding: 10px 20px;
@@ -57,8 +57,8 @@
         }
     </style>
 </head>
-<body>
-<div class="header">
+<body style="background-size: cover; background-image: url({{asset('discount.jpg')}}); background-color: rgba(255, 255, 255, 0.5);">
+<nav class="header">
     <a style="margin-top: 20px" href="{{back()->getTargetUrl()}}">
         <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 1024 1024">
             <path fill="white" d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64z"/>
@@ -68,25 +68,36 @@
     </a>
     <h1>Food Party Cards</h1>
     <div></div>
-</div>
+</nav>
 <div class="container">
-@foreach($parties as $foodParty)
-    <div class="category-card">
-            <div class="flex justify-between">
-                <h2>{{$foodParty->percent}}</h2>
+    @foreach($parties as $foodParty)
+        <div class="category-card bg-gray-100 p-4 rounded-xl">
+            <div class="">
+                <p>{{$foodParty->food->name}}</p>
+                <p>percent:</p>
+                <p>{{$foodParty->percent}}</p>
             </div>
-            <p>{{$foodParty->count}}</p>
-            <p>{{$foodParty->food->name}}</p>
-            <a href="{{route('party.edit',$foodParty)}}">
-                edit
-            </a>
-            <form action="{{route('party.delete',$foodParty)}}" method="post">
-                @csrf
-                @method('DELETE')
-                <button type="submit">delete</button>
-            </form>
+            <p>
+            <p>count:</p>{{$foodParty->count}}</p>
+            <div class="flex gap-2.5">
+                <a class=" border border-gray-700 bg-gray-700 text-white rounded-md px-4 py-2 mt-2
+                        transition duration-500 ease select-none hover:bg-gray-500 focus:outline-none
+                        focus:shadow-outline"
+                   href="{{route('party.edit',$foodParty)}}">
+                    edit
+                </a>
+                <form action="{{route('party.delete',$foodParty)}}" method="post">
+                    @csrf
+                    @method('DELETE')
+                    <button class=" border border-gray-700 bg-gray-700 text-white rounded-md px-4 py-2 mt-2
+                        transition duration-500 ease select-none hover:bg-gray-500 focus:outline-none
+                        focus:shadow-outline"
+                            type="submit">delete
+                    </button>
+                </form>
+            </div>
         </div>
-@endforeach
+    @endforeach
 </div>
 </body>
 </html>
