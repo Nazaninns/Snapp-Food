@@ -23,9 +23,9 @@ class UpdateAddressRequest extends FormRequest
     {
         return [
             'title' => ['string'],
-            'address' => ['email'],
-            'latitude' => ['decimal'],
-            'longitude' => ['decimal'],
+            'address' => ['string'],
+            'latitude' => ['decimal:2,4'],
+            'longitude' => ['decimal:2,4'],
         ];
     }
 }

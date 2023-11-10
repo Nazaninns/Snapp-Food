@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\api\restaurant\RestaurantRequest;
+use App\Http\Resources\restaurant\RestaurantResource;
 use App\Http\Resources\RestaurantCollection;
 use App\Http\Resources\hehe;
 use App\Models\Restaurant;
@@ -25,13 +26,13 @@ class RestaurantController extends Controller
             $restaurants=Restaurant::query()->where('score','>',$validated['score_gt'])->get();
         }
         if (isset($restaurants))
-            return $restaurants;
+            return RestaurantResource::collection($restaurants);
         else
-            return Restaurant::all();
+            return RestaurantResource::collection(Restaurant::all());
     }
 
     public function show(Restaurant $restaurant)
     {
-        return $restaurant;
+        return new RestaurantResource($restaurant);
     }
 }

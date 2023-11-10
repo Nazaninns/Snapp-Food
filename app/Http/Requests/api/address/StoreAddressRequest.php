@@ -24,8 +24,8 @@ class StoreAddressRequest extends FormRequest
         return [
             'title' => ['required', 'string'],
             'address' => ['required', 'string'],
-            'latitude' => ['required', 'decimal'],
-            'longitude' => ['required', 'decimal']
+            'latitude' => ['required', 'decimal:2'],
+            'longitude' => ['required', 'decimal:2']
         ];
     }
 }

@@ -38,6 +38,6 @@ protected $casts=[
 
     public function carts():BelongsToMany
     {
-        return $this->belongsToMany(Food::class,'food_carts')->withPivot('count');
+        return $this->belongsToMany(Cart::class,'food_carts')->withPivot('count');
     }
 }

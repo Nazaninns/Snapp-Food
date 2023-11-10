@@ -29,7 +29,7 @@ class CartController extends Controller
         $user = Auth::user();
         $validated = $request->validated();
         $restaurantId = Food::query()->find($validated['food_id'])->restaurant_id;
-        $cart = $user->carts()->where(['restaurant_id'=> $restaurantId,'pay'=>null])->get()->first();
+        $cart = $user->carts()->where(['restaurant_id' => $restaurantId, 'pay' => null])->get()->first();
         $cartExist = $cart?->toArray();
         if (empty($cartExist)) {
             $cart = Cart::query()->create([
@@ -61,10 +61,12 @@ class CartController extends Controller
         $user = Auth::user();
         $validated = $request->validated();
         $restaurantId = Food::query()->find($validated['food_id'])->restaurant_id;
-        $cart = $user->carts()->where(['restaurant_id'=> $restaurantId,'pay'=>null])->get()->first();
-        $cart->food()->updateExistingPivot($validated['food_id'], [
+        $cart = $user->carts()->where(['restaurant_id' => $restaurantId, 'pay' => null])->get()->first();
+        $cart?->food()->updateExistingPivot($validated['food_id'], [
             'count' => $validated['count']
         ]);
+        if ($cart == null)
+            return 'please create a new cart';
         return 'updated cart';
     }
 

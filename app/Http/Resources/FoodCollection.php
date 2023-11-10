@@ -5,7 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class FoodResource extends ResourceCollection
+class FoodCollection extends ResourceCollection
 {
     //public static $wrap=null;
     /**

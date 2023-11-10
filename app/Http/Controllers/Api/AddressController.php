@@ -24,8 +24,8 @@ class AddressController extends Controller
      */
     public function store(StoreAddressRequest $request)
     {
-        $validated=$request->validated();
-        $validated['user_id']=Auth::user()->id;
+        $validated = $request->validated();
+        $validated['user_id'] = Auth::user()->id;
         Address::query()->create($validated);
         return "address added successfully";
     }
@@ -33,11 +33,11 @@ class AddressController extends Controller
     public function current(Address $address)
     {
         $addresses = Auth::user()->addresses;
-        foreach ($addresses as $value){
-            $value->current_address=0;
+        foreach ($addresses as $value) {
+            $value->current_address = 0;
             $value->save();
         }
-        $address->current_address=1;
+        $address->current_address = 1;
         $address->save();
         return 'current address updated successfully';
     }
@@ -47,7 +47,7 @@ class AddressController extends Controller
      */
     public function update(UpdateAddressRequest $request, Address $address)
     {
-    $address->update($request->validated());
-    return 'update your address done';
+        $address->update($request->validated());
+        return 'update your address done';
     }
 }

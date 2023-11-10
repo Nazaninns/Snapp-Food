@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\FoodResource;
+use App\Http\Resources\FoodCollection;
 use App\Models\Food;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
@@ -19,7 +19,8 @@ class FoodController extends Controller
         $food = $restaurant->food()->get()->groupBy(function (Food $food) {
             return $food->foodCategory->name;
         });
-        return new FoodResource($food);
+        return new FoodCollection($food);
+
     }
 
 }
