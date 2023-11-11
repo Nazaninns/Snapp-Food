@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\PhoneRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class RestaurantSettingRequest extends FormRequest
@@ -23,7 +24,7 @@ class RestaurantSettingRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string'],
-            'phone' => ['required', 'string', 'regex:/^09[0|1|2|3][0-9]{8}$/'],
+            'phone' => ['required', 'string', new PhoneRule()],
             'address' => ['required', 'string'],
             'type' => ['required', 'array'],
             //'image'=>['string','required'],

@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Models\Restaurant;
+use App\Rules\PhoneRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
@@ -38,7 +39,7 @@ class ResturantProfileRequest extends FormRequest
         return [
             'name' => ['required', 'string'],
             //'type'=>['integer','required'],
-            'phone' => ['string', 'required', 'regex:/^09[0|1|2|3][0-9]{8}$/'],
+            'phone' => ['string', 'required', new PhoneRule()],
             'address' => ['string', 'required'],
             'account_number' => ['required', 'string'],
             'type' => ['required', 'array']

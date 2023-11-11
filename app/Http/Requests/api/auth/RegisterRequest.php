@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\api\auth;
 
+use App\Rules\PhoneRule;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Password;
 
@@ -25,7 +26,7 @@ class RegisterRequest extends FormRequest
         return [
             'name' => ['required', 'string'],
             'email' => ['required', 'email', 'unique:users','between:3,100'],
-            'phone' => ['required', 'string', 'regex:/^09[0|1|2|3][0-9]{8}$/'],
+            'phone' => ['required', 'string', new PhoneRule()],
             'password' => [Password::default()->mixedCase()->numbers()]
         ];
     }
