@@ -8,6 +8,7 @@ use App\Http\Resources\CartResource;
 use App\Models\Cart;
 use App\Models\Food;
 use App\Models\User;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,7 +19,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        return ['carts' => CartResource::collection(Auth::user()->carts)];
+        return response()->json(['carts' => CartResource::collection(Auth::user()->carts)]);
     }
 
     /**
@@ -36,21 +37,14 @@ class CartController extends Controller
                 'restaurant_id' => $restaurantId,
                 'user_id' => Auth::id()
             ]);
-            $cart->food()->attach($validated['food_id'], [
-                'count' => $validated['count']
-            ]);
-            return [
-                'msg' => 'food added to cart successfully',
-                'cart_id' => $cart->id
-            ];
         }
         $cart->food()->attach($validated['food_id'], [
             'count' => $validated['count']
         ]);
-        return [
+        return \response()->json([
             'msg' => 'food added to cart successfully',
             'cart_id' => $cart->id
-        ];
+        ]);
     }
 
     /**
@@ -66,14 +60,14 @@ class CartController extends Controller
             'count' => $validated['count']
         ]);
         if ($cart == null)
-            return 'please create a new cart';
-        return 'updated cart';
+            return \response()->json(['msg' => 'please create a new cart']);
+        return response()->json(['msg' => 'updated cart']);
     }
 
     public function pay(Cart $cart)
     {
         Cart::query()->update(['pay' => now()->toDateTimeString()]);
-        return 'submitted';
+        return \response()->json(['msg' => 'submitted']);
     }
 
     /**
@@ -81,6 +75,6 @@ class CartController extends Controller
      */
     public function info(Cart $cart)
     {
-        return $cart;
+        return \response()->json($cart);
     }
 }

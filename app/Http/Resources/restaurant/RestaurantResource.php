@@ -17,7 +17,7 @@ class RestaurantResource extends JsonResource
         return [
             'id'=>$this->id,
             'title'=>$this->name,
-            'type'=>$this->restaurant_categories->pluck('name'),
+            'type'=>$this->restaurantCategories->pluck('name'),
             'address'=>$this->address,
             'is_open'=>$this->is_open,
             'image'=>$this->image,

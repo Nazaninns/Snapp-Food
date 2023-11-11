@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Restaurant;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class ResturantProfileRequest extends FormRequest
 {
@@ -19,15 +21,27 @@ class ResturantProfileRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
+    public function passedValidation()
+    {
+//        $validated=$this->validated();
+//        $validated['user_id']=Auth::id();
+//        $restaurant=Restaurant::query()->create($validated);
+        //$restaurant = (new Restaurant())->save();
+        //dd($restaurant);
+        //$restaurant->restaurantCategories()->sync($this['type']);
+//       return $restaurant->restaurantCategories()->sync($this->type);
+        // dd($this->type);
+    }
+
     public function rules(): array
     {
         return [
-            'name'=>['required','string'],
+            'name' => ['required', 'string'],
             //'type'=>['integer','required'],
-            'phone'=>['string','required', 'regex:/^09[0|1|2|3][0-9]{8}$/'],
-            'address'=>['string','required'],
-            'account_number'=>['required','string'],
-            'type' => ['required','array']
+            'phone' => ['string', 'required', 'regex:/^09[0|1|2|3][0-9]{8}$/'],
+            'address' => ['string', 'required'],
+            'account_number' => ['required', 'string'],
+            'type' => ['required', 'array']
         ];
     }
 }

@@ -9,6 +9,7 @@ use App\Http\Resources\RestaurantCollection;
 use App\Http\Resources\hehe;
 use App\Models\Restaurant;
 use App\Models\RestaurantCategory;
+use http\Env\Response;
 
 class RestaurantController extends Controller
 {
@@ -26,13 +27,13 @@ class RestaurantController extends Controller
             $restaurants=Restaurant::query()->where('score','>',$validated['score_gt'])->get();
         }
         if (isset($restaurants))
-            return RestaurantResource::collection($restaurants);
+            return response()->json(RestaurantResource::collection($restaurants));
         else
-            return RestaurantResource::collection(Restaurant::all());
+            return \response()->json(RestaurantResource::collection(Restaurant::all()));
     }
 
     public function show(Restaurant $restaurant)
     {
-        return new RestaurantResource($restaurant);
+        return \response()->json(new RestaurantResource($restaurant)) ;
     }
 }

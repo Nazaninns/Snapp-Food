@@ -10,6 +10,7 @@ use App\Models\Cart;
 use App\Models\Comment;
 use App\Models\Food;
 use App\Models\Restaurant;
+use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -20,11 +21,11 @@ class CommentController extends Controller
         $validated = $request->validated();
         if (isset($validated['restaurant_id'])) {
             $comments = Cart::query()->where('restaurant_id', $validated['restaurant_id'])->with('comments')->getRelation('comments');
-            return ['comments'=>CommentResource::collection($comments->get())];
+            return \response()->json(['comments'=>CommentResource::collection($comments->get())]);
         }
         if (isset($validated['food_id'])) {
             $comments = Food::query()->find($validated['food_id'])->carts()->with('comments')->getRelation('comments');
-            return ['comments'=>CommentResource::collection($comments->get())];
+            return \response()->json(['comments'=>CommentResource::collection($comments->get())]);
         }
     }
 
@@ -33,7 +34,7 @@ class CommentController extends Controller
         $validated = $request->validated();
         $validated['user_id'] = Auth::id();
         Comment::query()->create($validated);
-        return 'comment created successfully';
+        return \response()->json(['msg'=>'comment created successfully'],201);
 
     }
 }

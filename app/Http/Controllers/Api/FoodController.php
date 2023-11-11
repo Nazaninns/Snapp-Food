@@ -19,7 +19,7 @@ class FoodController extends Controller
         $food = $restaurant->food()->get()->groupBy(function (Food $food) {
             return $food->foodCategory->name;
         });
-        return new FoodCollection($food);
+        return response()->json(new FoodCollection($food));
 
     }
 

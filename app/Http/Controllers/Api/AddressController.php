@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\api\address\StoreAddressRequest;
 use App\Http\Requests\api\address\UpdateAddressRequest;
+use App\Http\Resources\address\AddressResource;
 use App\Models\Address;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -16,7 +17,9 @@ class AddressController extends Controller
      */
     public function index()
     {
-        return Auth::user()->addresses;
+        return response()->json(
+            AddressResource::collection(Auth::user()->addresses)
+        );
     }
 
     /**
@@ -27,7 +30,9 @@ class AddressController extends Controller
         $validated = $request->validated();
         $validated['user_id'] = Auth::user()->id;
         Address::query()->create($validated);
-        return "address added successfully";
+        return response()->json([
+            'msg' => "address added successfully"
+        ], 201);
     }
 
     public function current(Address $address)
@@ -39,7 +44,9 @@ class AddressController extends Controller
         }
         $address->current_address = 1;
         $address->save();
-        return 'current address updated successfully';
+        return response()->json([
+            'msg' => 'current address updated successfully'
+        ]);
     }
 
     /**
@@ -48,6 +55,8 @@ class AddressController extends Controller
     public function update(UpdateAddressRequest $request, Address $address)
     {
         $address->update($request->validated());
-        return 'update your address done';
+        return response()->json([
+            'msg'=>'update your address done'
+        ]);
     }
 }

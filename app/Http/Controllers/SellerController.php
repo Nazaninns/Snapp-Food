@@ -22,17 +22,20 @@ class SellerController extends Controller
 
     public function restaurantProfile()
     {
+        if (Auth::user()->restaurant !== null)
+            return redirect()->route('seller.setting');
         $categories = RestaurantCategory::all();
         return view('seller.profile', compact('categories'));
     }
 
     public function profileStore(ResturantProfileRequest $request)
     {
+
         $validated = $request->validated();
         $types = $request->validated('type');
         $validated['user_id'] = Auth::id();
         $restaurant = Restaurant::query()->create($validated);
-        $restaurant->restaurant_categories()->sync($types);
+        $restaurant->restaurantCategories()->sync($types);
         return redirect()->route('seller.dashboard');
     }
 
@@ -48,7 +51,7 @@ class SellerController extends Controller
         $validated = $request->validated();
         $types = $validated['type'];
         $restaurant->update($request->validated());
-        $restaurant->restaurant_categories()->sync($types);
+        $restaurant->restaurantCategories()->sync($types);
         return redirect()->route('seller.dashboard');
     }
 }
