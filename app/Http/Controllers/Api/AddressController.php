@@ -37,10 +37,13 @@ class AddressController extends Controller
 
     public function current(Address $address)
     {
-        $addresses = Auth::user()->addresses;
-        foreach ($addresses as $value) {
-            $value->current_address = 0;
-            $value->save();
+        Auth::user()->addresses()->update([
+            'current_address' => 0
+        ]);
+        if ($address->user_id !== Auth::id()) {
+           return response()->json([
+                'msg' => 'address not found'
+            ], 404);
         }
         $address->current_address = 1;
         $address->save();
@@ -56,7 +59,7 @@ class AddressController extends Controller
     {
         $address->update($request->validated());
         return response()->json([
-            'msg'=>'update your address done'
+            'msg' => 'update your address done'
         ]);
     }
 }

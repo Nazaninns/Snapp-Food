@@ -22,8 +22,8 @@ class StoreAddressRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'string'],
-            'address' => ['required', 'string'],
+            'title' => ['required', 'string','between:3,100'],
+            'address' => ['required', 'string','between:3,200'],
             'latitude' => ['required', 'decimal:2'],
             'longitude' => ['required', 'decimal:2']
         ];

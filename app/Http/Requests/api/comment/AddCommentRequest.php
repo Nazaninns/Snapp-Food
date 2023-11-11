@@ -24,7 +24,7 @@ class AddCommentRequest extends FormRequest
         return [
             'cart_id' => ['required', 'numeric', 'exists:carts,id'],
             'score' => ['required', 'numeric', 'between:1,5'],
-            'text' => ['required', 'string']
+            'text' => ['required', 'string','between:3,200']
         ];
     }
 }
