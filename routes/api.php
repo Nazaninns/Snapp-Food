@@ -24,26 +24,37 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+
 Route::post('login', [AuthController::class, 'login']);
 Route::post('register', [AuthController::class, 'register']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
 //user
-    Route::apiResource('addresses', AddressController::class);
-    Route::post('addresses/{address}', [AddressController::class, 'current']);
+        Route::apiResource('addresses', AddressController::class);
+        Route::post('addresses/{address}', [AddressController::class, 'current']);
 //restaurants
-    Route::get('restaurants', [RestaurantController::class, 'index']);
-    Route::get('restaurants/{restaurant}', [RestaurantController::class, 'show']);
+    Route::controller(RestaurantController::class)->prefix('restaurants')->group(function () {
+        Route::get('/', 'index');
+        Route::get('/{restaurant}', 'show');
+    });
+
 //food
     Route::get('restaurants/{restaurant}/food', [FoodController::class, 'index']);
 //carts
-    Route::get('carts', [CartController::class, 'index']);
-    Route::post('carts/add', [CartController::class, 'add']);
-    Route::patch('carts/add', [CartController::class, 'update']);
-    Route::get('carts/{cart}', [CartController::class, 'info']);
-    Route::post('carts/{cart}/pay', [CartController::class, 'pay']);
+
+    Route::controller(CartController::class)->prefix('carts')->group(function () {
+        Route::get('/', 'index');
+        Route::post('/add', 'add');
+        Route::patch('/add', 'update');
+        Route::get('/{cart}','info');
+        Route::post('/{cart}/pay', 'pay');
+    });
 //comments
-    Route::get('comments', [CommentController::class, 'index']);
-    Route::post('comments', [CommentController::class, 'store']);
+    Route::controller(CommentController::class)->prefix('comments')->group(function () {
+        Route::get('/', 'index');
+        Route::post('/', 'store');
+    });
+
 });
+
