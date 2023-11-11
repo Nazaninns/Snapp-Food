@@ -8,6 +8,7 @@ use App\Http\Resources\CartResource;
 use App\Models\Cart;
 use App\Models\Food;
 use App\Models\User;
+use App\Services\CartService;
 use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,17 +28,8 @@ class CartController extends Controller
      */
     public function add(CartRequest $request)
     {
-        $user = Auth::user();
         $validated = $request->validated();
-        $restaurantId = Food::query()->find($validated['food_id'])->restaurant_id;
-        $cart = $user->carts()->where(['restaurant_id' => $restaurantId, 'pay' => null])->get()->first();
-        $cartExist = $cart?->toArray();
-        if (empty($cartExist)) {
-            $cart = Cart::query()->create([
-                'restaurant_id' => $restaurantId,
-                'user_id' => Auth::id()
-            ]);
-        }
+        $cart = CartService::getCart($validated['food_id']);
         $cart->food()->attach($validated['food_id'], [
             'count' => $validated['count']
         ]);
@@ -52,10 +44,9 @@ class CartController extends Controller
      */
     public function update(CartRequest $request)
     {
-        $user = Auth::user();
+
         $validated = $request->validated();
-        $restaurantId = Food::query()->find($validated['food_id'])->restaurant_id;
-        $cart = $user->carts()->where(['restaurant_id' => $restaurantId, 'pay' => null])->get()->first();
+        $cart=CartService::updateCart($validated['food_id']);
         $cart?->food()->updateExistingPivot($validated['food_id'], [
             'count' => $validated['count']
         ]);
