@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\seller;
 
 use App\Rules\PhoneRule;
 use Illuminate\Foundation\Http\FormRequest;

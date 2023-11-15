@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\seller;
 
-use App\Http\Requests\FoodPartyRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\seller\FoodPartyRequest;
 use App\Models\Food;
 use App\Models\FoodParty;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class FoodPartyController extends Controller
 {

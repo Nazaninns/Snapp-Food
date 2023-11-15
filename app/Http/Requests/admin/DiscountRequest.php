@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class FoodRequest extends FormRequest
+class DiscountRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,11 +22,7 @@ class FoodRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'string'],
-            'ingredients' => ['required', 'string'],
-            'price' => ['numeric', 'required'],
-            'image' => ['nullable', 'file'],
-            'food_category_id' => ['integer', 'required', 'exists:food_categories,id'],
+            'percent' => ['numeric', 'required', 'between:1,80'],
         ];
     }
 }

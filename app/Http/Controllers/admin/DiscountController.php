@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
-use App\Http\Requests\DiscountRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\admin\DiscountRequest;
 use App\Models\Discount;
-use Illuminate\Http\Request;
 
 class DiscountController extends Controller
 {

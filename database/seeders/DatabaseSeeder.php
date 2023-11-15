@@ -31,6 +31,12 @@ class DatabaseSeeder extends Seeder
             'phone' => '1235465',
             'password' => '123456'
         ]);
+        $customer=User::factory()->create([
+            'name'=>'aa',
+            'email'=>'a@gmail.com',
+            'phone'=>'09122222222',
+            'password'=>'Aa123456'
+        ]);
         RestaurantCategory::query()->create([
             'name'=>'aaa',
         ]);
@@ -49,5 +55,6 @@ class DatabaseSeeder extends Seeder
         ]);
         $admin->assignRole('admin');
         $seller->assignRole('seller');
+        $customer->assignRole('customer');
     }
 }

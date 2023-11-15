@@ -57,7 +57,7 @@ class CartController extends Controller
 
     public function pay(Cart $cart)
     {
-        Cart::query()->update(['pay' => now()->toDateTimeString()]);
+        $cart->update(['pay' => now()->toDateTimeString(),'situation'=>'pending']);
         return \response()->json(['msg' => 'submitted']);
     }
 

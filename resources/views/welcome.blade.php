@@ -149,10 +149,10 @@
     @vite('resources/css/app.css')
     <title>Home</title>
 </head>
-<body>
-<div class="bg-white dark:bg-black">
+<body style="background-image: url({{asset('delicious-pizza-indoors.jpg')}}) ;background-size: cover">
+<div class="  "   >
     <!-- Navigation Bar -->
-    <nav class=" dark:bg-gray-950">
+    <nav class=" ">
         <div class="max-w-7xl mx-auto px-4 py-2 flex justify-between items-center">
             <div class="text-white dark:text-gray-300 text-2xl font-semibold">Snapp Food</div>
             <div class="space-x-4">
@@ -176,7 +176,7 @@
 
     <!-- Image Section -->
     <div class="text-center">
-        <img src="../delicious-pizza-indoors.jpg"  alt="Food Image" class="max-w-full mt-8" />
+{{--        <img src="../delicious-pizza-indoors.jpg"  alt="Food Image" class="max-w-full mt-8" />--}}
     </div>
 </div>
 

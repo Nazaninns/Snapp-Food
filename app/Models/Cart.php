@@ -13,7 +13,7 @@ class Cart extends Model
     use HasFactory;
 
     protected $fillable = [
-        'restaurant_id', 'user_id', 'pay'
+        'restaurant_id', 'user_id', 'pay','situation'
     ];
 
     public function restaurant(): BelongsTo
@@ -23,7 +23,7 @@ class Cart extends Model
 
     public function food(): BelongsToMany
     {
-        return $this->belongsToMany(Food::class, 'food_carts');
+        return $this->belongsToMany(Food::class, 'food_carts')->withPivot('count');
     }
 
     public function user(): BelongsTo

@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
-use App\Http\Requests\RestaurantCategoryRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\admin\RestaurantCategoryRequest;
 use App\Models\RestaurantCategory;
-use Illuminate\Http\Request;
 
 class RestaurantCategoryController extends Controller
 {

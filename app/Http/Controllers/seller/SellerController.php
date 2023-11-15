@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\seller;
 
-use App\Http\Requests\RestaurantSettingRequest;
-use App\Http\Requests\ResturantProfileRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\seller\RestaurantSettingRequest;
+use App\Http\Requests\seller\ResturantProfileRequest;
 use App\Models\Restaurant;
 use App\Models\RestaurantCategory;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class SellerController extends Controller
@@ -17,7 +17,11 @@ class SellerController extends Controller
             return redirect()->route('seller.profile');
 
         $user = Auth::user();
-        return view('seller.dashboard', compact('user'));
+        $carts = $user->restaurant->carts()->where([
+            ['pay', '!=', null],
+            ['situation', '!=', 'delivered']
+        ])->get();
+        return view('seller.dashboard', compact(['user', 'carts']));
     }
 
     public function restaurantProfile()

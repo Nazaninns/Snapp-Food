@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\AdminController;
+use App\Http\Controllers\admin\AdminController;
+use App\Http\Controllers\admin\DiscountController;
+use App\Http\Controllers\admin\FoodCategoryController;
+use App\Http\Controllers\admin\RestaurantCategoryController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\FoodCategoryController;
-use App\Http\Controllers\DiscountController;
-use App\Http\Controllers\RestaurantCategoryController;
-use App\Http\Controllers\SellerController;
+use App\Http\Controllers\seller\SituationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -42,20 +42,24 @@ Route::middleware('auth')->middleware('role:admin')->prefix('admin')->name('admi
 
 //seller
 Route::middleware('auth')->middleware('role:seller')->prefix('seller')->group(function () {
-    Route::get('dashboard', [\App\Http\Controllers\SellerController::class, 'dashboard'])->name('seller.dashboard');
-    Route::get('profile', [\App\Http\Controllers\SellerController::class, 'restaurantProfile'])->name('seller.profile');
-    Route::post('profile', [\App\Http\Controllers\SellerController::class, 'profileStore'])->name('seller.storeProfile');
-    Route::get('setting', [\App\Http\Controllers\SellerController::class, 'restaurantSetting'])->name('seller.setting');
-    Route::post('setting/{restaurant}', [\App\Http\Controllers\SellerController::class, 'updateSetting'])->name('seller.updateSetting');
-    Route::resource('food', \App\Http\Controllers\FoodController::class);
+    Route::get('dashboard', [\App\Http\Controllers\seller\SellerController::class, 'dashboard'])->name('seller.dashboard');
+    Route::get('profile', [\App\Http\Controllers\seller\SellerController::class, 'restaurantProfile'])->name('seller.profile');
+    Route::post('profile', [\App\Http\Controllers\seller\SellerController::class, 'profileStore'])->name('seller.storeProfile');
+    Route::get('setting', [\App\Http\Controllers\seller\SellerController::class, 'restaurantSetting'])->name('seller.setting');
+    Route::post('setting/{restaurant}', [\App\Http\Controllers\seller\SellerController::class, 'updateSetting'])->name('seller.updateSetting');
+    Route::resource('food', \App\Http\Controllers\seller\FoodController::class);
 
 
-    Route::get('party/{food}',[\App\Http\Controllers\FoodPartyController::class,'party'])->name('party');
-    Route::get('party',[\App\Http\Controllers\FoodPartyController::class,'index'])->name('party.index');
-    Route::post('food/{food}/party', [\App\Http\Controllers\FoodPartyController::class, 'partyStore'])->name('party.submit');
-    Route::get('party/{food}/edit',[\App\Http\Controllers\FoodPartyController::class,'edit'])->name('party.edit');
-    Route::post('food/{food}/party/edit', [\App\Http\Controllers\FoodPartyController::class, 'partyUpdate'])->name('party.update');
-    Route::delete('food/{foodParty}/party', [\App\Http\Controllers\FoodPartyController::class, 'delete'])->name('party.delete');
+
+    Route::get('party/{food}',[\App\Http\Controllers\seller\FoodPartyController::class,'party'])->name('party');
+    Route::get('party',[\App\Http\Controllers\seller\FoodPartyController::class,'index'])->name('party.index');
+    Route::post('food/{food}/party', [\App\Http\Controllers\seller\FoodPartyController::class, 'partyStore'])->name('party.submit');
+    Route::get('party/{food}/edit',[\App\Http\Controllers\seller\FoodPartyController::class,'edit'])->name('party.edit');
+    Route::post('food/{food}/party/edit', [\App\Http\Controllers\seller\FoodPartyController::class, 'partyUpdate'])->name('party.update');
+    Route::delete('food/{foodParty}/party', [\App\Http\Controllers\seller\FoodPartyController::class, 'delete'])->name('party.delete');
 
 
+
+    Route::patch('dashboard/situation/{cart}',[SituationController::class,'changeSituation'])->name('change.situation');
+    Route::get('archive',[SituationController::class,'archive'])->name('archive');
 });

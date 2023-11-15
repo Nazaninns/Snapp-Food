@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\admin;
 
+use App\Http\Controllers\Controller;
+use App\Http\Requests\admin\FoodCategoryRequest;
 use App\Http\Requests\FoodCategoryCreateRequest;
-use App\Http\Requests\FoodCategoryRequest;
 use App\Models\FoodCategory;
-use Illuminate\Http\Request;
 
 class FoodCategoryController extends Controller
 {

@@ -1,11 +1,9 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\seller;
 
-use App\Models\Restaurant;
 use App\Rules\PhoneRule;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Support\Facades\Auth;
 
 class ResturantProfileRequest extends FormRequest
 {

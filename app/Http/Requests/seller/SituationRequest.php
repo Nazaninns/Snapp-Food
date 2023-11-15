@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\seller;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class FoodPartyRequest extends FormRequest
+class SituationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +22,7 @@ class FoodPartyRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'count' => ['required', 'numeric', 'min:1'],
-            'percent' => ['required', 'numeric', 'between:1,90']
+            'situation'=>['required','in:making,send,delivered']
         ];
     }
 }

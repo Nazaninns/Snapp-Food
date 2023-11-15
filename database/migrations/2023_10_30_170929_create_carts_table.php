@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('restaurant_id')->constrained();
             $table->foreignId('user_id')->constrained();
             $table->timestamp('pay')->nullable();
+            $table->enum('situation',['pending','making','send','delivered'])->nullable();
             $table->timestamps();
         });
     }

@@ -28,7 +28,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('login', [AuthController::class, 'login']);
 Route::post('register', [AuthController::class, 'register']);
 
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware(['auth:sanctum','role:customer'])->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
 //user
         Route::apiResource('addresses', AddressController::class);
@@ -58,3 +58,6 @@ Route::middleware('auth:sanctum')->group(function () {
 
 });
 
+//Route::get('test',function (){
+//    throw new \App\Exceptions\MyException();
+//});
