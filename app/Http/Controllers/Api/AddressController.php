@@ -28,8 +28,7 @@ class AddressController extends Controller
     public function store(StoreAddressRequest $request)
     {
         $validated = $request->validated();
-        $validated['user_id'] = Auth::user()->id;
-        Address::query()->create($validated);
+        Auth::user()->addresses()->create($validated);
         return response()->json([
             'msg' => "address added successfully"
         ], 201);

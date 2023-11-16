@@ -18,7 +18,8 @@ return new class extends Migration
             $table->boolean('current_address')->default(0);
             $table->float('latitude');
             $table->float('longitude');
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            //$table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->morphs('addressable');
             $table->timestamps();
         });
     }

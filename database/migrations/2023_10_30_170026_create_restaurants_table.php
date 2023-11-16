@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('phone');
-            $table->string('address');
+            //$table->string('address');
             $table->string('account_number');
             // $table->time('start_time')->nullable()->default('08:00:00');
             // $table->time('end_time')->nullable()->default('21:00:00');

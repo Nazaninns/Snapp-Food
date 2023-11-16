@@ -39,6 +39,8 @@ class ResturantProfileRequest extends FormRequest
             //'type'=>['integer','required'],
             'phone' => ['string', 'required', new PhoneRule()],
             'address' => ['string', 'required'],
+            'latitude'=>['required','decimal:2,4'],
+            'longitude'=>['required','decimal:2,4'],
             'account_number' => ['required', 'string'],
             'type' => ['required', 'array']
         ];

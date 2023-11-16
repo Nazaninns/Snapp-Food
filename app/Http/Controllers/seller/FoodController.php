@@ -15,6 +15,7 @@ class FoodController extends Controller
      */
     public function index()
     {
+
         if (\request()->get('sort') == 'asc')
             $foods =Food::query()->where(['restaurant_id'=>Auth::user()->restaurant->id])->orderBy('name')->paginate(4);
         elseif (\request()->get('sort') == 'desc')

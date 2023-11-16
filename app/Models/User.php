@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -26,7 +27,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'phone'
+        'phone',
+        'addressable_type','addressable_id'
     ];
 
     /**
@@ -55,9 +57,9 @@ class User extends Authenticatable
         return $this->hasOne(Restaurant::class);
     }
 
-    public function addresses(): HasMany
+    public function addresses(): MorphMany
     {
-        return $this->hasMany(Address::class);
+        return $this->morphMany(Address::class,'addressable');
     }
 
     public function carts():HasMany

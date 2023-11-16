@@ -7,13 +7,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\MorphOne;
 
 class Restaurant extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name', 'phone', 'address', 'account_number', 'user_id'
+        'name', 'phone', 'account_number', 'user_id'
     ];
     protected $casts = [
         'phone' => PhoneCast::class
@@ -37,5 +38,10 @@ class Restaurant extends Model
     public function carts(): HasMany
     {
         return $this->hasMany(Cart::class);
+    }
+
+    public function address():MorphOne
+    {
+        return $this->morphOne(Address::class,'addressable');
     }
 }

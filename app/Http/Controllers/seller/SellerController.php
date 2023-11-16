@@ -39,6 +39,7 @@ class SellerController extends Controller
         $types = $request->validated('type');
         $validated['user_id'] = Auth::id();
         $restaurant = Restaurant::query()->create($validated);
+        $restaurant->address()->create($validated);
         $restaurant->restaurantCategories()->sync($types);
         return redirect()->route('seller.dashboard');
     }
