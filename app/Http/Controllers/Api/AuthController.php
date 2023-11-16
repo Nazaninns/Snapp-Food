@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\api\address\UpdateAddressRequest;
 use App\Http\Requests\api\auth\LoginRequest;
 use App\Http\Requests\api\auth\RegisterRequest;
+use App\Http\Requests\api\auth\UpdateInfoRequest;
+use App\Models\Address;
 use App\Models\User;
 use http\Env\Response;
 use Illuminate\Http\Request;
@@ -39,6 +42,13 @@ class AuthController extends Controller
         Auth::user()->currentAccessToken()->delete();
         return response()->json([
             'msg' => 'logout successful'
+        ]);
+    }
+    public function update(UpdateInfoRequest $request)
+    {
+        Auth::user()->update($request->validated());
+        return response()->json([
+            'msg' => 'update your information done'
         ]);
     }
 }

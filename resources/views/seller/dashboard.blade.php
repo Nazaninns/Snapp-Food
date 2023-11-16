@@ -243,26 +243,5 @@
         @endforeach
     </div>
 </div>
-<!-- Add more food cards as needed -->
-
-<!-- Reporting Section -->
-<div class="container">
-    <div class="text-white">Reporting</div>
-    <div class="report-section">
-        <h2>Reporting Section</h2>
-        <p>Provide your feedback and report any issues here.</p>
-        <button>Report</button>
-    </div>
-</div>
-</div>
-<script>
-    // Initialization for ES Users
-    import {
-        Tab,
-        initTE,
-    } from "tw-elements";
-
-    initTE({Tab});
-</script>
 </body>
 </html>

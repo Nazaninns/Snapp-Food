@@ -28,11 +28,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('login', [AuthController::class, 'login']);
 Route::post('register', [AuthController::class, 'register']);
 
-Route::middleware(['auth:sanctum','role:customer'])->group(function () {
+Route::middleware(['auth:sanctum', 'role:customer'])->group(function () {
     Route::post('logout', [AuthController::class, 'logout']);
 //user
-        Route::apiResource('addresses', AddressController::class);
-        Route::post('addresses/{address}', [AddressController::class, 'current']);
+    Route::apiResource('addresses', AddressController::class);
+    Route::post('addresses/{address}', [AddressController::class, 'current']);
+    Route::patch('user',[AuthController::class,'update']);
 //restaurants
     Route::controller(RestaurantController::class)->prefix('restaurants')->group(function () {
         Route::get('/', 'index');
@@ -47,7 +48,7 @@ Route::middleware(['auth:sanctum','role:customer'])->group(function () {
         Route::get('/', 'index');
         Route::post('/add', 'add');
         Route::patch('/add', 'update');
-        Route::get('/{cart}','info');
+        Route::get('/{cart}', 'info');
         Route::post('/{cart}/pay', 'pay');
     });
 //comments

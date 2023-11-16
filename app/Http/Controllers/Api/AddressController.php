@@ -51,15 +51,4 @@ class AddressController extends Controller
             'msg' => 'current address updated successfully'
         ]);
     }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateAddressRequest $request, Address $address)
-    {
-        $address->update($request->validated());
-        return response()->json([
-            'msg' => 'update your address done'
-        ]);
-    }
 }

@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Requests\api\address;
+namespace App\Http\Requests\api\auth;
 
+use App\Rules\PhoneRule;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Password;
 
-class UpdateAddressRequest extends FormRequest
+class UpdateInfoRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,10 +24,9 @@ class UpdateAddressRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['string','between:3,100'],
-            'address' => ['string','between:3,200'],
-            'latitude' => ['decimal:2,4'],
-            'longitude' => ['decimal:2,4'],
+            'name' => ['string', 'max:100'],
+            'phone' => ['string', new PhoneRule()],
+            'password' => ['string', Password::default()->mixedCase()->letters()]
         ];
     }
 }
