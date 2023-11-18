@@ -55,6 +55,11 @@ class SellerController extends Controller
     {
         $validated = $request->validated();
         $types = $validated['type'];
+        $restaurant->address()->update([
+            'address'=>$validated['address'],
+            'latitude'=>$validated['latitude'],
+            'longitude'=>$validated['longitude']
+        ]);
         $restaurant->update($request->validated());
         $restaurant->restaurantCategories()->sync($types);
         return redirect()->route('seller.dashboard');

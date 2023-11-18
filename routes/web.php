@@ -63,3 +63,7 @@ Route::middleware('auth')->middleware('role:seller')->prefix('seller')->group(fu
     Route::patch('dashboard/situation/{cart}',[SituationController::class,'changeSituation'])->name('change.situation');
     Route::get('archive',[SituationController::class,'archive'])->name('archive');
 });
+Route::get('test',function (){
+     \Illuminate\Support\Facades\Mail::to('nazanin@gmail.com')->send(new \App\Mail\WelcomeMail());
+    return 'email send';
+});

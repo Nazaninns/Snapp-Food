@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\api;
 
+use App\Events\SituationChangeEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\api\cart\CartRequest;
 use App\Http\Resources\CartResource;
@@ -12,6 +13,7 @@ use App\Services\CartService;
 use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Psy\Readline\Hoa\Event;
 
 class CartController extends Controller
 {
@@ -58,6 +60,7 @@ class CartController extends Controller
     public function pay(Cart $cart)
     {
         $cart->update(['pay' => now()->toDateTimeString(),'situation'=>'pending']);
+        SituationChangeEvent::dispatch($cart);
         return \response()->json(['msg' => 'submitted']);
     }
 

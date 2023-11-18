@@ -39,7 +39,9 @@ class AddressController extends Controller
         Auth::user()->addresses()->update([
             'current_address' => 0
         ]);
-        if ($address->user_id !== Auth::id()) {
+
+        if (Auth::user()->isNot($address->addressable)) {
+
            return response()->json([
                 'msg' => 'address not found'
             ], 404);

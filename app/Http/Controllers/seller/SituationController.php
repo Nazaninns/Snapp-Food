@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\seller;
 
+use App\Events\SituationChangeEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\seller\SituationRequest;
 use App\Models\Cart;
@@ -14,6 +15,7 @@ class SituationController extends Controller
     public function changeSituation(Cart $cart,SituationRequest $request)
     {
         $cart->update(['situation'=>$request->post('situation')]);
+        SituationChangeEvent::dispatch($cart);
         return redirect()->route('seller.dashboard');
     }
 
