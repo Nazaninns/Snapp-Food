@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\WelcomeSellerEvent;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
@@ -40,6 +41,7 @@ class AuthController extends Controller
         $validated = $request->validated();
         $user = User::query()->create($validated);
         $user->assignRole('seller');
+        WelcomeSellerEvent::dispatch($user);
         return redirect()->route('login');
     }
 

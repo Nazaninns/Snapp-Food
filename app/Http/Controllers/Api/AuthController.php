@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\api;
 
+use App\Events\WelcomeCustomerEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\api\address\UpdateAddressRequest;
 use App\Http\Requests\api\auth\LoginRequest;
@@ -33,6 +34,7 @@ class AuthController extends Controller
     {
         $user = User::query()->create($request->validated());
         $user->assignRole('customer');
+        WelcomeCustomerEvent::dispatch($user);
         $token = $user->createToken($user->name);
         return response()->json([
             'token' => $token->plainTextToken

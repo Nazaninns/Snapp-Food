@@ -2,14 +2,13 @@
 
 namespace App\Listeners;
 
-use App\Events\SituationChangeEvent;
-use App\Mail\ChangeSituationMail;
+use App\Events\WelcomeCustomerEvent;
 use App\Mail\WelcomeMail;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Mail;
 
-class SituationChangeListener
+class WelcomeCustomerListener
 {
     /**
      * Create the event listener.
@@ -22,9 +21,9 @@ class SituationChangeListener
     /**
      * Handle the event.
      */
-    public function handle(SituationChangeEvent $event): void
+    public function handle(WelcomeCustomerEvent $event): void
     {
-    $cart=$event->cart;
-    Mail::to($cart->user)->send(new ChangeSituationMail($cart));
+        $user=$event->user;
+        Mail::to($user)->send(new WelcomeMail($user));
     }
 }

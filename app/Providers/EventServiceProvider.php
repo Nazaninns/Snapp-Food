@@ -3,7 +3,11 @@
 namespace App\Providers;
 
 use App\Events\SituationChangeEvent;
+use App\Events\WelcomeCustomerEvent;
+use App\Events\WelcomeSellerEvent;
 use App\Listeners\SituationChangeListener;
+use App\Listeners\WelcomeCustomerListener;
+use App\Listeners\WelcomeSellerListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -22,6 +26,12 @@ class EventServiceProvider extends ServiceProvider
         ],
         SituationChangeEvent::class => [
             SituationChangeListener::class
+        ],
+        WelcomeCustomerEvent::class => [
+            WelcomeCustomerListener::class
+        ],
+        WelcomeSellerEvent::class => [
+            WelcomeSellerListener::class
         ]
     ];
 
