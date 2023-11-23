@@ -5,6 +5,9 @@ namespace App\Http\Controllers\admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\admin\DiscountRequest;
 use App\Models\Discount;
+use App\Models\User;
+use App\Notifications\DiscountCodeNotification;
+use Illuminate\Support\Facades\Notification;
 
 class DiscountController extends Controller
 {
@@ -23,7 +26,10 @@ class DiscountController extends Controller
     {
         $validated=$discountRequest->validated();
         $validated['code']=uniqid();
-        Discount::query()->create($validated);
+        $discount=Discount::query()->create($validated);
+        Notification::send(User::all()->where(function ($user){
+           return $user->hasRole('customer');
+        }), new DiscountCodeNotification($discount));
         return redirect()->route('admin.discount.index');
     }
 

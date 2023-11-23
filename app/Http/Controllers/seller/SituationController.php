@@ -18,10 +18,4 @@ class SituationController extends Controller
         SituationChangeEvent::dispatch($cart);
         return redirect()->route('seller.dashboard');
     }
-
-    public function archive()
-    {
-        $carts=Auth::user()->restaurant->carts()->where('situation','delivered')->get();
-        return view('seller.archive',compact('carts'));
-    }
 }

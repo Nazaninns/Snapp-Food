@@ -16,6 +16,7 @@ class FoodCollection extends ResourceCollection
     public function toArray(Request $request): array
     {
         return [
-            'categories'=>$this->collection
+            'categories'=>$this->collection,
+
         ];
 }}

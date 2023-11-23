@@ -191,7 +191,7 @@
                         <p class="text-indigo-600">{{$food->pivot->count}}</p>
                     </div>
                 @endforeach
-                <p>total price</p>
+                <p >total price:  <span class="text-indigo-600">{{$cart->totalPriceAfterDiscount()}}</span>  $</p>
                 {{--                <div class="flex">--}}
                 {{--                    <button class="btn-grad " >--}}
                 {{--                        <svg  xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">--}}

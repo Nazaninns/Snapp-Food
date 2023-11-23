@@ -5,6 +5,7 @@ use App\Http\Controllers\admin\DiscountController;
 use App\Http\Controllers\admin\FoodCategoryController;
 use App\Http\Controllers\admin\RestaurantCategoryController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\seller\ArchiveController;
 use App\Http\Controllers\seller\SituationController;
 use Illuminate\Support\Facades\Route;
 
@@ -61,7 +62,12 @@ Route::middleware('auth')->middleware('role:seller')->prefix('seller')->group(fu
 
 
     Route::patch('dashboard/situation/{cart}',[SituationController::class,'changeSituation'])->name('change.situation');
-    Route::get('archive',[SituationController::class,'archive'])->name('archive');
+
+    Route::controller(ArchiveController::class)->prefix('archive')->group(function (){
+        Route::get('/','archive')->name('archive');
+        Route::get('show/{cart}','show')->name('archive.show');
+    });
+
 });
 Route::get('test',function (){
      \Illuminate\Support\Facades\Mail::to('nazanin@gmail.com')->send(new \App\Mail\WelcomeMail());

@@ -28,7 +28,7 @@ class User extends Authenticatable
         'email',
         'password',
         'phone',
-        'addressable_type','addressable_id'
+        'addressable_type', 'addressable_id'
     ];
 
     /**
@@ -49,7 +49,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
-        'phone'=>PhoneCast::class
+        'phone' => PhoneCast::class
     ];
 
     public function restaurant(): HasOne
@@ -59,16 +59,21 @@ class User extends Authenticatable
 
     public function addresses(): MorphMany
     {
-        return $this->morphMany(Address::class,'addressable');
+        return $this->morphMany(Address::class, 'addressable');
     }
 
-    public function carts():HasMany
+    public function carts(): HasMany
     {
         return $this->hasMany(Cart::class);
     }
 
-    public function comments():HasMany
+    public function comments(): HasMany
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function getCurrentAddress()
+    {
+        return $this->addresses()->where('current_address', 1)?->first()?->id;
     }
 }

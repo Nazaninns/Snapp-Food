@@ -5,9 +5,12 @@ namespace App\Http\Controllers\api;
 use App\Events\SituationChangeEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\api\cart\CartRequest;
+use App\Http\Requests\api\cart\PayRequest;
 use App\Http\Resources\CartResource;
 use App\Models\Cart;
+use App\Models\Discount;
 use App\Models\Food;
+use App\Models\FoodParty;
 use App\Models\User;
 use App\Services\CartService;
 use http\Env\Response;
@@ -48,7 +51,7 @@ class CartController extends Controller
     {
 
         $validated = $request->validated();
-        $cart=CartService::updateCart($validated['food_id']);
+        $cart = CartService::updateCart($validated['food_id']);
         $cart?->food()->updateExistingPivot($validated['food_id'], [
             'count' => $validated['count']
         ]);
@@ -57,11 +60,21 @@ class CartController extends Controller
         return response()->json(['msg' => 'updated cart']);
     }
 
-    public function pay(Cart $cart)
+    public function pay(Cart $cart, PayRequest $request)
     {
-        $cart->update(['pay' => now()->toDateTimeString(),'situation'=>'pending']);
+        if ($cart->pay !== null) return \response()->json(['msg' => 'you paid before'], 404);
+        if (Auth::user()->getCurrentAddress() === null) return \response()->json(['msg' => 'set current address first'], 404);
+        $discountId = Discount::query()->where('code', $request->validated('code'))->first()?->id;
+        $cart->update([
+            'pay' => now()->toDateTimeString(),
+            'situation' => 'pending',
+            'discount_id' => $discountId,
+            'address_id' => Auth::user()->getCurrentAddress()
+        ]);
+
         SituationChangeEvent::dispatch($cart);
         return \response()->json(['msg' => 'submitted']);
+
     }
 
     /**
