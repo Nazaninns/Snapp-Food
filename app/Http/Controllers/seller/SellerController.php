@@ -5,22 +5,21 @@ namespace App\Http\Controllers\seller;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\seller\RestaurantSettingRequest;
 use App\Http\Requests\seller\ResturantProfileRequest;
+use App\Http\Requests\seller\SortSituationRequest;
 use App\Models\Restaurant;
 use App\Models\RestaurantCategory;
+use App\Services\SituationService;
 use Illuminate\Support\Facades\Auth;
 
 class SellerController extends Controller
 {
-    public function dashboard()
+    public function dashboard(SortSituationRequest $request)
     {
         if (Auth::user()->restaurant == null)
             return redirect()->route('seller.profile');
-
+        $situation = $request->validated('situation');
         $user = Auth::user();
-        $carts = $user->restaurant->carts()->where([
-            ['pay', '!=', null],
-            ['situation', '!=', 'delivered']
-        ])->get();
+        $carts=SituationService::sortCart($situation);
         return view('seller.dashboard', compact(['user', 'carts']));
     }
 
@@ -56,9 +55,9 @@ class SellerController extends Controller
         $validated = $request->validated();
         $types = $validated['type'];
         $restaurant->address()->update([
-            'address'=>$validated['address'],
-            'latitude'=>$validated['latitude'],
-            'longitude'=>$validated['longitude']
+            'address' => $validated['address'],
+            'latitude' => $validated['latitude'],
+            'longitude' => $validated['longitude']
         ]);
         $restaurant->update($request->validated());
         $restaurant->restaurantCategories()->sync($types);

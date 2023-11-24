@@ -174,6 +174,28 @@
         </div>
     </div>
 </nav>
+
+   <div class="container ">
+
+       <!-- component -->
+       <form  class="flex gap-3">
+           @csrf
+          <select name="situation" class="bg-gray-800 rounded-xl text-lg ms-2 text-white h-14 mt-5 p-2">
+              <option value="" disabled selected>Order by</option>
+              <option value="pending">Pending</option>
+              <option value="making">Making</option>
+              <option value="send">Send</option>
+              <option value="">All</option>
+          </select>
+           <button type="submit" name="submit" class="bg-gray-800 w-1/12 h-14 mt-5 text-white rounded-xl text-xl">submit</button>
+       </form>
+           <script src="//unpkg.com/alpinejs" defer></script>
+       </div>
+
+
+
+
+
 <div class="container  ">
     <!-- Food Cards -->
     <div class="flex gap-2 flex-wrap">
@@ -243,5 +265,6 @@
         @endforeach
     </div>
 </div>
+
 </body>
 </html>
