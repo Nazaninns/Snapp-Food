@@ -34,9 +34,9 @@
         .category-card, .food-card {
             border: 1px solid #e0e0e0;
             border-radius: 5px;
-            margin: 10px;
+            margin: 5rem;
             padding: 20px;
-            width: 30%;
+            width: 15%;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         .btn-grad {
@@ -102,9 +102,10 @@ background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, F
     <h1 class="text-3xl mt-5">Comments </h1>
     <div></div>
 </nav>
-<div class="container category-card bg-gray-50  w-1/12 flex justify-between ">
-    <div class="container">
-        @foreach($comments as $comment)
+@foreach($comments as $comment)
+<div class="container category-card bg-gray-50   flex justify-between ">
+    <div class="">
+
             <div>{{$comment->text}}</div>
             <form action="{{route('admin.comments.accept',$comment)}}" method="post">
                 @csrf
@@ -112,13 +113,13 @@ background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, F
             </form>
             <form action="{{route('admin.comments.reject',$comment)}}" method="post">
                 @csrf
-                <button>delete</button>
+                <button>reject</button>
             </form>
-        @endforeach
+
     </div>
 
 </div>
-
+@endforeach
 </body>
 </html>
 

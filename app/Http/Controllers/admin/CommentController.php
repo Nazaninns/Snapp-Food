@@ -16,11 +16,15 @@ class CommentController extends Controller
 
     public function accept(Comment $comment)
     {
-        $comment->
+        $comment->delete();
+        return redirect()->route('admin.comments.request');
     }
 
     public function reject(Comment $comment)
     {
-
+    $comment->update([
+        'situation'=>'no_reply'
+    ]);
+    return redirect()->route('admin.comments.request');
     }
 }
