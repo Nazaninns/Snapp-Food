@@ -51,25 +51,23 @@ Route::middleware('auth')->middleware('role:seller')->prefix('seller')->group(fu
     Route::resource('food', \App\Http\Controllers\seller\FoodController::class);
 
 
-
-    Route::get('party/{food}',[\App\Http\Controllers\seller\FoodPartyController::class,'party'])->name('party');
-    Route::get('party',[\App\Http\Controllers\seller\FoodPartyController::class,'index'])->name('party.index');
+    Route::get('party/{food}', [\App\Http\Controllers\seller\FoodPartyController::class, 'party'])->name('party');
+    Route::get('party', [\App\Http\Controllers\seller\FoodPartyController::class, 'index'])->name('party.index');
     Route::post('food/{food}/party', [\App\Http\Controllers\seller\FoodPartyController::class, 'partyStore'])->name('party.submit');
-    Route::get('party/{food}/edit',[\App\Http\Controllers\seller\FoodPartyController::class,'edit'])->name('party.edit');
+    Route::get('party/{food}/edit', [\App\Http\Controllers\seller\FoodPartyController::class, 'edit'])->name('party.edit');
     Route::post('food/{food}/party/edit', [\App\Http\Controllers\seller\FoodPartyController::class, 'partyUpdate'])->name('party.update');
     Route::delete('food/{foodParty}/party', [\App\Http\Controllers\seller\FoodPartyController::class, 'delete'])->name('party.delete');
 
 
+    Route::patch('dashboard/situation/{cart}', [SituationController::class, 'changeSituation'])->name('change.situation');
 
-    Route::patch('dashboard/situation/{cart}',[SituationController::class,'changeSituation'])->name('change.situation');
-
-    Route::controller(ArchiveController::class)->prefix('archive')->group(function (){
-        Route::get('/','archive')->name('archive');
-        Route::get('show/{cart}','show')->name('archive.show');
+    Route::controller(ArchiveController::class)->prefix('archive')->group(function () {
+        Route::get('/', 'archive')->name('archive');
+        Route::get('show/{cart}', 'show')->name('archive.show');
     });
-
+    Route::get('comments', [\App\Http\Controllers\seller\CommentController::class,'index'])->name('comments.index');
 });
-Route::get('test',function (){
-     \Illuminate\Support\Facades\Mail::to('nazanin@gmail.com')->send(new \App\Mail\WelcomeMail());
+Route::get('test', function () {
+    \Illuminate\Support\Facades\Mail::to('nazanin@gmail.com')->send(new \App\Mail\WelcomeMail());
     return 'email send';
 });
