@@ -70,7 +70,8 @@
         }
     </style>
 </head>
-<body style="background-size: cover; background-image: url({{asset('download.avif')}}); background-color: rgba(255, 255, 255, 0.5);">
+<body
+    style="background-size: cover; background-image: url({{asset('download.avif')}}); background-color: rgba(255, 255, 255, 0.5);">
 {{--<div class="flex  >--}}
 {{--<div class=" flex flex-col  justify-center   header">--}}
 {{--    <div class="flex flex-col" >My RestaurantCollection</div>--}}
@@ -84,12 +85,20 @@
 {{--</div>--}}
 <nav class="bg-gray-800 text-white p-10">
     <div class="flex justify-between items-center">
-        <div class="flex "><a href="{{route('logout')}}" class="text-white hover:underline mr-4">
+        <div class="flex ">
+            <a href="{{route('logout')}}" class="text-white hover:underline mr-4">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                     <path fill="currentColor"
                           d="M5 21q-.825 0-1.413-.588T3 19V5q0-.825.588-1.413T5 3h7v2H5v14h7v2H5Zm11-4l-1.375-1.45l2.55-2.55H9v-2h8.175l-2.55-2.55L16 7l5 5l-5 5Z"/>
                 </svg>
-            </a></div>
+            </a>
+            <a href="">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                          d="M14.77 5.87a1 1 0 0 0 1.36-.37A1 1 0 0 1 18 6a1 1 0 0 1-1 1a1 1 0 0 0 0 2a3 3 0 1 0-2.6-4.5a1 1 0 0 0 .37 1.37Zm4.3 7.13a1 1 0 0 0-1.12.86A7 7 0 0 1 11 20H5.41l.65-.65a1 1 0 0 0 0-1.41A7 7 0 0 1 11 6a1 1 0 0 0 0-2a9 9 0 0 0-7 14.61l-1.71 1.68a1 1 0 0 0-.21 1.09A1 1 0 0 0 3 22h8a9 9 0 0 0 8.93-7.87a1 1 0 0 0-.86-1.13Zm-1.69-2.93a1 1 0 0 0-.58-.07l-.18.06l-.18.09l-.15.13a1 1 0 0 0-.21.32a.84.84 0 0 0-.08.4a1 1 0 0 0 .07.39a1 1 0 0 0 .22.32A1 1 0 0 0 17 12a1 1 0 0 0 1-1a.84.84 0 0 0-.08-.38a1.07 1.07 0 0 0-.54-.54Z"/>
+                </svg>
+            </a>
+        </div>
         <div class="text-2xl font-semibold"> Admin panel</div> <!-- Title in the middle -->
         <div class=" flex gap-4">
             <!-- Settings button -->

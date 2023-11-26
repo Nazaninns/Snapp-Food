@@ -12,7 +12,7 @@ class Comment extends Model
     use HasFactory;
 
     protected $fillable = [
-        'cart_id', 'text', 'score', 'user_id'
+        'cart_id', 'text', 'score', 'user_id','situation'
     ];
 
     public function user(): BelongsTo

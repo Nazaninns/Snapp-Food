@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\FoodCategoryController;
 use App\Http\Controllers\admin\RestaurantCategoryController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\seller\ArchiveController;
+use App\Http\Controllers\seller\CommentController;
 use App\Http\Controllers\seller\SituationController;
 use Illuminate\Support\Facades\Route;
 
@@ -39,6 +40,7 @@ Route::middleware('auth')->middleware('role:admin')->prefix('admin')->name('admi
     Route::get('discount/create', [DiscountController::class, 'create'])->name('discount.create');
     Route::post('discount/create', [DiscountController::class, 'store'])->name('discount.store');
     Route::delete('discount/delete/{discount}', [DiscountController::class, 'delete'])->name('discount.delete');
+    //Route::post('comment/request',[])
 });
 
 //seller
@@ -65,8 +67,15 @@ Route::middleware('auth')->middleware('role:seller')->prefix('seller')->group(fu
         Route::get('/', 'archive')->name('archive');
         Route::get('show/{cart}', 'show')->name('archive.show');
     });
-    Route::get('comments', [\App\Http\Controllers\seller\CommentController::class,'index'])->name('comments.index');
-    Route::post('comments', [\App\Http\Controllers\seller\CommentController::class,'reply'])->name('comments.reply');
+
+    Route::controller(CommentController::class)->prefix('comments')->group(function () {
+        Route::get('/', 'index')->name('comments.index');
+        Route::post('/{comment}', 'reply')->name('comments.reply');
+        Route::post('/accept/{comment}', 'accept')->name('comments.accept');
+        Route::post('/delete/{comment}', 'deleteRequest')->name('comments.delete');
+    });
+
+
 });
 Route::get('test', function () {
     \Illuminate\Support\Facades\Mail::to('nazanin@gmail.com')->send(new \App\Mail\WelcomeMail());
