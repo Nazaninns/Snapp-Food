@@ -1,12 +1,14 @@
 <?php
 
 use App\Http\Controllers\admin\AdminController;
+
 use App\Http\Controllers\admin\DiscountController;
 use App\Http\Controllers\admin\FoodCategoryController;
 use App\Http\Controllers\admin\RestaurantCategoryController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\seller\ArchiveController;
 use App\Http\Controllers\seller\CommentController;
+use App\Http\Controllers\admin\CommentController as AdminCommentController;
 use App\Http\Controllers\seller\SituationController;
 use Illuminate\Support\Facades\Route;
 
@@ -40,7 +42,7 @@ Route::middleware('auth')->middleware('role:admin')->prefix('admin')->name('admi
     Route::get('discount/create', [DiscountController::class, 'create'])->name('discount.create');
     Route::post('discount/create', [DiscountController::class, 'store'])->name('discount.store');
     Route::delete('discount/delete/{discount}', [DiscountController::class, 'delete'])->name('discount.delete');
-    //Route::post('comment/request',[])
+    Route::get('comment/request', [AdminCommentController::class, 'commentRequest'])->name('comments.request');
 });
 
 //seller
