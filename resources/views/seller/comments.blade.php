@@ -117,12 +117,8 @@ background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, F
 <div class="container">
     <!-- RestaurantCollection Categories -->
     @foreach($comments as $comment)
-        <div class="category-card bg-gray-300">
-            <h2>{{$comment->user->name}}</h2>
-            <p>comment:{{$comment->text}}</p>
-            <p>score:{{$comment->score}} star</p>
-
-        </div>
+        @php $situation='comment.'.$comment->situation."-comment" @endphp
+        <x-dynamic-component :component="$situation" :$comment />
 
     @endforeach
 

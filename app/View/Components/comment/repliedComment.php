@@ -7,7 +7,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class replyComment extends Component
+class repliedComment extends Component
 {
     /**
      * Create a new component instance.
@@ -22,6 +22,6 @@ class replyComment extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.comment.reply-comment');
+        return view('components.comment.replied-comment');
     }
 }
