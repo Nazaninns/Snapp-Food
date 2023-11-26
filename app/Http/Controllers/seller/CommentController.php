@@ -21,4 +21,9 @@ class CommentController extends Controller
 
         return view('seller.comments', compact('comments', 'food'));
     }
+
+    public function reply()
+    {
+        
+    }
 }

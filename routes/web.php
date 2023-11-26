@@ -66,6 +66,7 @@ Route::middleware('auth')->middleware('role:seller')->prefix('seller')->group(fu
         Route::get('show/{cart}', 'show')->name('archive.show');
     });
     Route::get('comments', [\App\Http\Controllers\seller\CommentController::class,'index'])->name('comments.index');
+    Route::post('comments', [\App\Http\Controllers\seller\CommentController::class,'reply'])->name('comments.reply');
 });
 Route::get('test', function () {
     \Illuminate\Support\Facades\Mail::to('nazanin@gmail.com')->send(new \App\Mail\WelcomeMail());
