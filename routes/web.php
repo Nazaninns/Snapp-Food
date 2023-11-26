@@ -43,6 +43,8 @@ Route::middleware('auth')->middleware('role:admin')->prefix('admin')->name('admi
     Route::post('discount/create', [DiscountController::class, 'store'])->name('discount.store');
     Route::delete('discount/delete/{discount}', [DiscountController::class, 'delete'])->name('discount.delete');
     Route::get('comment/request', [AdminCommentController::class, 'commentRequest'])->name('comments.request');
+    Route::post('comment/accept/{comment}',[AdminCommentController::class,'accept'])->name('comments.accept');
+    Route::post('comment/reject/{comment}',[AdminCommentController::class,'reject'])->name('comments.reject');
 });
 
 //seller

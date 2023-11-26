@@ -13,4 +13,14 @@ class CommentController extends Controller
         $comments = Comment::query()->where('situation', 'delete_request')->get();
         return view('admin.comments.index', compact('comments'));
     }
+
+    public function accept(Comment $comment)
+    {
+        $comment->
+    }
+
+    public function reject(Comment $comment)
+    {
+
+    }
 }
