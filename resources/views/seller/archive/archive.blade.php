@@ -138,14 +138,13 @@ background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, F
                     {{$cart->pay}}
                 </td>
                 <td class="px-6 py-4">
-                    {{$cart->totalPrice()}} $
+                    {{$cart->totalPriceAfterDiscount()}} $
                 </td>
                 <td class="px-6 py-4">
-                    <form action="">
                     <a href="{{route('archive.show',$cart)}}" class="btn-grad">
                         show
                     </a>
-                    </form>
+
                 </td>
             </tr>
             @endforeach
