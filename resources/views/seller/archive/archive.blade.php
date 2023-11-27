@@ -79,7 +79,7 @@ background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, F
 
     <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
         <div class="flex gap-5 justify-between p-4 pl-1">
-            <form action="{{route('date')}}" >
+            <form action="{{route('archive')}}" >
             <input type="date" name="from">
                 @error('from')
                 {{$message}}
