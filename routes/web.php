@@ -7,6 +7,7 @@ use App\Http\Controllers\admin\FoodCategoryController;
 use App\Http\Controllers\admin\RestaurantCategoryController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\seller\ArchiveController;
+use App\Http\Controllers\admin\ArchiveController as AdminArchiveController;
 use App\Http\Controllers\seller\CommentController;
 use App\Http\Controllers\admin\CommentController as AdminCommentController;
 use App\Http\Controllers\seller\SituationController;
@@ -45,6 +46,7 @@ Route::middleware('auth')->middleware('role:admin')->prefix('admin')->name('admi
     Route::get('comment/request', [AdminCommentController::class, 'commentRequest'])->name('comments.request');
     Route::post('comment/accept/{comment}',[AdminCommentController::class,'accept'])->name('comments.accept');
     Route::post('comment/reject/{comment}',[AdminCommentController::class,'reject'])->name('comments.reject');
+    Route::get('archive',[AdminArchiveController::class,'archive'])->name('archive');
 });
 
 //seller
