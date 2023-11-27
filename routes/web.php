@@ -70,6 +70,7 @@ Route::middleware('auth')->middleware('role:seller')->prefix('seller')->group(fu
     Route::controller(ArchiveController::class)->prefix('archive')->group(function () {
         Route::get('/', 'archive')->name('archive');
         Route::get('show/{cart}', 'show')->name('archive.show');
+        Route::get('date', 'date')->name('date');
     });
 
     Route::controller(CommentController::class)->prefix('comments')->group(function () {
