@@ -2,14 +2,18 @@
 
 namespace App\Models;
 
+use App\Casts\ImageCast;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Banner extends Model
 {
+    use HasFactory;
     protected $fillable=[
         'message','image'
     ];
-    use HasFactory;
+    protected $casts=[
+        'image'=>ImageCast::class
+    ];
 }

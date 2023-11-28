@@ -1,28 +1,6 @@
-{{--<!doctype html>--}}
-{{--<html lang="en">--}}
-{{--<head>--}}
-{{--    <meta charset="UTF-8">--}}
-{{--    <meta name="viewport"--}}
-{{--          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">--}}
-{{--    <meta http-equiv="X-UA-Compatible" content="ie=edge">--}}
-{{--    <title>Document</title>--}}
-{{--</head>--}}
-{{--<body>--}}
-{{--<form action="{{route('login.submit')}}" method="post">--}}
-{{--    @csrf--}}
-{{--    <input type="text" placeholder="email" name="email">--}}
-{{--    @error('email')--}}
-{{--    {{$message}}--}}
-{{--    @enderror--}}
-{{--    <input type="text" placeholder="password" name="password">--}}
-{{--    @error('password')--}}
-{{--    {{$message}}--}}
-{{--    @enderror--}}
-{{--    <button type="submit">login</button>--}}
-{{--</form>--}}
-{{--</body>--}}
-{{--</html>--}}
+@php
 
+  @endphp
     <!doctype html>
 <html lang="en">
 <head>
@@ -38,6 +16,7 @@
         <div class="hidden bg-cover lg:block lg:w-2/3"
              style="background-image: url({{asset('restaurant-interior.jpg')}})">
             <div class="flex items-center h-full px-20 bg-gray-900 bg-opacity-40">
+
                 <div>
                     <h2 class="text-4xl font-bold text-white">Snapp Food</h2>
 
@@ -46,8 +25,13 @@
             </div>
         </div>
 
-        <div class="flex items-center w-full max-w-md px-6 mx-auto lg:w-2/6">
+        <div class="flex mb-40  items-center w-full max-w-md  px-6 mx-auto lg:w-2/6">
+
             <div class="flex-1">
+                <div class="w-60 mb-12 mt-5   h-60 flex flex-col mx-auto">
+                    <div class="text-white text-xl mb-2">{{$banner->message}}</div>
+                    <img class="w-60 h-60"  src="{{asset('storage/'.$banner->image)}}" >
+                </div>
                 <div class="text-center">
                     <h2 class="text-4xl font-bold text-center text-gray-700 dark:text-white">Snapp Food</h2>
 

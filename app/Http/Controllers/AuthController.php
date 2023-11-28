@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\WelcomeSellerEvent;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
+use App\Models\Banner;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,7 +14,8 @@ class AuthController extends Controller
 {
     public function login()
     {
-        return view('login');
+        $banner=Banner::query()->inRandomOrder()->first();
+        return view('login',compact('banner'));
     }
 
     public function loginSubmit(LoginRequest $request)
