@@ -62,7 +62,7 @@
             background-image: linear-gradient(to right, #232526 0%, #414345  51%, #232526  100%);
             margin: 10px;
             padding: 10px 10px;
-            font-size: 12px;
+            font-size: 14px;
             text-align: center;
             text-transform: uppercase;
             transition: 0.5s;
