@@ -74,6 +74,6 @@ class User extends Authenticatable
 
     public function getCurrentAddress()
     {
-        return $this->addresses()->where('current_address', 1)?->first()?->id;
+        return $this->addresses()->where('current_address', 1)?->first();
     }
 }

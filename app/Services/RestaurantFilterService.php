@@ -4,6 +4,8 @@ namespace App\Services;
 
 use App\Models\Restaurant;
 use App\Models\RestaurantCategory;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Auth;
 
 class RestaurantFilterService
 {
@@ -23,5 +25,23 @@ class RestaurantFilterService
         }
 
         return $restaurants;
+    }
+
+    public static function nearRestaurants(Collection $restaurants)
+    {
+        $currentAddress = Auth::user()->getCurrentAddress();
+        return $restaurants->filter(function (Restaurant $restaurant) use ($currentAddress) {
+            $x = false;
+            $y = false;
+
+            if ($restaurant->address->latitude <= ($currentAddress->latitude) + 3 && $restaurant->address->latitude >= ($currentAddress->latitude) - 3) {
+                $x = true;
+            }
+            if ($restaurant->address->longitude <= ($currentAddress->longitude) + 3 && $restaurant->address->longitude >= ($currentAddress->longitude) - 3) {
+                $y = true;
+            }
+            return $x && $y;
+        });
+
     }
 }

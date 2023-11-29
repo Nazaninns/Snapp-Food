@@ -69,7 +69,7 @@ class CartController extends Controller
             'pay' => now()->toDateTimeString(),
             'situation' => 'pending',
             'discount_id' => $discountId,
-            'address_id' => Auth::user()->getCurrentAddress()
+            'address_id' => Auth::user()->getCurrentAddress()->id
         ]);
 
         SituationChangeEvent::dispatch($cart);

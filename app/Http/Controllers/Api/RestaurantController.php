@@ -18,6 +18,8 @@ class RestaurantController extends Controller
     {
         //filtering
         $restaurants = RestaurantFilterService::restaurantFilter($request->validated());
+        $restaurants=RestaurantFilterService::nearRestaurants($restaurants);
+        if ($restaurants->isEmpty()) return response()->json(['msg'=>'not found'],404);
         return response()->json(RestaurantResource::collection($restaurants));
     }
 
