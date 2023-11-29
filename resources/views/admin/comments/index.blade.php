@@ -105,17 +105,18 @@ background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, F
 @foreach($comments as $comment)
 <div class="container category-card bg-gray-50   flex justify-between ">
     <div class="">
-
-            <div>{{$comment->text}}</div>
+            <h1>Restaurant Name : <span class="text-indigo-700" >{{$comment->cart->restaurant->name}}</span></h1>
+            <div>Text : <span class="text-indigo-700">{{$comment->text}}</span></div>
+        <div class="flex justify-between m-2">
             <form action="{{route('admin.comments.accept',$comment)}}" method="post">
                 @csrf
-                <button>accept</button>
+                <button class="btn-gradd bg-gray-700 m-5  p-3 hover:bg-blue-900 text-lg text-gray-300" type="submit">accept</button>
             </form>
             <form action="{{route('admin.comments.reject',$comment)}}" method="post">
                 @csrf
-                <button>reject</button>
+                <button class="btn-gradd bg-gray-700 m-5  p-3 hover:bg-blue-900 text-lg text-gray-300" type="submit">reject</button>
             </form>
-
+        </div>
     </div>
 
 </div>
