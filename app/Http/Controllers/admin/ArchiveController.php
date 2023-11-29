@@ -16,8 +16,8 @@ class ArchiveController extends Controller
         return view('admin.archive.archive', compact('carts'));
     }
 
-    public function show()
+    public function show(Cart $cart)
     {
-
+        return view('admin.archive.show',compact('cart'));
     }
 }
