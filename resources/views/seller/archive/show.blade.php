@@ -53,17 +53,17 @@ background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, F
 </nav>
 <div class="container">
     <!-- Food Details Card -->
-    <div class="food-card bg-gray-100 " >
-        <h2 class="text-lg">customer name: <span class="text-blue-700 ms-96">  {{$cart->user->name}} </span></h2>
+    <div class="food-card w-7/12 mx-auto bg-gray-100 " >
+        <h2 class="text-lg">customer name: <span class="text-blue-700 ">  {{$cart->user->name}} </span></h2>
         @foreach($cart->food as $food)
-            <p>food: <span class="text-blue-700 " style="margin-left: 29.79rem">{{$food->name}}</span></p>
-            <p>count: <span class="text-blue-700" style="margin-left: 29.4rem">{{$food->pivot->count}}</span></p>
-            <p>price: <span class="text-blue-700" style="margin-left: 29.6rem">{{$food->price}}</span></p>
-            <p>food party: <span class="text-blue-700" style="margin-left: 27.3rem">{{(int)$food->foodParty->percent}}</span> %</p>
+            <p>food: <span class="text-blue-700 " >{{$food->name}}</span></p>
+            <p>count: <span class="text-blue-700" >{{$food->pivot->count}}</span></p>
+            <p>price: <span class="text-blue-700" >{{$food->price}}</span></p>
+            <p>food party: <span class="text-blue-700" >{{(int)$food->foodParty->percent}}</span> %</p>
         @endforeach
-        <p>discount: <span class="text-blue-700" style="margin-left: 28.2rem">{{(int)$cart->discount?->percent}}</span> %</p>
-        <p>total price: <span class="text-blue-700" style="margin-left: 27.6rem">{{$cart->totalPrice()}}</span> $</p>
-        <p>total price after food party | discount: <span class="text-blue-700" style="margin-left: 16.1rem">{{$cart->totalPriceAfterDiscount()}}</span> $</p>
+        <p>discount: <span class="text-blue-700" >{{(int)$cart->discount?->percent}}</span> %</p>
+        <p>total price: <span class="text-blue-700" >{{$cart->totalPrice()}}</span> $</p>
+        <p>total price after food party | discount: <span class="text-blue-700" >{{$cart->totalPriceAfterDiscount()}}</span> $</p>
 
 
     </div>
