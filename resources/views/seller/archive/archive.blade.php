@@ -127,7 +127,7 @@ background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, F
                 <th scope="col" class="px-6 py-3">
                     number
                 </th>
-                <th scope="col" class="px-6 py-3">
+                <th scope="col" class=" pl-28 py-3">
                     cart id
                 </th>
                 <th scope="col" class="px-6 py-3">
@@ -153,7 +153,7 @@ background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, F
 
                         #{{$cart->id}}
                     </td>
-                    <td class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                    <td class="pl-28 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
                         {{$cart->id}}
                     </td>
                     <td class="px-6 py-4">
