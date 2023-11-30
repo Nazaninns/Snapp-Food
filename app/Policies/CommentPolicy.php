@@ -25,4 +25,10 @@ class CommentPolicy
         return $user->carts->contains($cart)&&$cart->pay!==null;
 
     }
+
+    public function reply(User $user,$comment)
+    {
+       return $user->restaurant->carts()->has('comments')->get()->pluck('comments')->flatten()->contains($comment);
+    }
+
 }

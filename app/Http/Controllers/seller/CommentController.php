@@ -19,37 +19,28 @@ class CommentController extends Controller
         $food = Auth::user()->restaurant->food;
         if (!empty($request->validated('filter'))) {
             $comments = CommentService::CommentSort($request->validated('filter'));
-            //dd($comments);
         }
-
         return view('seller.comments', compact('comments', 'food'));
     }
 
     public function reply(Comment $comment, StoreReplyRequest $request)
     {
-        if (!Auth::user()->restaurant->carts()->has('comments')->get()->pluck('comments')->flatten()
-            ->contains($comment))
-            return redirect()->route('comments.index');
-        $validated = $request->validated();
-        $validated['restaurant_id'] = Auth::user()->restaurant->id;
-        $validated['comment_id'] = $comment->id;
-        Reply::query()->create($validated);
-        $comment->situation='replied';
-        $comment->save();
+        $this->authorize('reply',[Comment::class,$comment]);
+        CommentService::reply($request->validated(), $comment);;
         return redirect()->route('comments.index');
     }
 
     public function accept(Comment $comment)
     {
         $comment->update([
-            'situation'=>'no_reply'
+            'situation' => 'no_reply'
         ]);
         return redirect()->route('comments.index');
     }
 
     public function deleteRequest(Comment $comment)
     {
-        $comment->update(['situation'=>'delete_request']);
+        $comment->update(['situation' => 'delete_request']);
         return redirect()->route('comments.index');
     }
 }

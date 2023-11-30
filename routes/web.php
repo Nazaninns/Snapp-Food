@@ -81,7 +81,7 @@ Route::middleware('auth')->middleware('role:seller')->prefix('seller')->group(fu
         Route::get('/', 'index')->name('comments.index');
         Route::post('/{comment}', 'reply')->name('comments.reply');
         Route::post('/accept/{comment}', 'accept')->name('comments.accept');
-        Route::post('/delete/{comment}', 'deleteRequest')->name('comments.delete');
+        Route::delete('/delete/{comment}', 'deleteRequest')->name('comments.delete');
     });
 
 
