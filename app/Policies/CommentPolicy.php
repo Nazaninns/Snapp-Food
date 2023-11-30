@@ -20,7 +20,7 @@ class CommentPolicy
     public function create(User $user,$cart_id)
     {
 
-        $cart=Cart::query()->where('id',$cart_id)->first();
+        $cart=Cart::query()->find($cart_id);
         //dd($user->carts);
         return $user->carts->contains($cart)&&$cart->pay!==null;
 

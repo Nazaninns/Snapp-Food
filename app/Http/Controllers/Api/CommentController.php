@@ -10,6 +10,7 @@ use App\Models\Cart;
 use App\Models\Comment;
 use App\Models\Food;
 use App\Models\Restaurant;
+use App\Services\CommentService;
 use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,24 +20,19 @@ class CommentController extends Controller
     public function index(GetCommentRequest $request)
     {
         $validated = $request->validated();
-        if (isset($validated['restaurant_id'])) {
-            $comments = Cart::query()->where('restaurant_id', $validated['restaurant_id'])->with('comments')->getRelation('comments');
-            return \response()->json(['comments'=>CommentResource::collection($comments->get())]);
-        }
-        if (isset($validated['food_id'])) {
-            $comments = Food::query()->find($validated['food_id'])->carts()->with('comments')->getRelation('comments');
-            return \response()->json(['comments'=>CommentResource::collection($comments->get())]);
-        }
+
+        $comments = CommentService::getComments($validated);
+        return \response()->json(['comments' => CommentResource::collection($comments)]);
     }
 
     public function store(AddCommentRequest $request)
     {
 
-        $this->authorize('create',[Comment::class,$request->validated('cart_id')]);
+        $this->authorize('create', [Comment::class, $request->validated('cart_id')]);
         $validated = $request->validated();
         $validated['user_id'] = Auth::id();
         Comment::query()->create($validated);
-        return \response()->json(['msg'=>'comment created successfully'],201);
+        return \response()->json(['msg' => 'comment created successfully'], 201);
 
     }
 }
