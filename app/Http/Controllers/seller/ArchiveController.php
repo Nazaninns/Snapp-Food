@@ -19,18 +19,7 @@ class ArchiveController extends Controller
 
     public function show(Cart $cart)
     {
-        if (Auth::user()->restaurant->carts->contains($cart))
-            return view('seller.archive.show', compact('cart'));
-        return redirect()->route('archive');
-    }
-
-    public function date(DateRequest $request)
-    {
-        $time = now()->toDateString();
-        echo '<br>';
-        echo $time;
-        echo '<br>';
-        if ($time < $request->validated('to')) return 'before';
-        return (int)false;
+        $this->authorize('show', [Cart::class, $cart]);
+        return view('seller.archive.show', compact('cart'));
     }
 }

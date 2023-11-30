@@ -59,7 +59,7 @@ background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, F
             <p>food: <span class="text-blue-700 " >{{$food->name}}</span></p>
             <p>count: <span class="text-blue-700" >{{$food->pivot->count}}</span></p>
             <p>price: <span class="text-blue-700" >{{$food->price}}</span></p>
-            <p>food party: <span class="text-blue-700" >{{(int)$food->foodParty->percent}}</span> %</p>
+            <p>food party: <span class="text-blue-700" >{{(int)$food->foodParty?->percent}}</span> %</p>
         @endforeach
         <p>discount: <span class="text-blue-700" >{{(int)$cart->discount?->percent}}</span> %</p>
         <p>total price: <span class="text-blue-700" >{{$cart->totalPrice()}}</span> $</p>
