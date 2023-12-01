@@ -20,7 +20,7 @@ class RestaurantFilterService
             $restaurants = $restaurants->intersect($restaurantsType);
         }
         if (isset($validated['score_gt'])) {
-            $restaurantsScore = Restaurant::query()->where('score', '>', $validated['score_gt'])->get();
+            $restaurantsScore = Restaurant::query()->where('score', '>=', $validated['score_gt'])->get();
             $restaurants = $restaurants->intersect($restaurantsScore);
         }
 

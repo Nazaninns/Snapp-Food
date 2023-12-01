@@ -18,6 +18,7 @@ class CommentController extends Controller
         $comments = Auth::user()->restaurant->carts()->has('comments')->get()->pluck('comments')->flatten();
         $food = Auth::user()->restaurant->food;
         if (!empty($request->validated('filter'))) {
+            $this->authorize('show',[Comment::class,$request->validated('filter')]);
             $comments = CommentService::CommentSort($request->validated('filter'));
         }
         return view('seller.comments', compact('comments', 'food'));
