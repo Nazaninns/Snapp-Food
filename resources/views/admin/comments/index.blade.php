@@ -107,6 +107,7 @@ background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, F
     <div class="">
             <h1>Restaurant Name : <span class="text-indigo-700" >{{$comment->cart->restaurant->name}}</span></h1>
             <div>Text : <span class="text-indigo-700">{{$comment->text}}</span></div>
+        <p >Requested at : <span class="text-indigo-700">{{$comment->updated_at}}</span></p>
         <div class="flex justify-between m-2">
             <form action="{{route('admin.comments.accept',$comment)}}" method="post">
                 @csrf

@@ -12,6 +12,8 @@
         {!!str_repeat($starSvg,$comment->score)!!}
 
     </p>
+    <p >Comment at : <span class="text-indigo-700">{{$comment->created_at}}</span></p>
+    <p >Accepted at : <span class="text-indigo-700">{{$comment->updated_at}}</span></p>
     <div class="flex gap-16 ms-5 ">
 
     </div>

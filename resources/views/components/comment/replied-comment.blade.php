@@ -12,7 +12,10 @@
         {!!str_repeat($starSvg,$comment->score)!!}
 
     </p>
+
     <p class="text-lg ">answer: <span class="text-indigo-700">{{$comment->reply?->text}}</span></p>
+    <p >Comment at : <span class="text-indigo-700">{{$comment->created_at}}</span></p>
+    <p >Answer at : <span class="text-indigo-700">{{$comment->updated_at}}</span></p>
 </div>
 
 

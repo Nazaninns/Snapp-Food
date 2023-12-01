@@ -12,6 +12,7 @@
         {!!str_repeat($starSvg,$comment->score)!!}
 
     </p>
+    <p >Comment at : <span class="text-indigo-700">{{$comment->created_at}}</span></p>
     <div class="flex gap-16 ms-5 ">
         <form action="{{route('comments.delete',$comment)}}" method="post">
             @csrf

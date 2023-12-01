@@ -15,7 +15,7 @@ class CommentController extends Controller
 {
     public function index(CommentRequest $request)
     {
-        $comments = Auth::user()->restaurant->carts()->has('comments')->get()->pluck('comments')->flatten();
+        $comments = Auth::user()->restaurant->carts()->has('comments')->get()->pluck('comments')->flatten()->sortByDesc('created_at');
         $food = Auth::user()->restaurant->food;
         if (!empty($request->validated('filter'))) {
             $this->authorize('show',[Comment::class,$request->validated('filter')]);

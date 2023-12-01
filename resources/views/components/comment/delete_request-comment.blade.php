@@ -10,8 +10,10 @@
     <p>Comment : <span class="text-indigo-700">{{$comment->text}}</span></p>
     <p class="flex gap-2"> Score :
         {!!str_repeat($starSvg,$comment->score)!!}
-
     </p>
+    <br>
+    <p >Comment at : <span class="text-indigo-700">{{$comment->created_at}}</span></p>
+    <p >Requested at : <span class="text-indigo-700">{{$comment->updated_at}}</span></p>
 
 </div>
 

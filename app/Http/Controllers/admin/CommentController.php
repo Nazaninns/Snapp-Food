@@ -10,7 +10,7 @@ class CommentController extends Controller
 {
     public function commentRequest()
     {
-        $comments = Comment::query()->where('situation', 'delete_request')->get();
+        $comments = Comment::query()->where('situation', 'delete_request')->get()->sortByDesc('created_at');
         return view('admin.comments.index', compact('comments'));
     }
 
