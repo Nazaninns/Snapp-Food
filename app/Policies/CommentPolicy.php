@@ -18,21 +18,21 @@ class CommentPolicy
 
     }
 
-    public function create(User $user,$cart_id)
+    public function create(User $user, $cart_id)
     {
 
-        $cart=Cart::query()->find($cart_id);
+        $cart = Cart::query()->find($cart_id);
         //dd($user->carts);
-        return $user->carts->contains($cart)&&$cart->pay!==null;
+        return $user->carts->contains($cart) && $cart->pay !== null && $cart->situation === 'delivered';
 
     }
 
-    public function reply(User $user,$comment)
+    public function reply(User $user, $comment)
     {
-       return $user->restaurant->carts()->has('comments')->get()->pluck('comments')->flatten()->contains($comment);
+        return $user->restaurant->carts()->has('comments')->get()->pluck('comments')->flatten()->contains($comment);
     }
 
-    public function show(User $user,int $foodId)
+    public function show(User $user, int $foodId)
     {
         return $user->restaurant->food->contains($foodId);
     }
