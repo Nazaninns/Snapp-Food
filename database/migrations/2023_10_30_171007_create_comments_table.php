@@ -17,6 +17,8 @@ return new class extends Migration
             $table->integer('score');
             $table->foreignId('user_id')->constrained();
             $table->foreignId('cart_id')->constrained();
+            $table->enum('situation',['new','replied','no_reply','delete_request'])->default('new');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
