@@ -11,6 +11,7 @@ use App\Models\RestaurantCategory;
 use App\Services\SituationService;
 use Illuminate\Support\Facades\Auth;
 
+
 class SellerController extends Controller
 {
     public function dashboard(SortSituationRequest $request)

@@ -114,7 +114,7 @@ background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, F
         <button  class="btn-grad bg-gray-700 text-white rounded-xl hover:bg-gray-500 p-2" type="submit">Submit</button>
     </form>
 </div>
-<div class="container">
+<div class="container ">
     <!-- RestaurantCollection Categories -->
     @foreach($comments as $comment)
         @php $situation='comment.'.$comment->situation."-comment" @endphp
@@ -123,6 +123,7 @@ background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, F
     @endforeach
 
 </div>
+{{$comments->links()}}
 </body>
 </html>
 

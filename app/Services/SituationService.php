@@ -4,6 +4,7 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Auth;
 
+
 class SituationService
 {
     public static function sortCart($situation)
@@ -13,14 +14,14 @@ class SituationService
             $carts = $user->restaurant->carts()->where([
                 ['pay', '!=', null],
                 ['situation', '=', $situation]
-            ])->get();
+            ])->paginate(3);
         }
         else
         {
             $carts = $user->restaurant->carts()->where([
                 ['pay', '!=', null],
                 ['situation', '!=', 'delivered']
-            ])->get();
+            ])->paginate(3);
         }
         return $carts;
 }

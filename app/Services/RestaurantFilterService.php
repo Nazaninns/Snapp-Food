@@ -34,10 +34,10 @@ class RestaurantFilterService
             $x = false;
             $y = false;
 
-            if ($restaurant->address->latitude <= ($currentAddress->latitude) + 3 && $restaurant->address->latitude >= ($currentAddress->latitude) - 3) {
+            if ($restaurant->address?->latitude <= ($currentAddress?->latitude) + 3 && $restaurant->address?->latitude >= ($currentAddress?->latitude) - 3) {
                 $x = true;
             }
-            if ($restaurant->address->longitude <= ($currentAddress->longitude) + 3 && $restaurant->address->longitude >= ($currentAddress->longitude) - 3) {
+            if ($restaurant->address?->longitude <= ($currentAddress?->longitude) + 3 && $restaurant->address?->longitude >= ($currentAddress?->longitude) - 3) {
                 $y = true;
             }
             return $x && $y;

@@ -8,6 +8,7 @@ use App\Http\Requests\seller\StoreReplyRequest;
 use App\Models\Comment;
 use App\Models\Reply;
 use App\Services\CommentService;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -16,17 +17,21 @@ class CommentController extends Controller
     public function index(CommentRequest $request)
     {
         $comments = Auth::user()->restaurant->carts()->has('comments')->get()->pluck('comments')->flatten()->sortByDesc('created_at');
+
+
         $food = Auth::user()->restaurant->food;
         if (!empty($request->validated('filter'))) {
-            $this->authorize('show',[Comment::class,$request->validated('filter')]);
+            $this->authorize('show', [Comment::class, $request->validated('filter')]);
             $comments = CommentService::CommentSort($request->validated('filter'));
         }
+        $comments = new Collection($comments);
+        $comments = $comments->toQuery()->paginate(1);
         return view('seller.comments', compact('comments', 'food'));
     }
 
     public function reply(Comment $comment, StoreReplyRequest $request)
     {
-        $this->authorize('reply',[Comment::class,$comment]);
+        $this->authorize('reply', [Comment::class, $comment]);
         CommentService::reply($request->validated(), $comment);;
         return redirect()->route('comments.index');
     }

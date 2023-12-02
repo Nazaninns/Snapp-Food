@@ -237,6 +237,6 @@
         @endforeach
     </div>
 </div>
-
+{{$carts->links()}}
 </body>
 </html>
