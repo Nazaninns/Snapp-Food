@@ -13,7 +13,7 @@ class Cart extends Model
     use HasFactory;
 
     protected $fillable = [
-        'restaurant_id', 'user_id', 'pay', 'situation','discount_id','address_id'
+        'restaurant_id', 'user_id','discount_id','address_id'
     ];
 
     public function restaurant(): BelongsTo
