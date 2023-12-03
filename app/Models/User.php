@@ -76,4 +76,9 @@ class User extends Authenticatable
     {
         return $this->addresses()->where('current_address', 1)?->first();
     }
+
+    public function orders():HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
 }

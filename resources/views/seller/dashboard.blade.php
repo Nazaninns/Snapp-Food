@@ -204,13 +204,13 @@
 <div class="container  ">
     <!-- Food Cards -->
     <div class="flex gap-2 flex-wrap">
-        @foreach($carts as $cart)
+        @foreach($orders as $order)
             <div class="food-card bg-gray-300 ">
 
-                <h1 class="text-3xl">order {{$cart->id}}</h1>
-                <p>{{$cart->user->name}}</p>
+                <h1 class="text-3xl">order {{$order->id}}</h1>
+                <p>{{$order->user->name}}</p>
 
-                @foreach($cart->food as $food)
+                @foreach($order->food as $food)
                     <div class="flex gap-2">
                         <h2>{{$food->name}}</h2>
                         <p class="text-indigo-600">{{$food->price}}</p>
@@ -218,18 +218,18 @@
                         <p class="text-indigo-600">{{$food->pivot->count}}</p>
                     </div>
                 @endforeach
-                <p>total price: <span class="text-indigo-600">{{$cart->totalPriceAfterDiscount()}}</span> $</p>
+                <p>total price: <span class="text-indigo-600">{{$order->totalPriceAfterDiscount()}}</span> $</p>
 
-                <form action="{{route('change.situation',$cart)}}" method="post">
+                <form action="{{route('change.situation',$order)}}" method="post">
                     @csrf
                     @method('PATCH')
-                    @php $situation=$cart->situation @endphp
+                    @php $situation=$order->situation @endphp
                     <x-dynamic-component :component="$situation"/>
-                    {{--                    @if($cart->situation==='pending')--}}
+                    {{--                    @if($order->situation==='pending')--}}
                     {{--                        <x-pending/>--}}
-                    {{--                    @elseif($cart->situation==='making')--}}
+                    {{--                    @elseif($order->situation==='making')--}}
                     {{--                        <x-making/>--}}
-                    {{--                    @elseif($cart->situation==='send')--}}
+                    {{--                    @elseif($order->situation==='send')--}}
                     {{--                        <x-send/>--}}
                     {{--                    @endif--}}
                 </form>

@@ -56,4 +56,9 @@ class Cart extends Model
     {
         return $this->belongsTo(Discount::class);
     }
+
+    public function totalDiscount()
+    {
+        return $this->totalPrice() - $this->totalPriceAfterDiscount();
+    }
 }

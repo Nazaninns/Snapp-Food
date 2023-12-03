@@ -13,18 +13,10 @@ class CartService
     {
         $user = Auth::user();
         $restaurantId = Food::query()->find($foodId)->restaurant_id;
-        $cart = $user->carts()->where(['restaurant_id' => $restaurantId, 'pay' => null])->firstOrCreate([
+        $cart = $user->carts()->where('restaurant_id' , $restaurantId)->firstOrCreate([
             'restaurant_id' => $restaurantId,
             'user_id' => Auth::id()
         ]);
-
-        // $cartExist = $cart?->toArray();
-//        if (empty($cartExist)) {
-//            $cart = Cart::query()->create([
-//                'restaurant_id' => $restaurantId,
-//                'user_id' => Auth::id()
-//            ]);
-//        }
         return $cart;
     }
 
@@ -32,7 +24,7 @@ class CartService
     {
         $user = Auth::user();
         $restaurantId = Food::query()->find($foodId)->restaurant_id;
-        $cart = $user->carts()->where(['restaurant_id' => $restaurantId, 'pay' => null])->get()->first();
+        $cart = $user->carts()->where('restaurant_id' ,$restaurantId)->get()->first();
         return $cart;
     }
 }

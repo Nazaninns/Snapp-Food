@@ -44,4 +44,10 @@ class Restaurant extends Model
     {
         return $this->morphOne(Address::class,'addressable');
     }
+
+    public function orders():HasMany
+    {
+        return $this->hasMany(Order::class);
+    }
 }
+

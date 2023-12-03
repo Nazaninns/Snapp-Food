@@ -19,8 +19,8 @@ class SellerController extends Controller
             return redirect()->route('seller.profile');
         $situation = $request->validated('situation');
         $user = Auth::user();
-        $carts=SituationService::sortCart($situation);
-        return view('seller.dashboard', compact(['user', 'carts']));
+        $orders=SituationService::sortOrders($situation);
+        return view('seller.dashboard', compact(['user', 'orders']));
     }
 
     public function restaurantProfile()
