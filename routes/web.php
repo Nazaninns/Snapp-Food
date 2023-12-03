@@ -48,7 +48,7 @@ Route::middleware('auth')->middleware('role:admin')->prefix('admin')->name('admi
     Route::post('comment/accept/{comment}', [AdminCommentController::class, 'accept'])->name('comments.accept');
     Route::post('comment/reject/{comment}', [AdminCommentController::class, 'reject'])->name('comments.reject');
     Route::get('archive', [AdminArchiveController::class, 'archive'])->name('archive');
-    Route::get('archive/show/{cart}',[AdminArchiveController::class,'show'])->name('archive.show');
+    Route::get('archive/show/{order}',[AdminArchiveController::class,'show'])->name('archive.show');
 
 
     Route::resource('banners', BannerController::class)->except('edit', 'update', 'show');
