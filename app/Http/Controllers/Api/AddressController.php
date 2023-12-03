@@ -31,9 +31,9 @@ class AddressController extends Controller
     {
         $validated = $request->validated();
         Auth::user()->addresses()->create($validated);
-        return response()->json([
+        return response()->json(['data'=>[
             'msg' => "address added successfully"
-        ], 201);
+        ]], 201);
     }
 
     public function current(Address $address)
