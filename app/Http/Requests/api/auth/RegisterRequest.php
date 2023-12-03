@@ -27,7 +27,7 @@ class RegisterRequest extends FormRequest
             'name' => ['required', 'string'],
             'email' => ['required', 'email', 'unique:users','between:3,100'],
             'phone' => ['required', 'string', new PhoneRule()],
-            'password' => [Password::default()->mixedCase()->numbers()]
+            'password' => [Password::default()->mixedCase()->numbers(),'confirmed']
         ];
     }
 }
