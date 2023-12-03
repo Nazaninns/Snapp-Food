@@ -17,6 +17,7 @@ class RestaurantController extends Controller
     public function index(RestaurantRequest $request)
     {
         //filtering
+        $this->authorize('get',[Restaurant::class]);
         $restaurants = RestaurantFilterService::restaurantFilter($request->validated());
         $restaurants=RestaurantFilterService::nearRestaurants($restaurants);
         if ($restaurants->isEmpty()) return response()->json(['msg'=>'not found'],404);
