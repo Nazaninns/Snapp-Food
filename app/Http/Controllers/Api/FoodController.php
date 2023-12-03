@@ -25,7 +25,7 @@ class FoodController extends Controller
         $food =FoodResource::collection($restaurant->food)->collection->groupBy(function (FoodResource $food) {
             return $food->foodCategory->name;
         });
-        return response()->json($food);
+        return response()->json(['data'=>$food]);
 
     }
 

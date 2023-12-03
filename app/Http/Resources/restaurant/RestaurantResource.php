@@ -22,7 +22,7 @@ class RestaurantResource extends JsonResource
             'is_open'=>$this->is_open,
             'image'=>$this->image,
             'score'=>$this->score,
-            'comment_count'=>count($this->carts()->with('comments')->getRelation('comments')->get())
+            'comment_count'=>count($this->orders()->has('comments')->get()->pluck('comments')->flatten())
         ];
     }
 }

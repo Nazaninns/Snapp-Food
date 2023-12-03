@@ -20,11 +20,11 @@ class RestaurantController extends Controller
         $restaurants = RestaurantFilterService::restaurantFilter($request->validated());
         $restaurants=RestaurantFilterService::nearRestaurants($restaurants);
         if ($restaurants->isEmpty()) return response()->json(['msg'=>'not found'],404);
-        return response()->json(RestaurantResource::collection($restaurants));
+        return response()->json(['data'=>RestaurantResource::collection($restaurants)]);
     }
 
     public function show(Restaurant $restaurant)
     {
-        return \response()->json(new RestaurantResource($restaurant));
+        return \response()->json(['data'=>new RestaurantResource($restaurant)]);
     }
 }

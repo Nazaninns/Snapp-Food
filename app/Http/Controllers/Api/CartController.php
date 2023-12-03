@@ -28,7 +28,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        return response()->json(['carts' => CartResource::collection(Auth::user()->carts)]);
+        return response()->json(['data' => ['carts' => CartResource::collection(Auth::user()->carts)]]);
     }
 
     /**
@@ -38,11 +38,11 @@ class CartController extends Controller
     {
         $validated = $request->validated();
         $cart = CartService::getCart($validated['food_id']);
-        CartService::upsert($validated,$cart);
-        return \response()->json([
+        CartService::upsert($validated, $cart);
+        return \response()->json(['data'=>[
             'msg' => 'food added to cart successfully',
             'cart_id' => $cart->id
-        ]);
+        ]]);
     }
 
     /**
@@ -52,13 +52,12 @@ class CartController extends Controller
     {
 
         $validated = $request->validated();
-        $cart = CartService::updateCart($validated['food_id']);
-        $cart?->food()->updateExistingPivot($validated['food_id'], [
-            'count' => $validated['count']
-        ]);
+        $cart = CartService::updateCart($validated['food_id'],$validated['count']);
+        CartService::checkCountHasUnsignedInteger($validated['count'],$validated['food_id'],$cart);
+        CartService::checkCartHasFood($cart);
         if ($cart == null)
-            return \response()->json(['msg' => 'please create a new cart']);
-        return response()->json(['msg' => 'updated cart']);
+            return \response()->json(['data'=>['msg' => 'please create a new cart']]);
+        return response()->json(['data'=>['msg' => 'updated cart']]);
     }
 
     public function pay(Cart $cart, PayRequest $request)
@@ -77,6 +76,6 @@ class CartController extends Controller
      */
     public function info(Cart $cart)
     {
-        return \response()->json($cart);
+        return \response()->json(['data'=>$cart]);
     }
 }

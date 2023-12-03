@@ -8,6 +8,7 @@ use App\Models\Cart;
 use App\Models\Food;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use function PHPUnit\Framework\isEmpty;
 
 class CartService
 {
@@ -22,12 +23,27 @@ class CartService
         return $cart;
     }
 
-    public static function updateCart($foodId)
+    public static function updateCart($foodId,$count)
     {
         $user = Auth::user();
         $restaurantId = Food::query()->find($foodId)->restaurant_id;
         $cart = $user->carts()->where('restaurant_id' ,$restaurantId)->get()->first();
+        $cart?->food()->updateExistingPivot($foodId, [
+            'count' => $count
+        ]);
         return $cart;
+    }
+
+    public static function checkCountHasUnsignedInteger($count,$foodId,$cart)
+    {
+        if ($count == 0)
+            $cart->food()->detach($foodId);
+    }
+
+    public static function checkCartHasFood(Cart $cart)
+    {
+        if (($cart->food->isEmpty()))
+            $cart->delete();
     }
 
     public static function updateCartForPay(Cart $cart,$discountId)
