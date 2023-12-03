@@ -2,7 +2,9 @@
 
 namespace App\Policies;
 
+use App\Models\Address;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class AddressPolicy
 {
@@ -14,4 +16,9 @@ class AddressPolicy
         //
     }
 
+    public function update(User $user,Address $address)
+    {
+       return ($user->is($address->addressable)) ;
+
+    }
 }
