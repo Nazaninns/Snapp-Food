@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Events\SituationChangeEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\api\cart\CartRequest;
+use App\Http\Requests\api\cart\CartUpdateRequest;
 use App\Http\Requests\api\cart\PayRequest;
 use App\Http\Resources\CartResource;
 use App\Models\Cart;
@@ -36,6 +37,7 @@ class CartController extends Controller
      */
     public function add(CartRequest $request)
     {
+        $this->authorize('add',[Cart::class]);
         $validated = $request->validated();
         $cart = CartService::getCart($validated['food_id']);
         CartService::upsert($validated, $cart);
@@ -48,14 +50,14 @@ class CartController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(CartRequest $request)
+    public function update(CartUpdateRequest $request)
     {
 
         $validated = $request->validated();
         $cart = CartService::updateCart($validated['food_id'],$validated['count']);
-        CartService::checkCountHasUnsignedInteger($validated['count'],$validated['food_id'],$cart);
-        CartService::checkCartHasFood($cart);
-        if ($cart == null)
+        CartService::checkCount($validated['count'],$validated['food_id'],$cart);
+        $cart=CartService::checkCartHasFood($cart);
+        if (!$cart)
             return \response()->json(['data'=>['msg' => 'please create a new cart']]);
         return response()->json(['data'=>['msg' => 'updated cart']]);
     }
