@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Models\Cart;
+use App\Models\order;
 use Illuminate\Support\Facades\Auth;
 
 class ArchiveService
@@ -10,16 +10,16 @@ class ArchiveService
     public static function sortArchiveByDate($from, $to)
     {
         if (Auth::user()->hasRole('admin')) {
-            $carts = Cart::query()->where('situation', 'delivered');
+            $orders = Order::query()->where('situation', 'delivered');
         }
         if (Auth::user()->hasRole('seller')) {
-            $carts = Auth::user()->restaurant->carts()->where('situation', 'delivered');
+            $orders = Auth::user()->restaurant->orders()->where('situation', 'delivered');
         }
         if ($from && $to) {
-            $carts = $carts->where([
+            $orders = $orders->where([
                 ['pay', '>=', $from], ['pay', '<=', $to]
             ]);
         }
-        return $carts->get();
+        return $orders->get();
     }
 }

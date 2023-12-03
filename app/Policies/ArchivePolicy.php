@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Models\Cart;
+use App\Models\Order;
 use App\Models\User;
 
 class ArchivePolicy
@@ -15,8 +16,8 @@ class ArchivePolicy
         //
     }
 
-    public function show(User $user, Cart $cart)
+    public function show(User $user, Order $order)
     {
-        return $user->restaurant->carts->contains($cart);
+        return $user->restaurant->orders->contains($order);
     }
 }
