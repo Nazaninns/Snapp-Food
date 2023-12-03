@@ -57,7 +57,7 @@
         }
     </style>
 </head>
-<body style="background-size: cover; background-image: url({{asset('discount.jpg')}}); background-color: rgba(255, 255, 255, 0.5);">
+<body style="background-size: cover; background-image: url({{asset('discounts.jpg')}}); background-color: rgba(255, 255, 255, 0.5);">
 <nav class="header">
     <a style="margin-top: 20px" href="{{back()->getTargetUrl()}}">
         <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 1024 1024">

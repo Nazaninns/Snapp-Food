@@ -22,7 +22,7 @@ class CommentController extends Controller
         $validated = $request->validated();
 
         $comments = CommentService::getComments($validated);
-        return \response()->json(['comments' => CommentResource::collection($comments)]);
+        return \response()->json(['data'=>['comments' => CommentResource::collection($comments)]]);
     }
 
     public function store(AddCommentRequest $request)
@@ -32,7 +32,7 @@ class CommentController extends Controller
         $validated = $request->validated();
         $validated['user_id'] = Auth::id();
         Comment::query()->create($validated);
-        return \response()->json(['msg' => 'comment created successfully'], 201);
+        return \response()->json(['data'=>['msg' => 'comment created successfully']], 201);
 
     }
 }

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->foreignId('address_id')->constrained()->cascadeOnDelete();
             $table->enum('situation',['pending','making','send','delivered'])->default('pending');
             $table->unsignedDecimal('total_price');
-            $table->integer('discount');
+            $table->integer('discounts');
             $table->unsignedInteger('delivery_cost');
             $table->softDeletes();
             $table->timestamps();

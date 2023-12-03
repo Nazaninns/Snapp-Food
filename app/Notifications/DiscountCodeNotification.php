@@ -40,7 +40,7 @@ class DiscountCodeNotification extends Notification
 
         return (new MailMessage)
             ->greeting('hello dear'.' '. $notifiable->name)
-                    ->line('this is discount code for you:')
+                    ->line('this is discounts code for you:')
                     ->line($this->discount->code)
                     ->line('enjoy it🥹!');
     }

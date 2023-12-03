@@ -158,7 +158,7 @@ background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, F
             <div class="flex justify-between">
                 <img style="width: 10rem" src="{{asset('storage/'.$food->image)}}">
                 <div class="flex">
-                    <a href="{{route('party',$food)}}">
+                    <a href="{{route('party.create',$food)}}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
                             <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                stroke-width="2">

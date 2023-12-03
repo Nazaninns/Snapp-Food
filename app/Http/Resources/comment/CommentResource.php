@@ -17,7 +17,7 @@ class CommentResource extends JsonResource
     {
         return [
             'author'=>new CommentWriterResource($this->user),
-            'food'=>CommentFoodResource::collection($this->cart->food),
+            'food'=>CommentFoodResource::collection($this->order?->food),
             'created_at'=>$this->created_at,
             'score'=>$this->score,
             'content'=>$this->text

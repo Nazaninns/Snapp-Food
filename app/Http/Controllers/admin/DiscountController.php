@@ -14,12 +14,12 @@ class DiscountController extends Controller
     public function index()
     {
         $discounts=Discount::paginate(6);
-        return view('admin.discount.index',compact('discounts'));
+        return view('admin.discounts.index',compact('discounts'));
     }
 
     public function create()
     {
-       return view('admin.discount.create');
+       return view('admin.discounts.create');
     }
 
     public function store(DiscountRequest $discountRequest)
@@ -30,12 +30,12 @@ class DiscountController extends Controller
         Notification::send(User::all()->where(function ($user){
            return $user->hasRole('customer');
         }), new DiscountCodeNotification($discount));
-        return redirect()->route('admin.discount.index');
+        return redirect()->route('admin.discounts.index');
     }
 
     public function delete(Discount $discount)
     {
         $discount->delete();
-        return redirect()->route('admin.discount.index');
+        return redirect()->route('admin.discounts.index');
     }
 }

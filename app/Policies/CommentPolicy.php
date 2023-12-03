@@ -23,7 +23,7 @@ class CommentPolicy
     {
 
         $order = Order::query()->find($order_id);
-        return $user->orders->contains($order)  && $order->situation === 'delivered';
+        return $user->orders->contains($order)  && $order->situation === 'delivered' && $order->comment ==null;
 
     }
 

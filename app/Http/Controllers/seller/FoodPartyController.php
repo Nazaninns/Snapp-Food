@@ -14,7 +14,7 @@ class FoodPartyController extends Controller
         return view('seller.party.index',compact('parties'));
     }
 
-    public function party(Food $food)
+    public function create(Food $food)
     {
         return view('seller.party.create', compact('food'));
     }

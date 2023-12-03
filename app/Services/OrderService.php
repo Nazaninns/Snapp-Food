@@ -16,7 +16,7 @@ class OrderService
             'user_id' => $cart->user_id,
             'address_id' => $cart->address_id,
             'total_price' => $cart->totalPrice(),
-            'discount' => $cart->totalDiscount(),
+            'discounts' => $cart->totalDiscount(),
             //'situation'=>'pending',
             'delivery_cost' => $cart->restaurant->delivery_cost
         ])->refresh();
