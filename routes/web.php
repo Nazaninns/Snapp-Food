@@ -70,11 +70,11 @@ Route::middleware('auth')->middleware('role:seller')->prefix('seller')->group(fu
     Route::delete('food/{foodParty}/party', [\App\Http\Controllers\seller\FoodPartyController::class, 'delete'])->name('party.delete');
 
 
-    Route::patch('dashboard/situation/{cart}', [SituationController::class, 'changeSituation'])->name('change.situation');
+    Route::patch('dashboard/situation/{order}', [SituationController::class, 'changeSituation'])->name('change.situation');
 
     Route::controller(ArchiveController::class)->prefix('archive')->group(function () {
         Route::get('/', 'archive')->name('archive');
-        Route::get('show/{cart}', 'show')->name('archive.show');
+        Route::get('show/{order}', 'show')->name('archive.show');
     });
 
     Route::controller(CommentController::class)->prefix('comments')->group(function () {

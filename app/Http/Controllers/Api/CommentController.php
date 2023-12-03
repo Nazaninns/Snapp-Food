@@ -28,7 +28,7 @@ class CommentController extends Controller
     public function store(AddCommentRequest $request)
     {
 
-        $this->authorize('create', [Comment::class, $request->validated('cart_id')]);
+        $this->authorize('create', [Comment::class, $request->validated('order_id')]);
         $validated = $request->validated();
         $validated['user_id'] = Auth::id();
         Comment::query()->create($validated);

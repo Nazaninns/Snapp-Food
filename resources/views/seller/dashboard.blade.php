@@ -218,7 +218,7 @@
                         <p class="text-indigo-600">{{$food->pivot->count}}</p>
                     </div>
                 @endforeach
-                <p>total price: <span class="text-indigo-600">{{$order->totalPriceAfterDiscount()}}</span> $</p>
+                <p>total price: <span class="text-indigo-600">{{($order->total_price - $order->discount)}}</span> $</p>
 
                 <form action="{{route('change.situation',$order)}}" method="post">
                     @csrf

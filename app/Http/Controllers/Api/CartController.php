@@ -69,7 +69,6 @@ class CartController extends Controller
         CartService::updateCartForPay($cart, $discountId);
         OrderService::create($cart);
         $cart->delete();
-        SituationChangeEvent::dispatch($cart);
         return \response()->json(['msg' => 'submitted']);
 
     }
