@@ -36,12 +36,12 @@ class ResturantProfileRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string'],
-            //'type'=>['integer','required'],
             'phone' => ['string', 'required', new PhoneRule()],
             'address' => ['string', 'required'],
             'latitude'=>['required','decimal:2,4'],
             'longitude'=>['required','decimal:2,4'],
             'account_number' => ['required', 'string'],
+            'delivery_cost'=>['required','numeric','between:1,8'],
             'type' => ['required', 'array']
         ];
     }

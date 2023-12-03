@@ -12,7 +12,9 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Order extends Model
 {
     use HasFactory,SoftDeletes;
-
+protected $fillable=[
+    'restaurant_id','user_id','pay','address_id','situation','total_price','discount','delivery_cost'
+];
     public function food():BelongsToMany
     {
         return $this->belongsToMany(Food::class)->withPivot('count');

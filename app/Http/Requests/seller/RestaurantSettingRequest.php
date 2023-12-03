@@ -28,7 +28,8 @@ class RestaurantSettingRequest extends FormRequest
             'address' => [ 'string','max:200'],
             'type' => [ 'array'],
             'latitude'=>['decimal:2,4'],
-            'longitude'=>['decimal:2,4']
+            'longitude'=>['decimal:2,4'],
+            'delivery_cost'=>['required','numeric','max:300'],
             //'image'=>['string','required'],
             //'delivery'=>['integer','required'],
             //'open_close'=>['boolean','required'],

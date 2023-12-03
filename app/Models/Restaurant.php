@@ -14,7 +14,7 @@ class Restaurant extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'phone', 'account_number', 'user_id'
+        'name', 'phone', 'account_number', 'user_id','delivery_cost'
     ];
     protected $casts = [
         'phone' => PhoneCast::class

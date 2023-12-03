@@ -14,6 +14,7 @@ use App\Models\FoodParty;
 use App\Models\Order;
 use App\Models\User;
 use App\Services\CartService;
+use App\Services\OrderService;
 use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -65,22 +66,9 @@ class CartController extends Controller
     {
         if (Auth::user()->getCurrentAddress() === null) return \response()->json(['msg' => 'set current address first'], 404);
         $discountId = Discount::query()->where('code', $request->validated('code'))->first()?->id;
-        $cart->update([
-            'discount_id' => $discountId,
-            'address_id' => Auth::user()->getCurrentAddress()->id
-        ]);
-        $order=Order::query()->create([
-            'restaurant_id' => $cart->restaurant_id,
-            'user_id' => $cart->user_id,
-            'address_id' => $cart->address_id,
-            'total_price' => $cart->totalPrice(),
-            'discount' => $cart->totalDiscount(),
-            'delivery_cost' => $cart->restaurant->delivery_cost
-        ]);
-        $cart->food->map(function (Food $food)use ($order,$cart){
-            $order->food()->attach($food->id,['count'=>$food->pivot->count]);
-            $cart->food()->detach($food->id);
-        });
+        CartService::updateCartForPay($cart, $discountId);
+        OrderService::create($cart);
+        $cart->delete();
         SituationChangeEvent::dispatch($cart);
         return \response()->json(['msg' => 'submitted']);
 
