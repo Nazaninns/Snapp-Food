@@ -18,6 +18,7 @@ use App\Services\OrderService;
 use http\Env\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Psy\Readline\Hoa\Event;
 
 class CartController extends Controller
@@ -37,9 +38,7 @@ class CartController extends Controller
     {
         $validated = $request->validated();
         $cart = CartService::getCart($validated['food_id']);
-        $cart->food()->attach($validated['food_id'], [
-            'count' => $validated['count']
-        ]);
+        CartService::upsert($validated,$cart);
         return \response()->json([
             'msg' => 'food added to cart successfully',
             'cart_id' => $cart->id
