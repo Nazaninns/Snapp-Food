@@ -17,6 +17,7 @@ use Laravel\Sanctum\Sanctum;
 
 class AuthController extends Controller
 {
+
     public function login(LoginRequest $request)
     {
         if (Auth::attempt($request->validated())) {
@@ -38,21 +39,15 @@ class AuthController extends Controller
         $token = $user->createToken($user->name);
         return response()->json([
             'token' => $token->plainTextToken
-        ]);
+        ],201);
     }
 
-    public function logout(Request $request)
+    public function logout()
     {
         Auth::user()->currentAccessToken()->delete();
         return response()->json([
             'msg' => 'logout successful'
         ]);
     }
-    public function update(UpdateInfoRequest $request)
-    {
-        Auth::user()->update($request->validated());
-        return response()->json([
-            'msg' => 'update your information done'
-        ]);
-    }
+
 }

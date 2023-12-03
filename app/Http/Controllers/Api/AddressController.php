@@ -18,7 +18,9 @@ class AddressController extends Controller
     public function index()
     {
         return response()->json(
-            AddressResource::collection(Auth::user()->addresses)
+           ['data'=>
+           AddressResource::collection(Auth::user()->addresses)
+           ]
         );
     }
 

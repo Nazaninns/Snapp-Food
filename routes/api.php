@@ -33,7 +33,7 @@ Route::middleware(['auth:sanctum', 'role:customer'])->group(function () {
 //user
     Route::apiResource('addresses', AddressController::class);
     Route::post('addresses/{address}', [AddressController::class, 'current']);
-    Route::patch('user',[AuthController::class,'update']);
+    Route::patch('user',[UserController::class,'update']);
 //restaurants
     Route::controller(RestaurantController::class)->prefix('restaurants')->group(function () {
         Route::get('/', 'index');
