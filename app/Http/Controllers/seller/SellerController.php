@@ -64,8 +64,8 @@ class SellerController extends Controller
         return redirect()->route('seller.dashboard');
     }
 
-    public function setDate()
+    public function setTime()
     {
-        return view('seller.date');
+        return view('seller.time');
     }
 }

@@ -69,7 +69,7 @@ Route::middleware('auth')->middleware('role:seller')->prefix('seller')->group(fu
         Route::post('profile', 'profileStore')->name('storeProfile');
         Route::get('setting', 'restaurantSetting')->name('setting');
         Route::post('setting/{restaurant}', 'updateSetting')->name('updateSetting');
-        Route::get('date','setDate')->name('date');
+        Route::get('date','setTime')->name('time');
     });
 
     Route::resource('food', FoodController::class);
