@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
     <title>My Restaurant</title>
     @vite('resources/css/app.css')
     <style>
