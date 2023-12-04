@@ -1,6 +1,4 @@
-@php
-    $days=['saturday','sunday','monday','tuesday','wednesday','saturday-wednesday','thursday','friday','all days'];
-@endphp
+
     <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -98,95 +96,103 @@ background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, F
             @foreach($days as $day)
                 <td class="px-6 py-3">
                     <div class="flex flex-col">
-                        <form action="{{route('time.update')}}" method="post">
+                        <form class="" action="{{route('time.update')}}" method="post">
                             @csrf
                             @method('PATCH')
                             <p>time</p>
-                            <input type="time" name="from" class="w-24">
-                            <input type="time" name="to" class="w-24">
-                            <div class="flex gap-2">
-                                <button type="submit" name="accept" value="{{$day}}">accept</button>
-
+                            <input type="time" name="start_time" class="w-24">
+                            @error('start_time')
+                            {{$message}}
+                            @enderror
+                            <input type="time" name="end_time" class="w-24">
+                            <div>
+                                <button type="submit" name="day" value="{{$day}}">accept</button>
+                            </div>
+                        </form>
                         <form action="{{route('time.close')}}" method="post">
                             @csrf
                             @method('PATCH')
-                            <button type="submit" name="close">close</button>
+
+                            <button type="submit" value="{{$day}}" name="day">close</button>
+
                         </form>
+
                     </div>
+                </td>
+            @endforeach
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+<div class="mt-5 w-11/12 mx-auto">
+    <table class="w-full bg-gray-700 text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+
+                <td class="px-6 py-3"></td>
+                <td class="px-6 py-3"></td>
+
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Add dynamic data here if available -->
+        <tr>
+
+                <td class="px-6 py-3">
+                    <div class="flex flex-col">
+                        <form class="" action="{{route('time.update')}}" method="post">
+                            @csrf
+                            @method('PATCH')
+                            <p>time</p>
+                            <input type="time" name="start_time" class="w-24">
+                            @error('start_time')
+                            {{$message}}
+                            @enderror
+                            <input type="time" name="end_time" class="w-24">
+                            <div>
+                                <button type="submit" name="day" value="{{$day}}">accept</button>
+                            </div>
+                        </form>
+                        <form action="{{route('time.close')}}" method="post">
+                            @csrf
+                            @method('PATCH')
+
+                            <button type="submit" value="{{$day}}" name="day">close</button>
+
                         </form>
 
-</div>
-</td>
-@endforeach
-</tr>
+                    </div>
+                </td>
+            <td class="px-6 py-3">
+                <div class="flex flex-col">
+                    <form class="" action="{{route('time.update')}}" method="post">
+                        @csrf
+                        @method('PATCH')
+                        <p>time</p>
+                        <input type="time" name="start_time" class="w-24">
+                        @error('start_time')
+                        {{$message}}
+                        @enderror
+                        <input type="time" name="end_time" class="w-24">
+                        <div>
+                            <button type="submit" name="day" value="{{$day}}">accept</button>
+                        </div>
+                    </form>
+                    <form action="{{route('time.close')}}" method="post">
+                        @csrf
+                        @method('PATCH')
 
-{{--                    <tr>--}}
-{{--                        <td class="border p-2">--}}
-{{--                            <button type="submit" class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-700 transition duration-300">--}}
-{{--                                Set</button>--}}
-{{--                            <button type="submit" class="bg-red-500 text-white p-2 rounded-md hover:bg-blue-700 transition duration-300">--}}
-{{--                                Close</button>--}}
-{{--                        </td>--}}
-{{--                        <td class="border p-2">--}}
-{{--                            <button type="submit" class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-700 transition duration-300">--}}
-{{--                                Set</button>--}}
-{{--                            <button type="submit" class="bg-red-500 text-white p-2 rounded-md hover:bg-blue-700 transition duration-300">--}}
-{{--                                Close</button>--}}
-{{--                        </td>--}}
-{{--                        <td class="border p-2">--}}
-{{--                            <button type="submit" class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-700 transition duration-300">--}}
-{{--                                Set</button>--}}
-{{--                            <button type="submit" class="bg-red-500 text-white p-2 rounded-md hover:bg-blue-700 transition duration-300">--}}
-{{--                                Close</button>--}}
-{{--                        </td>--}}
-{{--                        <td class="border p-2">--}}
-{{--                            <button type="submit" class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-700 transition duration-300">--}}
-{{--                                Set--}}
-{{--                            </button>--}}
-{{--                            <button type="submit" class="bg-red-500 text-white p-2 rounded-md hover:bg-blue-700 transition duration-300">--}}
-{{--                                Close</button>--}}
-{{--                        </td>--}}
+                        <button type="submit" value="{{$day}}" name="day">close</button>
 
-{{--                        <td class="border p-2">--}}
-{{--                            <button type="submit" class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-700 transition duration-300">--}}
-{{--                                Set</button>--}}
-{{--                            <button type="submit" class="bg-red-500 text-white p-2 rounded-md hover:bg-blue-700 transition duration-300">--}}
-{{--                                Close</button>--}}
-{{--                        </td>--}}
-{{--                        <td class="border p-2">--}}
-{{--                            <button type="submit" class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-700 transition duration-300">--}}
-{{--                                Set</button>--}}
-{{--                            <button type="submit" class="bg-red-500 text-white p-2 rounded-md hover:bg-blue-700 transition duration-300">--}}
-{{--                                Close</button>--}}
-{{--                        </td>--}}
-{{--                        <td class="border p-2">--}}
-{{--                            <button type="submit" class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-700 transition duration-300">--}}
-{{--                                Set</button>--}}
-{{--                            <button type="submit" class="bg-red-500 text-white p-2 rounded-md hover:bg-blue-700 transition duration-300">--}}
-{{--                                Close</button>--}}
-{{--                        </td>--}}
-{{--                        <td class="border p-2">--}}
-{{--                            <button type="submit" class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-700 transition duration-300">--}}
-{{--                                Set</button>--}}
-{{--                            <button type="submit" class="bg-red-500 text-white p-2 rounded-md hover:bg-blue-700 transition duration-300">--}}
-{{--                                Close</button>--}}
-{{--                        </td>--}}
-{{--                        <td class="border p-2">--}}
-{{--                            <button type="submit" class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-700 transition duration-300">--}}
-{{--                                Set</button>--}}
-{{--                            <button type="submit" class="bg-red-500 text-white p-2 rounded-md hover:bg-blue-700 transition duration-300">--}}
-{{--                                Close</button>--}}
-{{--                        </td>--}}
-{{--                        <td class="border p-2">--}}
-{{--                            <button type="submit" class="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-700 transition duration-300">--}}
-{{--                                Set</button>--}}
-{{--                            <button type="submit" class="bg-red-500 text-white p-2 rounded-md hover:bg-blue-700 transition duration-300">--}}
-{{--                                Close</button>--}}
-{{--                        </td>--}}
-{{--                    </tr>--}}
-<!-- Repeat for other days -->
-</tbody>
-</table>
+                    </form>
+
+                </div>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
 </div>
 </body>
 </html>

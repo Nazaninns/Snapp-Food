@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\seller;
 
+use App\Events\RestaurantCreateEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\seller\RestaurantSettingRequest;
 use App\Http\Requests\seller\ResturantProfileRequest;
@@ -38,6 +39,7 @@ class SellerController extends Controller
         $types = $request->validated('type');
         $validated['user_id'] = Auth::id();
         $restaurant = Restaurant::query()->create($validated);
+        RestaurantCreateEvent::dispatch($restaurant);
         $restaurant->address()->create($validated);
         $restaurant->restaurantCategories()->sync($types);
         return redirect()->route('seller.dashboard');
