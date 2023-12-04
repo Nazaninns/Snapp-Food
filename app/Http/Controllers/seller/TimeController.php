@@ -21,12 +21,14 @@ class TimeController extends Controller
 
     public function update(Time $time, UpdateRequest $request)
     {
+        $this->authorize('update', [Time::class, $time]);
         $time->update($request->validated());
         return redirect()->route('time.index');
     }
 
     public function close(Time $time)
     {
+        $this->authorize('close', [Time::class, $time]);
         $time->update([
             'start_time' => null,
             'end_time' => null

@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Models\Time;
 use App\Models\User;
 
 class TimePolicy
@@ -12,5 +13,15 @@ class TimePolicy
     public function __construct()
     {
         //
+    }
+
+    public function update(User $user,Time $time)
+    {
+       return $user->restaurant->times->contains($time);
+    }
+
+    public function close(User $user,Time $time)
+    {
+        return $user->restaurant->times->contains($time);
     }
 }
