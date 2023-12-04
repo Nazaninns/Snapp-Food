@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('times', function (Blueprint $table) {
             $table->id();
             $table->enum('day',['saturday','sunday','monday','tuesday','wednesday','thursday','friday']);
-            $table->time('start_time');
-            $table->time('end_time');
+            $table->time('start_time')->nullable();
+            $table->time('end_time')->nullable();
             $table->foreignId('restaurant_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
