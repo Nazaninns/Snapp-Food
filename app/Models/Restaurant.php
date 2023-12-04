@@ -14,7 +14,7 @@ class Restaurant extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name', 'phone', 'account_number', 'user_id','delivery_cost'
+        'name', 'phone', 'account_number', 'user_id', 'delivery_cost'
     ];
     protected $casts = [
         'phone' => PhoneCast::class
@@ -40,19 +40,28 @@ class Restaurant extends Model
         return $this->hasMany(Cart::class);
     }
 
-    public function address():MorphOne
+    public function address(): MorphOne
     {
-        return $this->morphOne(Address::class,'addressable');
+        return $this->morphOne(Address::class, 'addressable');
     }
 
-    public function orders():HasMany
+    public function orders(): HasMany
     {
         return $this->hasMany(Order::class);
     }
 
-    public function times():HasMany
+    public function times(): HasMany
     {
         return $this->hasMany(Time::class);
+    }
+
+    public function restaurantIsOpen()
+    {
+       return $this->times()->where([
+            ['day', '=', now()->dayName],
+            ['start_time', '<', now()->toTimeString()],
+            ['end_time', '>', now()->addHour()->toTimeString()]
+        ])->get()->isNotEmpty();
     }
 }
 
