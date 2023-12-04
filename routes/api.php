@@ -60,7 +60,7 @@ Route::middleware(['auth:sanctum', 'role:customer'])->group(function () {
     //Route::apiResource('orders',\App\Http\Controllers\api\OrderController::class)->only('index','show');
     Route::get('orders/active', [\App\Http\Controllers\api\OrderController::class, 'active']);
     Route::get('orders/deActive', [\App\Http\Controllers\api\OrderController::class, 'deActive']);
-    Route::get('orders/{order}', [\App\Http\Controllers\api\OrderController::class, 'deActive']);
+    Route::get('orders/{order}', [\App\Http\Controllers\api\OrderController::class, 'show']);
 });
 
 //Route::get('test',function (){

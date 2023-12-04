@@ -10,7 +10,7 @@ use App\Models\Order;
 use App\Models\Restaurant;
 use App\Models\Time;
 use App\Policies\AddressPolicy;
-use App\Policies\ArchivePolicy;
+use App\Policies\OrderPolicy;
 use App\Policies\CartPolicy;
 use App\Policies\CommentPolicy;
 use App\Policies\RestaurantPolicy;
@@ -26,11 +26,12 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected $policies = [
         Comment::class=>CommentPolicy::class,
-        Order::class=>ArchivePolicy::class,
+        Order::class=>OrderPolicy::class,
         Address::class=>AddressPolicy::class,
         Cart::class=>CartPolicy::class,
         Restaurant::class=>RestaurantPolicy::class,
-        Time::class=>TimePolicy::class
+        Time::class=>TimePolicy::class,
+
     ];
 
     /**

@@ -6,7 +6,7 @@ use App\Models\Cart;
 use App\Models\Order;
 use App\Models\User;
 
-class ArchivePolicy
+class OrderPolicy
 {
     /**
      * Create a new policy instance.
@@ -18,6 +18,10 @@ class ArchivePolicy
 
     public function show(User $user, Order $order)
     {
-        return $user->restaurant->orders->contains($order);
+        if ($user->hasRole('seller'))
+            return $user->restaurant->orders->contains($order);
+        if ($user->hasRole('customer'))
+            return $user->orders->contains($order);
     }
+
 }
