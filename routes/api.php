@@ -57,6 +57,7 @@ Route::middleware(['auth:sanctum', 'role:customer'])->group(function () {
         Route::post('/', 'store');
     });
 
+    Route::apiResource('orders',\App\Http\Controllers\api\OrderController::class)->only('index','show');
 });
 
 //Route::get('test',function (){

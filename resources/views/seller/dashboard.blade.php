@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -221,27 +221,46 @@
                     </div>
                 @endforeach
                 <p>total price: <span class="text-indigo-600">{{($order->total_price - $order->discount)}}</span> $</p>
-
-                <form action="{{route('change.situation',$order)}}" method="post">
-                    @csrf
-                    @method('PATCH')
-                    @php $situation=$order->situation @endphp
-                    <x-dynamic-component :component="$situation"/>
-                    {{--                    @if($order->situation==='pending')--}}
-                    {{--                        <x-pending/>--}}
-                    {{--                    @elseif($order->situation==='making')--}}
-                    {{--                        <x-making/>--}}
-                    {{--                    @elseif($order->situation==='send')--}}
-                    {{--                        <x-send/>--}}
-                    {{--                    @endif--}}
-                </form>
+                <div class="flex gap-1">
+                    <form action="{{route('change.situation',$order)}}" method="post">
+                        @csrf
+                        @method('PATCH')
+                        @php $situation=$order->situation @endphp
+                        <x-dynamic-component :component="$situation"/>
+                        {{--                    @if($order->situation==='pending')--}}
+                        {{--                        <x-pending/>--}}
+                        {{--                    @elseif($order->situation==='making')--}}
+                        {{--                        <x-making/>--}}
+                        {{--                    @elseif($order->situation==='send')--}}
+                        {{--                        <x-send/>--}}
+                        {{--                    @endif--}}
+                    </form>
+                    <form action="{{route('orders.delete',$order)}}" method="post">
+                        @csrf
+                        @method('DELETE')
+                    <button type="submit" class="btn-grad">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">
+                            <g fill="none" stroke="#ea8685" stroke-linecap="round" stroke-width="2">
+                                <path stroke-dasharray="60" stroke-dashoffset="60"
+                                      d="M5.63604 5.63603C9.15076 2.12131 14.8492 2.12131 18.364 5.63603C21.8787 9.15075 21.8787 14.8492 18.364 18.364C14.8492 21.8787 9.15076 21.8787 5.63604 18.364C2.12132 14.8492 2.12132 9.15075 5.63604 5.63603Z">
+                                    <animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/>
+                                </path>
+                                <path stroke-dasharray="18" stroke-dashoffset="18" d="M6 6L18 18">
+                                    <animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s"
+                                             values="18;0"/>
+                                </path>
+                            </g>
+                        </svg>
+                    </button>
+                    </form>
+                </div>
             </div>
         @endforeach
     </div>
 </div>
-<x-paginate />
+<x-paginate/>
 <div class="container w-2/12 mx-auto">
-{{$orders->links()}}
+    {{$orders->links()}}
 </div>
 </body>
 </html>

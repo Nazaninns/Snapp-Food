@@ -19,4 +19,11 @@ class SituationController extends Controller
         SituationChangeEvent::dispatch($order);
         return redirect()->route('seller.dashboard');
     }
+
+    public function delete(Order $order)
+    {
+        $order->food()->detach();
+        $order->delete();
+        return redirect()->route('seller.dashboard');
+    }
 }

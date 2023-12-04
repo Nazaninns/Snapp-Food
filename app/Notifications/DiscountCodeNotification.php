@@ -11,7 +11,7 @@ use Illuminate\Notifications\Notification;
 use Illuminate\Support\Collection;
 
 
-class DiscountCodeNotification extends Notification
+class DiscountCodeNotification extends Notification implements ShouldQueue
 {
     use Queueable;
     /**

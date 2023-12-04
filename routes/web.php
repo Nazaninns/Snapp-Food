@@ -84,6 +84,7 @@ Route::middleware('auth')->middleware('role:seller')->prefix('seller')->group(fu
     });
 
     Route::patch('dashboard/situation/{order}', [SituationController::class, 'changeSituation'])->name('change.situation');
+    Route::delete('dashboard/orders/delete/{order}', [SituationController::class, 'delete'])->name('orders.delete');
 
     Route::controller(ArchiveController::class)->prefix('archive')->group(function () {
         Route::get('/', 'archive')->name('archive');
