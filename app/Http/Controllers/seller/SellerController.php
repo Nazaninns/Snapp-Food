@@ -63,4 +63,9 @@ class SellerController extends Controller
         $restaurant->restaurantCategories()->sync($types);
         return redirect()->route('seller.dashboard');
     }
+
+    public function setDate()
+    {
+        return view('seller.date');
+    }
 }
