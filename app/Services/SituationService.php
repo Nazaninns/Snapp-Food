@@ -12,13 +12,13 @@ class SituationService
         if (!empty($situation)){
             $orders = $user->restaurant->orders()->where([
                 ['situation', '=', $situation]
-            ])->get();
+            ]);
         }
         else
         {
             $orders = $user->restaurant->orders()->where([
                 ['situation', '!=', 'delivered']
-            ])->get();
+            ]);
         }
         return $orders;
 }

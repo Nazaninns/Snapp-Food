@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\seller\FoodRequest;
 use App\Models\Food;
 use App\Models\FoodCategory;
+use App\Services\PaginateService;
 use Illuminate\Support\Facades\Auth;
 
 class FoodController extends Controller
@@ -17,17 +18,18 @@ class FoodController extends Controller
     {
 
         if (\request()->get('sort') == 'asc')
-            $foods =Food::query()->where(['restaurant_id'=>Auth::user()->restaurant->id])->orderBy('name')->paginate(4);
+            $foods =Food::query()->where(['restaurant_id'=>Auth::user()->restaurant->id])->orderBy('name');
         elseif (\request()->get('sort') == 'desc')
-            $foods = Food::query()->where(['restaurant_id'=>Auth::user()->restaurant->id])->orderByDesc('name')->paginate(4);
+            $foods = Food::query()->where(['restaurant_id'=>Auth::user()->restaurant->id])->orderByDesc('name');
         else
-        $foods = Food::query()->where(['restaurant_id'=>Auth::user()->restaurant->id])->paginate(4);
+        $foods = Food::query()->where(['restaurant_id'=>Auth::user()->restaurant->id]);
         if (\request()->get('filter')!== null)
             $foods=Food::query()->where([
                 'food_category_id'=>\request()->get('filter'),
                 'restaurant_id'=>Auth::user()->restaurant->id
-                ])->paginate(4);
+                ]);
         $foodCategories = FoodCategory::all();
+        $foods=PaginateService::paginate(request('paginate'),$foods);
         return view('seller.food.index', compact('foods', 'foodCategories'));
     }
 

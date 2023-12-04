@@ -9,6 +9,7 @@ use App\Http\Requests\seller\ResturantProfileRequest;
 use App\Http\Requests\seller\SortSituationRequest;
 use App\Models\Restaurant;
 use App\Models\RestaurantCategory;
+use App\Services\PaginateService;
 use App\Services\SituationService;
 use Illuminate\Support\Facades\Auth;
 
@@ -21,6 +22,7 @@ class SellerController extends Controller
         $situation = $request->validated('situation');
         $user = Auth::user();
         $orders=SituationService::sortOrders($situation);
+        $orders=PaginateService::paginate($request->validated('paginate'),$orders);
         return view('seller.dashboard', compact(['user', 'orders']));
     }
 

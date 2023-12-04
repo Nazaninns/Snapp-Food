@@ -239,6 +239,9 @@
         @endforeach
     </div>
 </div>
-
+<x-paginate />
+<div class="container w-2/12 mx-auto">
+{{$orders->links()}}
+</div>
 </body>
 </html>
