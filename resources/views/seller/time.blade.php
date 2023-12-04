@@ -1,5 +1,4 @@
-
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -85,35 +84,36 @@ background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, F
     <table class="w-full bg-gray-700 text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
         <tr>
-            @foreach($days as $day)
-                <td class="px-6 py-3">{{$day}}</td>
+            @foreach($times as $time)
+                <td class="px-6 py-3">{{$time->day}}</td>
             @endforeach
         </tr>
         </thead>
         <tbody>
         <!-- Add dynamic data here if available -->
         <tr>
-            @foreach($days as $day)
+            @foreach($times as $time)
                 <td class="px-6 py-3">
                     <div class="flex flex-col">
-                        <form class="" action="{{route('time.update')}}" method="post">
+                        <form class="" action="{{route('time.update',$time)}}" method="post">
                             @csrf
                             @method('PATCH')
-                            <p>time</p>
-                            <input type="time" name="start_time" class="w-24">
+                            <label for="">start</label>
+                            <input type="time" value="{{$time->start_time}}" name="start_time" class="w-24">
                             @error('start_time')
                             {{$message}}
                             @enderror
-                            <input type="time" name="end_time" class="w-24">
+                            <label for="">end</label>
+                            <input type="time" value="{{$time->end_time}}" name="end_time" class="w-24">
                             <div>
-                                <button type="submit" name="day" value="{{$day}}">accept</button>
+                                <button type="submit">accept</button>
                             </div>
                         </form>
-                        <form action="{{route('time.close')}}" method="post">
+                        <form action="{{route('time.close',$time)}}" method="post">
                             @csrf
                             @method('PATCH')
 
-                            <button type="submit" value="{{$day}}" name="day">close</button>
+                            <button type="submit">close</button>
 
                         </form>
 
@@ -130,65 +130,55 @@ background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, F
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
         <tr>
 
-                <td class="px-6 py-3"></td>
-                <td class="px-6 py-3"></td>
+            <td class="px-6 py-3">saturday_wednesday</td>
+            <td class="px-6 py-3">all_days</td>
 
         </tr>
         </thead>
         <tbody>
         <!-- Add dynamic data here if available -->
         <tr>
-
-                <td class="px-6 py-3">
-                    <div class="flex flex-col">
-                        <form class="" action="{{route('time.update')}}" method="post">
-                            @csrf
-                            @method('PATCH')
-                            <p>time</p>
-                            <input type="time" name="start_time" class="w-24">
-                            @error('start_time')
-                            {{$message}}
-                            @enderror
-                            <input type="time" name="end_time" class="w-24">
-                            <div>
-                                <button type="submit" name="day" value="{{$day}}">accept</button>
-                            </div>
-                        </form>
-                        <form action="{{route('time.close')}}" method="post">
-                            @csrf
-                            @method('PATCH')
-
-                            <button type="submit" value="{{$day}}" name="day">close</button>
-
-                        </form>
-
-                    </div>
-                </td>
             <td class="px-6 py-3">
                 <div class="flex flex-col">
-                    <form class="" action="{{route('time.update')}}" method="post">
+                    <form class="" action="{{route('time.someDay')}}" method="post">
                         @csrf
-                        @method('PATCH')
-                        <p>time</p>
                         <input type="time" name="start_time" class="w-24">
                         @error('start_time')
                         {{$message}}
                         @enderror
                         <input type="time" name="end_time" class="w-24">
                         <div>
-                            <button type="submit" name="day" value="{{$day}}">accept</button>
+                            <button type="submit">accept</button>
                         </div>
                     </form>
-                    <form action="{{route('time.close')}}" method="post">
+                    <form action="{{route('time.someDay.close')}}" method="post">
                         @csrf
-                        @method('PATCH')
-
-                        <button type="submit" value="{{$day}}" name="day">close</button>
-
+                        <button type="submit">close</button>
                     </form>
-
                 </div>
             </td>
+
+
+            <td class="px-6 py-3">
+                <div class="flex flex-col">
+                    <form class="" action="{{route('time.allDay')}}" method="post">
+                        @csrf
+                        <input type="time" name="start_time" class="w-24">
+                        @error('start_time')
+                        {{$message}}
+                        @enderror
+                        <input type="time" name="end_time" class="w-24">
+                        <div>
+                            <button type="submit">accept</button>
+                        </div>
+                    </form>
+                    <form action="{{route('time.allDay.close')}}" method="post">
+                        @csrf
+                        <button type="submit">close</button>
+                    </form>
+                </div>
+            </td>
+
         </tr>
 
         </tbody>

@@ -41,7 +41,7 @@ class ResturantProfileRequest extends FormRequest
             'latitude'=>['required','decimal:2,4'],
             'longitude'=>['required','decimal:2,4'],
             'account_number' => ['required', 'string'],
-            'delivery_cost'=>['required','numeric','between:1,8'],
+            'delivery_cost'=>['required','numeric','between:1,400'],
             'type' => ['required', 'array']
         ];
     }

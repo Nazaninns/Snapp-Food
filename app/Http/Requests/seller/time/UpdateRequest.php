@@ -24,7 +24,6 @@ class UpdateRequest extends FormRequest
         return [
             'start_time'=>['required','date_format:H:i'],
             'end_time'=>['required','date_format:H:i'],
-            'day'=>['required','in:saturday,sunday,monday,tuesday,wednesday,thursday,friday,saturday_wednesday,all_days']
         ];
     }
 }

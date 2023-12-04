@@ -98,8 +98,12 @@ Route::middleware('auth')->middleware('role:seller')->prefix('seller')->group(fu
     });
     Route::controller(TimeController::class)->prefix('time')->name('time.')->group(function () {
         Route::get('/', 'index')->name('index');
-        Route::patch('/accept', 'update')->name('update');
-        Route::patch('/close', 'close')->name('close');
+        Route::patch('/accept/{time}', 'update')->name('update');
+        Route::patch('/close/{time}', 'close')->name('close');
+        Route::post('/some-day/accept','someDay')->name('someDay');
+        Route::post('/some-day/close','someDayClose')->name('someDay.close');
+        Route::post('/all-day/accept','allDay')->name('allDay');
+        Route::post('/all-day/close','allDayClose')->name('allDay.close');
     });
 
 });
