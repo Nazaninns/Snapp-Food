@@ -19,10 +19,11 @@ class RestaurantResource extends JsonResource
             'title'=>$this->name,
             'type'=>$this->restaurantCategories->pluck('name'),
             'address'=>new RestaurantAddressResource($this->address),
-            'is_open'=>$this->is_open,
+            'is_open'=>$this->restaurantIsOpen(),
             'image'=>$this->image,
             'score'=>$this->score,
-            'comment_count'=>count($this->orders()->has('comments')->get()->pluck('comments')->flatten())
+            'comment_count'=>count($this->orders()->has('comment')->get()->pluck('comment')->flatten()),
+            'schedules'=>TimeRestaurantResource::collection($this->times)
         ];
     }
 }
