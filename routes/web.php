@@ -15,6 +15,7 @@ use App\Http\Controllers\seller\FoodController;
 use App\Http\Controllers\seller\FoodPartyController;
 use App\Http\Controllers\seller\SellerController;
 use App\Http\Controllers\seller\SituationController;
+use App\Http\Controllers\seller\TimeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -69,7 +70,6 @@ Route::middleware('auth')->middleware('role:seller')->prefix('seller')->group(fu
         Route::post('profile', 'profileStore')->name('storeProfile');
         Route::get('setting', 'restaurantSetting')->name('setting');
         Route::post('setting/{restaurant}', 'updateSetting')->name('updateSetting');
-        Route::get('date','setTime')->name('time');
     });
 
     Route::resource('food', FoodController::class);
@@ -95,6 +95,11 @@ Route::middleware('auth')->middleware('role:seller')->prefix('seller')->group(fu
         Route::post('/{comment}', 'reply')->name('reply');
         Route::post('/accept/{comment}', 'accept')->name('accept');
         Route::delete('/delete/{comment}', 'deleteRequest')->name('delete');
+    });
+    Route::controller(TimeController::class)->prefix('time')->name('time.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::patch('/accept', 'update')->name('update');
+        Route::patch('/close', 'close')->name('close');
     });
 
 });

@@ -1,7 +1,7 @@
 @php
-$days=['saturday','sunday','monday','tuesday','wednesday','saturday-wednesday','thursday','friday','all days'];
+    $days=['saturday','sunday','monday','tuesday','wednesday','saturday-wednesday','thursday','friday','all days'];
 @endphp
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -84,32 +84,41 @@ background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, F
     <div></div>
 </nav>
 <div class="mt-5 w-11/12 mx-auto">
-                <table class="w-full bg-gray-700 text-sm text-left text-gray-500 dark:text-gray-400">
-                    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
-                    <tr>
-                        @foreach($days as $day)
-                        <td  class="px-6 py-3">{{$day}}</td>
-                        @endforeach
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <!-- Add dynamic data here if available -->
-                    <tr>
-                        @foreach($days as $day)
-                        <td class="px-6 py-3">
-                            <form action="" class="flex flex-col" method="">
-                                @csrf
-                               <p>time</p>
-                                <input type="time" name="from" class="w-24">
-                                <input type="time" name="to" class="w-24">
-                                <div class="flex gap-2">  <button type="submit" name="accept" value="{{$day}}">accept</button>
-                                    <button type="submit" name="close">close</button>
-                                </div>
+    <table class="w-full bg-gray-700 text-sm text-left text-gray-500 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+            @foreach($days as $day)
+                <td class="px-6 py-3">{{$day}}</td>
+            @endforeach
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Add dynamic data here if available -->
+        <tr>
+            @foreach($days as $day)
+                <td class="px-6 py-3">
+                    <div class="flex flex-col">
+                        <form action="{{route('time.update')}}" method="post">
+                            @csrf
+                            @method('PATCH')
+                            <p>time</p>
+                            <input type="time" name="from" class="w-24">
+                            <input type="time" name="to" class="w-24">
+                            <div class="flex gap-2">
+                                <button type="submit" name="accept" value="{{$day}}">accept</button>
 
-                            </form>
-                        </td>
-                        @endforeach
-                    </tr>
+                        <form action="{{route('time.close')}}" method="post">
+                            @csrf
+                            @method('PATCH')
+                            <button type="submit" name="close">close</button>
+                        </form>
+                    </div>
+                        </form>
+
+</div>
+</td>
+@endforeach
+</tr>
 
 {{--                    <tr>--}}
 {{--                        <td class="border p-2">--}}
@@ -175,9 +184,9 @@ background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, F
 {{--                                Close</button>--}}
 {{--                        </td>--}}
 {{--                    </tr>--}}
-                    <!-- Repeat for other days -->
-                    </tbody>
-                </table>
+<!-- Repeat for other days -->
+</tbody>
+</table>
 </div>
 </body>
 </html>
