@@ -14,7 +14,7 @@ class Order extends Model
 {
     use HasFactory,SoftDeletes;
 protected $fillable=[
-    'restaurant_id','user_id','pay','address_id','situation','total_price','discounts','delivery_cost'
+    'restaurant_id','user_id','pay','address_id','situation','total_price','discount','delivery_cost'
 ];
     public function food():BelongsToMany
     {

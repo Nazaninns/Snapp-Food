@@ -15,7 +15,7 @@ class CommentService
     public static function CommentSort(int $foodId)
     {
         $food = Food::query()->find($foodId);
-        return $food->orders()->has('comments')->get()->pluck('comments')->flatten();
+        return $food->orders()->has('comment')->get()->pluck('comment')->flatten();
     }
 
     public static function reply($validated,$comment)
@@ -29,11 +29,11 @@ class CommentService
     public static function getComments($validated)
     {
         if (isset($validated['restaurant_id'])) {
-            $comments = Order::query()->where('restaurant_id', $validated['restaurant_id'])->has('comments')->get()->pluck('comments')->flatten();
+            $comments = Order::query()->where('restaurant_id', $validated['restaurant_id'])->has('comment')->get()->pluck('comment')->flatten();
 
         }
         if (isset($validated['food_id'])) {
-            $comments = Food::query()->find($validated['food_id'])->orders()->has('comments')->get()->pluck('comments')->flatten();
+            $comments = Food::query()->find($validated['food_id'])->orders()->has('comment')->get()->pluck('comment')->flatten();
 
         }
 
