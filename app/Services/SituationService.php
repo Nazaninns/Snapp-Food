@@ -21,5 +21,5 @@ class SituationService
             ]);
         }
         return $orders;
-    }
+}
 }
