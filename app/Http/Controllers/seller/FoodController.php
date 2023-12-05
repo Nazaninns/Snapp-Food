@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\seller;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PaginateRequest;
 use App\Http\Requests\seller\FoodRequest;
 use App\Models\Food;
 use App\Models\FoodCategory;
@@ -14,7 +15,7 @@ class FoodController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(PaginateRequest $request)
     {
 
         if (\request()->get('sort') == 'asc')
@@ -29,7 +30,7 @@ class FoodController extends Controller
                 'restaurant_id'=>Auth::user()->restaurant->id
                 ]);
         $foodCategories = FoodCategory::all();
-        $foods=PaginateService::paginate(request('paginate'),$foods);
+        $foods=PaginateService::paginate($request->validated('paginate'),$foods);
         return view('seller.food.index', compact('foods', 'foodCategories'));
     }
 

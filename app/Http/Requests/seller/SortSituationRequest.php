@@ -23,7 +23,6 @@ class SortSituationRequest extends FormRequest
     {
         return [
             'situation' => ['nullable', 'in:pending,making,send'],
-            'paginate' => ['numeric', 'between:1,20']
         ];
     }
 }

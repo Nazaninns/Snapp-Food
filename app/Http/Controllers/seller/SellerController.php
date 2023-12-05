@@ -4,6 +4,7 @@ namespace App\Http\Controllers\seller;
 
 use App\Events\RestaurantCreateEvent;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PaginateRequest;
 use App\Http\Requests\seller\RestaurantSettingRequest;
 use App\Http\Requests\seller\ResturantProfileRequest;
 use App\Http\Requests\seller\SortSituationRequest;
@@ -15,14 +16,14 @@ use Illuminate\Support\Facades\Auth;
 
 class SellerController extends Controller
 {
-    public function dashboard(SortSituationRequest $request)
+    public function dashboard(SortSituationRequest $request,PaginateRequest $paginateRequest)
     {
         if (Auth::user()->restaurant == null)
             return redirect()->route('seller.profile');
         $situation = $request->validated('situation');
         $user = Auth::user();
         $orders=SituationService::sortOrders($situation);
-        $orders=PaginateService::paginate($request->validated('paginate'),$orders);
+        $orders=PaginateService::paginate($paginateRequest->validated('paginate'),$orders);
         return view('seller.dashboard', compact(['user', 'orders']));
     }
 
