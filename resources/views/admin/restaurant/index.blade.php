@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @vite('resources/css/app.css')
     <title>Restaurant Categories</title>
-
+    <script src="https://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -123,8 +123,9 @@ background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, F
     @endforeach
 
 </div>
-<div class="container">
-    <div style="width: 23rem">{{$restaurantCategories->links()}}</div>
+<x-paginate />
+<div class="container w-2/12 mx-auto">
+    {{$restaurantCategories->links()}}
 </div>
 </body>
 </html>

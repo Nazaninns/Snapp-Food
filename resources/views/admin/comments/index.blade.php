@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restaurant Comments</title>
     @vite('resources/css/app.css')
+    <script src="https://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -34,9 +35,10 @@
         .category-card, .food-card {
             border: 1px solid #e0e0e0;
             border-radius: 5px;
-            margin: 5rem;
+            margin: 3rem;
+            width: 26%;
             padding: 20px;
-            width: 15%;
+
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         .btn-grad {
@@ -102,10 +104,11 @@ background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, F
     <h1 class="text-3xl mt-5">Comments </h1>
     <div></div>
 </nav>
+<div class=" mx-auto  flex flex-wrap w-9/12 justify-between ">
 @foreach($comments as $comment)
-<div class="container category-card bg-gray-50   flex justify-between ">
+    <div class="container category-card bg-gray-50   ">
     <div class="">
-            <h1>Restaurant Name : <span class="text-indigo-700" >{{$comment->cart->restaurant->name}}</span></h1>
+            <h1>Restaurant Name : <span class="text-indigo-700" >{{$comment->order->restaurant->name}}</span></h1>
             <div>Text : <span class="text-indigo-700">{{$comment->text}}</span></div>
         <p >Requested at : <span class="text-indigo-700">{{$comment->updated_at}}</span></p>
         <div class="flex justify-between m-2">
@@ -120,8 +123,13 @@ background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, F
         </div>
     </div>
 
-</div>
+    </div>
 @endforeach
+</div>
+<x-paginate />
+<div class="container w-2/12 mx-auto">
+    {{$comments->links()}}
+</div>
 </body>
 </html>
 

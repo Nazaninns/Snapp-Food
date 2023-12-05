@@ -22,7 +22,7 @@ class PaginateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'paginate'=>['numeric','in:3,6,9,12,15']
+            'paginate'=>['numeric','in:2,4,8,10,3,6,9,12,15']
         ];
     }
 }

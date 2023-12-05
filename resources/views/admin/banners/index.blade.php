@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>archive</title>
     @vite('resources/css/app.css')
-
+    <script src="https://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -91,12 +91,12 @@ background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, F
         </svg>
     </a>
 </nav>
-<div class="flex  gap-5">
+<div class="flex flex-wrap ">
 @foreach($banners as $banner)
-<div class=" container mt-5 flex  category-card bg-gray-300">
+<div class=" container mt-5  flex  category-card bg-gray-300">
     <div class="flex flex-col">
         <div class="text-2xl text-blue-800 font-medium">{{$banner->message}}</div>
-        <img style="width: 30rem ; height: 30rem" src="{{asset('storage/'.$banner->image)}}">
+        <img style="width: 33rem ; height: 30rem; " src="{{asset('storage/'.$banner->image)}}">
         <form action="{{route('admin.banners.destroy',$banner)}}" method="post">
             @csrf
             @method('DELETE')
@@ -106,6 +106,10 @@ background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, F
 
 </div>
 @endforeach
+    </div>
+<x-banner_paginate />
+<div class="container w-2/12 mx-auto">
+    {{$banners->links()}}
 </div>
 </body>
 </html>
