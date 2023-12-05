@@ -9,7 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Mail;
 
-class SituationChangeListener
+class SituationChangeListener implements ShouldQueue
 {
     /**
      * Create the event listener.
@@ -24,7 +24,7 @@ class SituationChangeListener
      */
     public function handle(SituationChangeEvent $event): void
     {
-    $cart=$event->cart;
-    Mail::to($cart->user)->send(new ChangeSituationMail($cart));
+    $order=$event->order;
+    Mail::to($order->user)->send(new ChangeSituationMail($order));
     }
 }

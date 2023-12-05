@@ -28,10 +28,12 @@
         <div class="flex mb-40  items-center w-full max-w-md  px-6 mx-auto lg:w-2/6">
 
             <div class="flex-1">
+                @isset($banner)
                 <div class="w-60 mb-12 mt-5   h-60 flex flex-col mx-auto">
-                    <div class="text-white text-xl mb-2">{{$banner->message}}</div>
-                    <img class="w-60 h-60"  src="{{asset('storage/'.$banner->image)}}" >
+                    <div class="text-white text-xl mb-2">{{$banner?->message}}</div>
+                    <img class="w-60 h-60"  src="{{asset('storage/'.$banner?->image)}}" >
                 </div>
+                @endisset
                 <div class="text-center">
                     <h2 class="text-4xl font-bold text-center text-gray-700 dark:text-white">Snapp Food</h2>
 

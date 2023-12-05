@@ -3,6 +3,7 @@
 namespace App\Events;
 
 use App\Models\Cart;
+use App\Models\Order;
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Broadcasting\PresenceChannel;
@@ -18,7 +19,7 @@ class SituationChangeEvent
     /**
      * Create a new event instance.
      */
-    public function __construct(public Cart $cart)
+    public function __construct(public Order $order)
     {
         //
     }

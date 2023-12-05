@@ -23,8 +23,8 @@ class RestaurantRequest extends FormRequest
     {
         return [
             'is_open' => ['boolean'],
-            'type' => ['string'],
-            'score_gt' => ['numeric', 'between:3,5']
+            'type' => ['string','max:50'],
+            'score_gt' => ['numeric', 'between:1,5']
         ];
     }
 }

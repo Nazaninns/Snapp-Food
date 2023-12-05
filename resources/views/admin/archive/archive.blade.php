@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>archive</title>
     @vite('resources/css/app.css')
-
+    <script src="https://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -105,12 +105,12 @@ background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, F
                            fill="currentColor"
                            d="M14 13.1V12H4.6l.6-1.1l9.2-.9L16 4H3.7L3 1H0v1h2.2l2.1 8.4L3 13v1.5c0 .8.7 1.5 1.5 1.5S6 15.3 6 14.5S5.3 13 4.5 13H12v1.5c0 .8.7 1.5 1.5 1.5s1.5-.7 1.5-1.5c0-.7-.4-1.2-1-1.4z"/></svg>
                 </span>
-               : <span style="margin-top: 2px">  {{count($carts)}}</span></span>
+               : <span style="margin-top: 2px">  {{count($orders)}}</span></span>
 
             <span
                 class=" flex gap-3 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500  w-80 pl-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-300 dark:focus:ring-blue-500 dark:focus:border-blue-500  ">
-                @php $totalPrice=$carts->sum(function ($cart){
-     return $cart->totalPriceAfterDiscount();
+                @php $totalPrice=$orders->sum(function ($order){
+     return $order->total_price - $order->discount;
  }) ;
                 @endphp
 
@@ -132,7 +132,7 @@ background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, F
                     restaurant name
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    cart id
+                    order id
                 </th>
                 <th scope="col" class="px-6 py-3">
                     customer name
@@ -149,32 +149,32 @@ background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, F
             </tr>
             </thead>
             <tbody>
-            @foreach($carts as $cart)
+            @foreach($orders as $order)
                 <tr
                     class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
 
                     <td class=" w-4 pl-10">
 
-                        #{{$cart->id}}
+                        #{{$order->id}}
                     </td>
                     <td class="  pl-7 ">
 
-                        {{$cart->restaurant->name}}
+                        {{$order->restaurant->name}}
                     </td>
                     <td class="pl-7 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                        {{$cart->id}}
+                        {{$order->id}}
                     </td>
                     <td class="px-6 py-4">
-                        {{$cart->user->name}}
+                        {{$order->user->name}}
                     </td>
                     <td class="px-6 py-4">
-                        {{$cart->pay}}
+                        {{$order->pay}}
                     </td>
                     <td class="px-6 py-4">
-                        {{$cart->totalPriceAfterDiscount()}} $
+                        {{$order->total_price - $order->discount}} $
                     </td>
                     <td class="px-6 py-4">
-                        <a href="{{route('admin.archive.show',$cart)}}" class="btn-grad">
+                        <a href="{{route('admin.archive.show',$order)}}" class="btn-grad">
                             show
                         </a>
 
@@ -184,6 +184,10 @@ background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, F
             </tbody>
         </table>
     </div>
+</div>
+<x-paginate />
+<div class="container w-2/12 mx-auto">
+    {{$orders->links()}}
 </div>
 </body>
 </html>

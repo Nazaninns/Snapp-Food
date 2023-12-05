@@ -33,7 +33,7 @@ Route::middleware(['auth:sanctum', 'role:customer'])->group(function () {
 //user
     Route::apiResource('addresses', AddressController::class);
     Route::post('addresses/{address}', [AddressController::class, 'current']);
-    Route::patch('user',[AuthController::class,'update']);
+    Route::patch('user', [UserController::class, 'update']);
 //restaurants
     Route::controller(RestaurantController::class)->prefix('restaurants')->group(function () {
         Route::get('/', 'index');
@@ -57,6 +57,10 @@ Route::middleware(['auth:sanctum', 'role:customer'])->group(function () {
         Route::post('/', 'store');
     });
 
+    //Route::apiResource('orders',\App\Http\Controllers\api\OrderController::class)->only('index','show');
+    Route::get('orders/active', [\App\Http\Controllers\api\OrderController::class, 'active']);
+    Route::get('orders/deActive', [\App\Http\Controllers\api\OrderController::class, 'deActive']);
+    Route::get('orders/{order}', [\App\Http\Controllers\api\OrderController::class, 'show']);
 });
 
 //Route::get('test',function (){

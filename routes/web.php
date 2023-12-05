@@ -11,7 +11,11 @@ use App\Http\Controllers\seller\ArchiveController;
 use App\Http\Controllers\admin\ArchiveController as AdminArchiveController;
 use App\Http\Controllers\seller\CommentController;
 use App\Http\Controllers\admin\CommentController as AdminCommentController;
+use App\Http\Controllers\seller\FoodController;
+use App\Http\Controllers\seller\FoodPartyController;
+use App\Http\Controllers\seller\SellerController;
 use App\Http\Controllers\seller\SituationController;
+use App\Http\Controllers\seller\TimeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -28,65 +32,80 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::controller(AuthController::class)->group(function () {
+    Route::get('login', 'login')->name('login');
+    Route::post('login', 'loginSubmit')->name('login.submit');
+    Route::get('register', 'register')->name('register');
+    Route::post('register', 'registerSubmit')->name('register.submit');
+    Route::middleware('auth')->get('logout', 'logout')->name('logout');
+});
 
-Route::get('login', [AuthController::class, 'login'])->name('login');
-Route::post('login', [AuthController::class, 'loginSubmit'])->name('login.submit');
-Route::get('register', [AuthController::class, 'register'])->name('register');
-Route::post('register', [AuthController::class, 'registerSubmit'])->name('register.submit');
-Route::middleware('auth')->get('logout', [AuthController::class, 'logout'])->name('logout');
 
 //admin
 Route::middleware('auth')->middleware('role:admin')->prefix('admin')->name('admin.')->group(function () {
     Route::get('dashboard', AdminController::class)->name('dashboard');
     Route::resource('food_category', FoodCategoryController::class);
     Route::resource('restaurant_category', RestaurantCategoryController::class);
-    Route::get('discount', [DiscountController::class, 'index'])->name('discount.index');
-    Route::get('discount/create', [DiscountController::class, 'create'])->name('discount.create');
-    Route::post('discount/create', [DiscountController::class, 'store'])->name('discount.store');
-    Route::delete('discount/delete/{discount}', [DiscountController::class, 'delete'])->name('discount.delete');
-    Route::get('comment/request', [AdminCommentController::class, 'commentRequest'])->name('comments.request');
-    Route::post('comment/accept/{comment}', [AdminCommentController::class, 'accept'])->name('comments.accept');
-    Route::post('comment/reject/{comment}', [AdminCommentController::class, 'reject'])->name('comments.reject');
+
+    Route::resource('discounts', DiscountController::class)->except('edit', 'update', 'show');
+
+    Route::controller(AdminCommentController::class)->prefix('comment')->name('comments.')->group(function () {
+        Route::get('/request', 'commentRequest')->name('request');
+        Route::post('/accept/{comment}', 'accept')->name('accept');
+        Route::post('/reject/{comment}', 'reject')->name('reject');
+    });
+
     Route::get('archive', [AdminArchiveController::class, 'archive'])->name('archive');
-    Route::get('archive/show/{cart}',[AdminArchiveController::class,'show'])->name('archive.show');
+    Route::get('archive/show/{order}', [AdminArchiveController::class, 'show'])->name('archive.show');
 
 
     Route::resource('banners', BannerController::class)->except('edit', 'update', 'show');
+    //seller
 });
 Route::middleware('auth')->middleware('role:seller')->prefix('seller')->group(function () {
-    Route::get('dashboard', [\App\Http\Controllers\seller\SellerController::class, 'dashboard'])->name('seller.dashboard');
-    Route::get('profile', [\App\Http\Controllers\seller\SellerController::class, 'restaurantProfile'])->name('seller.profile');
-    Route::post('profile', [\App\Http\Controllers\seller\SellerController::class, 'profileStore'])->name('seller.storeProfile');
-    Route::get('setting', [\App\Http\Controllers\seller\SellerController::class, 'restaurantSetting'])->name('seller.setting');
-    Route::post('setting/{restaurant}', [\App\Http\Controllers\seller\SellerController::class, 'updateSetting'])->name('seller.updateSetting');
-    Route::resource('food', \App\Http\Controllers\seller\FoodController::class);
 
+    Route::controller(SellerController::class)->name('seller.')->group(function () {
+        Route::get('dashboard', 'dashboard')->name('dashboard');
+        Route::get('profile', 'restaurantProfile')->name('profile');
+        Route::post('profile', 'profileStore')->name('storeProfile');
+        Route::get('setting', 'restaurantSetting')->name('setting');
+        Route::post('setting/{restaurant}', 'updateSetting')->name('updateSetting');
+    });
 
-    Route::get('party/{food}', [\App\Http\Controllers\seller\FoodPartyController::class, 'party'])->name('party');
-    Route::get('party', [\App\Http\Controllers\seller\FoodPartyController::class, 'index'])->name('party.index');
-    Route::post('food/{food}/party', [\App\Http\Controllers\seller\FoodPartyController::class, 'partyStore'])->name('party.submit');
-    Route::get('party/{food}/edit', [\App\Http\Controllers\seller\FoodPartyController::class, 'edit'])->name('party.edit');
-    Route::post('food/{food}/party/edit', [\App\Http\Controllers\seller\FoodPartyController::class, 'partyUpdate'])->name('party.update');
-    Route::delete('food/{foodParty}/party', [\App\Http\Controllers\seller\FoodPartyController::class, 'delete'])->name('party.delete');
+    Route::resource('food', FoodController::class);
 
+    Route::controller(FoodPartyController::class)->name('party.')->group(function () {
+        Route::get('party/{food}', 'create')->name('create');
+        Route::get('party', 'index')->name('index');
+        Route::post('food/{food}/party', 'partyStore')->name('submit');
+        Route::get('party/{food}/edit', 'edit')->name('edit');
+        Route::post('food/{food}/party/edit', 'partyUpdate')->name('update');
+        Route::delete('food/{foodParty}/party', 'delete')->name('delete');
+    });
 
-    Route::patch('dashboard/situation/{cart}', [SituationController::class, 'changeSituation'])->name('change.situation');
+    Route::patch('dashboard/situation/{order}', [SituationController::class, 'changeSituation'])->name('change.situation');
+    Route::delete('dashboard/orders/delete/{order}', [SituationController::class, 'delete'])->name('orders.delete');
 
     Route::controller(ArchiveController::class)->prefix('archive')->group(function () {
         Route::get('/', 'archive')->name('archive');
-        Route::get('show/{cart}', 'show')->name('archive.show');
+        Route::get('show/{order}', 'show')->name('archive.show');
     });
 
-    Route::controller(CommentController::class)->prefix('comments')->group(function () {
-        Route::get('/', 'index')->name('comments.index');
-        Route::post('/{comment}', 'reply')->name('comments.reply');
-        Route::post('/accept/{comment}', 'accept')->name('comments.accept');
-        Route::delete('/delete/{comment}', 'deleteRequest')->name('comments.delete');
+    Route::controller(CommentController::class)->prefix('comments')->name('comments.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/{comment}', 'reply')->name('reply');
+        Route::post('/accept/{comment}', 'accept')->name('accept');
+        Route::delete('/delete/{comment}', 'deleteRequest')->name('delete');
+    });
+    Route::controller(TimeController::class)->prefix('time')->name('time.')->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::patch('/accept/{time}', 'update')->name('update');
+        Route::patch('/close/{time}', 'close')->name('close');
+        Route::post('/some-day/accept','someDay')->name('someDay');
+        Route::post('/some-day/close','someDayClose')->name('someDay.close');
+        Route::post('/all-day/accept','allDay')->name('allDay');
+        Route::post('/all-day/close','allDayClose')->name('allDay.close');
     });
 
+});
 
-});
-Route::get('test', function () {
-    \Illuminate\Support\Facades\Mail::to('nazanin@gmail.com')->send(new \App\Mail\WelcomeMail());
-    return 'email send';
-});

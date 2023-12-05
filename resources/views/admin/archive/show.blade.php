@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cart Detail</title>
+    <title>order Detail</title>
     @vite('resources/css/app.css')
     <style>
         body {
@@ -48,22 +48,21 @@ background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, F
                   d="m237.248 512l265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312L237.248 512z"/>
         </svg>
     </a>
-    <h1 class="text-3xl mt-2">Cart Detail</h1>
+    <h1 class="text-3xl mt-2">order Detail</h1>
     <div></div>
 </nav>
 <div class="container">
     <!-- Food Details Card -->
     <div class="food-card w-7/12 mx-auto bg-gray-100 " >
-        <h2 class="text-lg">customer name: <span class="text-blue-700 ">  {{$cart->user->name}} </span></h2>
-        @foreach($cart->food as $food)
+        <h2 class="text-lg">customer name: <span class="text-blue-700 ">  {{$order->user->name}} </span></h2>
+        @foreach($order->food as $food)
             <p>food: <span class="text-blue-700 " >{{$food->name}}</span></p>
             <p>count: <span class="text-blue-700" >{{$food->pivot->count}}</span></p>
             <p>price: <span class="text-blue-700" >{{$food->price}}</span></p>
             <p>food party: <span class="text-blue-700" >{{(int)$food->foodParty?->percent}}</span> %</p>
         @endforeach
-        <p>discount: <span class="text-blue-700" >{{(int)$cart->discount?->percent}}</span> %</p>
-        <p>total price: <span class="text-blue-700" >{{$cart->totalPrice()}}</span> $</p>
-        <p>total price after food party | discount: <span class="text-blue-700" >{{$cart->totalPriceAfterDiscount()}}</span> $</p>
+        <p>total price: <span class="text-blue-700" >{{$order->total_price}}</span> $</p>
+        <p>total price after food party | discount: <span class="text-blue-700" >{{$order->total_price - $order->discount}}</span> $</p>
 
 
     </div>

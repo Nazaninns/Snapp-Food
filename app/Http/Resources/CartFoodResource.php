@@ -18,7 +18,7 @@ class CartFoodResource extends JsonResource
         return [
                 'id'=>$this->id,
                 'title'=>$this->name,
-                //'count'=>$this->carts->pivot->count,
+                'count'=>$this->pivot->count,
                 'price'=>$this->price
         ];
     }

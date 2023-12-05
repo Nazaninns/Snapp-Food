@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->text('text');
             $table->integer('score');
-            $table->foreignId('user_id')->constrained();
-            $table->foreignId('cart_id')->constrained();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('order_id')->constrained()->cascadeOnDelete();
+            $table->enum('situation',['new','replied','no_reply','delete_request'])->default('new');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

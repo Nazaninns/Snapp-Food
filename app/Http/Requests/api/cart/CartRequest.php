@@ -23,7 +23,7 @@ class CartRequest extends FormRequest
     {
         return [
             'food_id' => ['required', 'numeric', 'exists:food,id'],
-            'count' => ['required', 'numeric', 'min:0']
+            'count' => ['required', 'numeric', 'between:1,50']
         ];
     }
 }

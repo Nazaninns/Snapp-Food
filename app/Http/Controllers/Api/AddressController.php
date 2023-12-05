@@ -18,7 +18,9 @@ class AddressController extends Controller
     public function index()
     {
         return response()->json(
-            AddressResource::collection(Auth::user()->addresses)
+            ['data' =>
+                AddressResource::collection(Auth::user()->addresses)
+            ]
         );
     }
 
@@ -29,27 +31,21 @@ class AddressController extends Controller
     {
         $validated = $request->validated();
         Auth::user()->addresses()->create($validated);
-        return response()->json([
+        return response()->json(['data' => [
             'msg' => "address added successfully"
-        ], 201);
+        ]], 201);
     }
 
     public function current(Address $address)
     {
+        $this->authorize('update', [Address::class, $address]);
         Auth::user()->addresses()->update([
             'current_address' => 0
         ]);
-
-        if (Auth::user()->isNot($address->addressable)) {
-
-           return response()->json([
-                'msg' => 'address not found'
-            ], 404);
-        }
         $address->current_address = 1;
         $address->save();
-        return response()->json([
+        return response()->json(['data' => [
             'msg' => 'current address updated successfully'
-        ]);
+        ]]);
     }
 }

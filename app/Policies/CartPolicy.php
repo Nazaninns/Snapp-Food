@@ -2,10 +2,9 @@
 
 namespace App\Policies;
 
-use App\Models\Cart;
 use App\Models\User;
 
-class ArchivePolicy
+class CartPolicy
 {
     /**
      * Create a new policy instance.
@@ -15,8 +14,8 @@ class ArchivePolicy
         //
     }
 
-    public function show(User $user, Cart $cart)
+    public function add(User $user)
     {
-        return $user->restaurant->carts->contains($cart);
+       return ($user->getCurrentAddress());
     }
 }

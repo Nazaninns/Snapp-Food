@@ -22,7 +22,7 @@ class SortSituationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'situation'=>['nullable','in:pending,making,send']
+            'situation' => ['nullable', 'in:pending,making,send'],
         ];
     }
 }

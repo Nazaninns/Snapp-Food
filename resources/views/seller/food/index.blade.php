@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restaurant Menu</title>
+    <script src="https://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
     @vite('resources/css/app.css')
     <style>
         body {
@@ -38,8 +39,9 @@
             width: 30%;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+
         .btn-grad {
-            background-image: linear-gradient(to right, #4b6cb7 0%, #182848  51%, #4b6cb7  100%);
+            background-image: linear-gradient(to right, #4b6cb7 0%, #182848 51%, #4b6cb7 100%);
             margin: 10px;
             padding: 10px 10px;
             text-align: center;
@@ -59,7 +61,7 @@
 
 
         .btn-gradd {
-            background-image: linear-gradient(to right, #232526 0%, #414345  51%, #232526  100%);
+            background-image: linear-gradient(to right, #232526 0%, #414345 51%, #232526 100%);
             margin: 10px;
             padding: 10px 10px;
             font-size: 12px;
@@ -120,7 +122,7 @@ background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, F
             <option value="asc">ascending</option>
             <option value="desc">descending</option>
         </select>
-        <button  class="btn-grad bg-gray-700 text-white rounded-xl hover:bg-gray-500 p-2" type="submit">Submit</button>
+        <button class="btn-grad bg-gray-700 text-white rounded-xl hover:bg-gray-500 p-2" type="submit">Submit</button>
     </form>
     <form action="">
         <select style="display: inline" name="filter" id="countries"
@@ -130,7 +132,7 @@ background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, F
                 <option value="{{$category->id}}">{{$category->name}}</option>
             @endforeach
         </select>
-        <button  class="btn-grad bg-gray-700 text-white rounded-xl hover:bg-gray-500 p-2" type="submit">Submit</button>
+        <button class="btn-grad bg-gray-700 text-white rounded-xl hover:bg-gray-500 p-2" type="submit">Submit</button>
     </form>
     {{--    <form action="">--}}
     {{--        <select name="sort">--}}
@@ -151,14 +153,14 @@ background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, F
     {{--    </form>--}}
 
 </div>
-<div class="container">
+<div class="container flex flex-wrap w-10/12 ">
     <!-- RestaurantCollection Categories -->
     @foreach($foods as $food)
         <div class="category-card bg-gray-300">
             <div class="flex justify-between">
                 <img style="width: 10rem" src="{{asset('storage/'.$food->image)}}">
                 <div class="flex">
-                    <a href="{{route('party',$food)}}">
+                    <a href="{{route('party.create',$food)}}">
                         <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 24 24">
                             <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
                                stroke-width="2">
@@ -216,8 +218,8 @@ background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, F
     @endforeach
 
 </div>
+<x-paginate/>
 <div class="container">
-
     <div style="width: 23rem">{{$foods->links()}}</div>
 </div>
 </body>

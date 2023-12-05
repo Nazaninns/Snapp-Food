@@ -4,16 +4,19 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\admin\RestaurantCategoryRequest;
+use App\Http\Requests\PaginateRequest;
 use App\Models\RestaurantCategory;
+use App\Services\PaginateService;
 
 class RestaurantCategoryController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(PaginateRequest $request)
     {
-        $restaurantCategories=RestaurantCategory::paginate(6);
+        $restaurantCategories=RestaurantCategory::query();
+        $restaurantCategories=PaginateService::paginate($request->validated('paginate'),$restaurantCategories);
         return view('admin.restaurant.index',compact('restaurantCategories'));
     }
 

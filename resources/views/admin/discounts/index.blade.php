@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Food Card</title>
+    <title>discount</title>
     @vite('resources/css/app.css')
+    <script src="https://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -23,37 +24,21 @@
         }
 
         .container {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
             padding: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
         }
 
-        .food-form {
+        .category-card, .food-card {
             border: 1px solid #e0e0e0;
             border-radius: 5px;
+            margin: 10px;
             padding: 20px;
+            width: 30%;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .food-form label {
-            display: block;
-            margin-top: 10px;
-        }
-
-        .food-form input, .food-form textarea {
-            width: 100%;
-            padding: 10px;
-            margin: 5px 0;
-            border: 1px solid #e0e0e0;
-            border-radius: 3px;
-        }
-
-        .food-form button {
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
         }
         .btn-grad {
             background-image: linear-gradient(to right, #4b6cb7 0%, #182848  51%, #4b6cb7  100%);
@@ -84,7 +69,7 @@ background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, F
 
 "
 >
-<div class="header">
+<nav class="header">
     <a style="margin-top: 20px" href="{{back()->getTargetUrl()}}">
         <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 1024 1024">
             <path fill="white" d="M224 480h640a32 32 0 1 1 0 64H224a32 32 0 0 1 0-64z"/>
@@ -92,29 +77,43 @@ background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, F
                   d="m237.248 512l265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312L237.248 512z"/>
         </svg>
     </a>
-    <h1>Create Discount</h1>
-    <div></div>
-</div>
-<div class="container">
-    <!-- Food Card Creation Form -->
-    <form method="post" action="{{route('admin.discount.store')}}" class="food-form bg-gray-50">
-        @csrf
-        <label for="percent">Percent</label>
-        <input type="number" id="percent" name="percent" placeholder="Enter your percent">
-        <div class="text-red-600">
-            @error('percent')
-            {{$message}}
-            @enderror
-        </div>
-        <button class="btn-grad border border-gray-700 bg-gray-700 text-white rounded-md px-4 py-2 mt-2
+    <h1>Discounts</h1>
+    <a style="margin-top: 14px" href="{{route('admin.discounts.create')}}">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
+            <mask id="ipSAdd0">
+                <g fill="none" stroke-linejoin="round" stroke-width="4">
+                    <rect width="36" height="36" x="6" y="6" fill="#fff" stroke="#fff" rx="3"/>
+                    <path stroke="#000" stroke-linecap="round" d="M24 16v16m-8-8h16"/>
+                </g>
+            </mask>
+            <path fill="white" d="M0 0h48v48H0z" mask="url(#ipSAdd0)"/>
+        </svg>
+    </a>
+</nav>
+<div class="container ">
+    <!-- RestaurantCollection Categories -->
+    @foreach($discounts as $discount)
+        <div class="category-card bg-gray-50">
+            <h2>Discount</h2>
+            <p>percent:
+            <p>{{$discount->percent}}</p></p>
+            <p>code:
+            <p>{{$discount->code}}</p></p>
+            <form action="{{route('admin.discounts.destroy',$discount)}}" method="post">
+                @csrf
+                @method('DELETE')
+                <button class="btn-grad border border-gray-700 bg-gray-700 text-white rounded-md px-4 py-2 mt-2
                         transition duration-500 ease select-none hover:bg-gray-500 focus:outline-none
                         focus:shadow-outline"
-                type="submit">Create
-        </button>
-    </form>
+                        type="submit">delete
+                </button>
+            </form>
+        </div>
+    @endforeach
+</div>
+<x-paginate />
+<div class="container w-2/12 mx-auto">
+    {{$discounts->links()}}
 </div>
 </body>
 </html>
-
-
-

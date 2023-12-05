@@ -26,7 +26,7 @@ class UpdateInfoRequest extends FormRequest
         return [
             'name' => ['string', 'max:100'],
             'phone' => ['string', new PhoneRule()],
-            'password' => ['string', Password::default()->mixedCase()->letters()]
+            'password' => ['string', Password::default()->mixedCase()->letters(), 'confirmed']
         ];
     }
 }

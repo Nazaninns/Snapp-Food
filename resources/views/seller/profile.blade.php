@@ -1,37 +1,4 @@
-{{--<!doctype html>--}}
-{{--<html lang="en">--}}
-{{--<head>--}}
-{{--    <meta charset="UTF-8">--}}
-{{--    <meta name="viewport"--}}
-{{--          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">--}}
-{{--    <meta http-equiv="X-UA-Compatible" content="ie=edge">--}}
-{{--    <title>Document</title>--}}
-{{--</head>--}}
-{{--<body>--}}
-{{--<form action="{{route('register.submit')}}" method="post">--}}
-{{--@csrf--}}
 
-{{--    <input type="text" placeholder="name" name="name">--}}
-{{--    @error('name')--}}
-{{--    {{$message}}--}}
-{{--    @enderror--}}
-{{--    <input type="text" placeholder="email" name="email">--}}
-{{--    @error('email')--}}
-{{--    {{$message}}--}}
-{{--    @enderror--}}
-{{--    <input type="text" placeholder="phone" name="phone">--}}
-{{--    @error('phone')--}}
-{{--    {{$message}}--}}
-{{--    @enderror--}}
-{{--    <input type="text" placeholder="password" name="password">--}}
-{{--    @error('password')--}}
-{{--    {{$message}}--}}
-{{--    @enderror--}}
-{{--    <button type="submit">register</button>--}}
-
-{{--</form>--}}
-{{--</body>--}}
-{{--</html>--}}
     <!doctype html>
 <html lang="en">
 <head>
@@ -129,7 +96,7 @@
                         <div>
                             <label for="account" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Account
                                 Number</label>
-                            <input type="text" name="account_number" id="account"
+                            <input type="number" name="account_number" id="account"
                                    placeholder="enter your account number"
                                    class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
                         </div>
@@ -137,6 +104,16 @@
                         @error('account_number')
                         {{$message}}
                         @enderror
+                        </div>
+                        <div>
+                            <label for="account" class="block mb-2 text-sm text-gray-600 dark:text-gray-200">Delivery Cost</label>
+                            <input type="number" name="delivery_cost" id="account"
+                                   class="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-md dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"/>
+                        </div>
+                        <div class="text-red-600">
+                            @error('delivery_cost')
+                            {{$message}}
+                            @enderror
                         </div>
                         <div class="mt-6">
                             <button type="submit"

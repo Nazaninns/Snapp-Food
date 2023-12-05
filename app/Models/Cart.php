@@ -13,7 +13,7 @@ class Cart extends Model
     use HasFactory;
 
     protected $fillable = [
-        'restaurant_id', 'user_id', 'pay', 'situation','discount_id','address_id'
+        'restaurant_id', 'user_id','discount_id','address_id'
     ];
 
     public function restaurant(): BelongsTo
@@ -31,10 +31,6 @@ class Cart extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function comments(): HasMany
-    {
-        return $this->hasMany(Comment::class);
-    }
 
     public function totalPrice()
     {
@@ -55,5 +51,10 @@ class Cart extends Model
     public function discount(): BelongsTo
     {
         return $this->belongsTo(Discount::class);
+    }
+
+    public function totalDiscount()
+    {
+        return $this->totalPrice() - $this->totalPriceAfterDiscount();
     }
 }

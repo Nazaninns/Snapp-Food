@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restaurant Comments</title>
+    <script src="https://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
     @vite('resources/css/app.css')
     <style>
         body {
@@ -101,7 +102,7 @@ background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, F
     <h1 class="text-3xl mt-5">Comments </h1>
     <div></div>
 </nav>
-<div class="container w-full flex justify-between ">
+<div class="container w-full flex  justify-between ">
 
     <form action="">
         <select style="display: inline" name="filter" id="countries"
@@ -114,7 +115,7 @@ background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, F
         <button  class="btn-grad bg-gray-700 text-white rounded-xl hover:bg-gray-500 p-2" type="submit">Submit</button>
     </form>
 </div>
-<div class="container ">
+<div class="container flex flex-wrap w-8/12">
     <!-- RestaurantCollection Categories -->
     @foreach($comments as $comment)
         @php $situation='comment.'.$comment->situation."-comment" @endphp
@@ -123,7 +124,10 @@ background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, F
     @endforeach
 
 </div>
-{{$comments->links()}}
+<x-paginate />
+<div class="container w-2/12 mx-auto">
+    {{$comments->links()}}
+</div>
 </body>
 </html>
 

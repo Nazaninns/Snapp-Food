@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\api\restaurant\RestaurantRequest;
 use App\Http\Resources\restaurant\RestaurantResource;
+use App\Http\Resources\restaurant\RestaurantsResource;
 use App\Http\Resources\RestaurantCollection;
 use App\Http\Resources\hehe;
 use App\Models\Restaurant;
@@ -17,14 +18,15 @@ class RestaurantController extends Controller
     public function index(RestaurantRequest $request)
     {
         //filtering
+        $this->authorize('get',[Restaurant::class]);
         $restaurants = RestaurantFilterService::restaurantFilter($request->validated());
         $restaurants=RestaurantFilterService::nearRestaurants($restaurants);
         if ($restaurants->isEmpty()) return response()->json(['msg'=>'not found'],404);
-        return response()->json(RestaurantResource::collection($restaurants));
+        return response()->json(['data'=>RestaurantsResource::collection($restaurants)]);
     }
 
     public function show(Restaurant $restaurant)
     {
-        return \response()->json(new RestaurantResource($restaurant));
+        return \response()->json(['data'=>new RestaurantResource($restaurant)]);
     }
 }

@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use App\Events\RestaurantCreateEvent;
 use App\Events\SituationChangeEvent;
 use App\Events\WelcomeCustomerEvent;
 use App\Events\WelcomeSellerEvent;
+use App\Listeners\RestaurantCreateListener;
 use App\Listeners\SituationChangeListener;
 use App\Listeners\WelcomeCustomerListener;
 use App\Listeners\WelcomeSellerListener;
@@ -32,6 +34,9 @@ class EventServiceProvider extends ServiceProvider
         ],
         WelcomeSellerEvent::class => [
             WelcomeSellerListener::class
+        ],
+        RestaurantCreateEvent::class=>[
+            RestaurantCreateListener::class
         ]
     ];
 

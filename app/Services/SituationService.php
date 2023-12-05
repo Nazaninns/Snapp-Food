@@ -4,25 +4,22 @@ namespace App\Services;
 
 use Illuminate\Support\Facades\Auth;
 
-
 class SituationService
 {
-    public static function sortCart($situation)
+    public static function sortOrders($situation)
     {
         $user=Auth::user();
         if (!empty($situation)){
-            $carts = $user->restaurant->carts()->where([
-                ['pay', '!=', null],
+            $orders = $user->restaurant->orders()->where([
                 ['situation', '=', $situation]
-            ])->paginate(3);
+            ]);
         }
         else
         {
-            $carts = $user->restaurant->carts()->where([
-                ['pay', '!=', null],
+            $orders = $user->restaurant->orders()->where([
                 ['situation', '!=', 'delivered']
-            ])->paginate(3);
+            ]);
         }
-        return $carts;
-}
+        return $orders;
+    }
 }
