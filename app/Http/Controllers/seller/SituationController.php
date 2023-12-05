@@ -8,8 +8,10 @@ use App\Http\Requests\seller\SituationRequest;
 use App\Models\Cart;
 use App\Models\Order;
 use App\Models\Restaurant;
+use App\Notifications\DeleteOrderNotification;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Notification;
 
 class SituationController extends Controller
 {
@@ -23,6 +25,7 @@ class SituationController extends Controller
     public function delete(Order $order)
     {
         $order->food()->detach();
+        Notification::send($order->user,new DeleteOrderNotification($order));
         $order->delete();
         return redirect()->route('seller.dashboard');
     }
