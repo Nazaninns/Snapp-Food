@@ -3,24 +3,29 @@
 namespace App\Http\Controllers\seller;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PaginateRequest;
 use App\Http\Requests\seller\CommentRequest;
 use App\Http\Requests\seller\StoreReplyRequest;
 use App\Models\Comment;
 use App\Models\Reply;
 use App\Services\CommentService;
+use App\Services\PaginateService;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CommentController extends Controller
 {
-    public function index(CommentRequest $request)
+    public function index(CommentRequest $request,PaginateRequest $paginateRequest)
     {
         $comments = Auth::user()->restaurant->orders()->has('comment')->get()->pluck('comment')->flatten()->sortByDesc('created_at');
+        $comments=(new Collection($comments))->toQuery();
         $food = Auth::user()->restaurant->food;
         if (!empty($request->validated('filter'))) {
             $this->authorize('show',[Comment::class,$request->validated('filter')]);
             $comments = CommentService::CommentSort($request->validated('filter'));
         }
+        $comments=PaginateService::paginate($paginateRequest->validated('paginate'),$comments);
         return view('seller.comments', compact('comments', 'food'));
     }
 

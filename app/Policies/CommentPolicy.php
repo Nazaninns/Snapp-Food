@@ -29,7 +29,7 @@ class CommentPolicy
 
     public function reply(User $user, $comment)
     {
-        return $user->restaurant->carts()->has('comments')->get()->pluck('comments')->flatten()->contains($comment);
+        return $user->restaurant->carts()->has('comment')->get()->pluck('comment')->flatten()->contains($comment);
     }
 
     public function show(User $user, int $foodId)

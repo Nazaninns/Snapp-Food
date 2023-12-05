@@ -20,6 +20,6 @@ class ArchiveService
                 ['pay', '>=', $from], ['pay', '<=', $to]
             ]);
         }
-        return $orders->get();
+        return $orders;
     }
 }

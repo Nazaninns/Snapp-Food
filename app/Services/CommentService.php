@@ -8,6 +8,7 @@ use App\Models\Food;
 use App\Models\Order;
 use App\Models\Reply;
 use App\Models\Restaurant;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 
 class CommentService
@@ -15,7 +16,9 @@ class CommentService
     public static function CommentSort(int $foodId)
     {
         $food = Food::query()->find($foodId);
-        return $food->orders()->has('comment')->get()->pluck('comment')->flatten();
+        $comments= $food->orders()->has('comment')->get()->pluck('comment')->flatten();
+        $comments=(new Collection($comments))->toQuery();
+        return $comments;
     }
 
     public static function reply($validated,$comment)

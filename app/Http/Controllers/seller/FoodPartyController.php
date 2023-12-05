@@ -3,14 +3,17 @@
 namespace App\Http\Controllers\seller;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\PaginateRequest;
 use App\Http\Requests\seller\FoodPartyRequest;
 use App\Models\Food;
 use App\Models\FoodParty;
+use App\Services\PaginateService;
 
 class FoodPartyController extends Controller
 {
-    public function index(){
-        $parties = FoodParty::paginate(4);
+    public function index(PaginateRequest $request){
+        $parties = FoodParty::query();
+        $parties=PaginateService::paginate($request->validated('paginate'),$parties);
         return view('seller.party.index',compact('parties'));
     }
 

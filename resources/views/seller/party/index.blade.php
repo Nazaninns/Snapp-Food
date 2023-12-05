@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @vite('resources/css/app.css')
-    <title></title>
+    <title>food party</title>
+    <script src="https://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -55,9 +56,29 @@
             border-radius: 5px;
             cursor: pointer;
         }
+        .btn-grad {
+            background-image: linear-gradient(to right, #4b6cb7 0%, #182848  51%, #4b6cb7  100%);
+            margin: 10px;
+            padding: 10px 10px;
+            font-size: 13px;
+            text-align: center;
+            text-transform: uppercase;
+            transition: 0.5s;
+            background-size: 200% auto;
+            color: white;
+            box-shadow: 0 0 20px #eee;
+            border-radius: 10px;
+            display: block;
+        }
+
+        .btn-grad:hover {
+            background-position: right center; /* change the direction of the change here */
+            color: #fff;
+            text-decoration: none;
+        }
     </style>
 </head>
-<body style="background-size: cover; background-image: url({{asset('discounts.jpg')}}); background-color: rgba(255, 255, 255, 0.5);">
+<body style="background-size: cover; background-image: url({{asset('discount.jpg')}}); background-color: rgba(255, 255, 255, 0.5);">
 <nav class="header">
     <a style="margin-top: 20px" href="{{back()->getTargetUrl()}}">
         <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 1024 1024">
@@ -71,7 +92,7 @@
 </nav>
 <div class="container">
     @foreach($parties as $foodParty)
-        <div class="category-card bg-gray-100 p-4 rounded-xl">
+        <div class="category-card bg-gray-100 p-4 m-5 rounded-xl">
             <div class="">
                 <p>{{$foodParty->food->name}}</p>
                 <p>percent:</p>
@@ -98,6 +119,10 @@
             </div>
         </div>
     @endforeach
+</div>
+<x-paginate/>
+<div class="container w-2/12 mx-auto">
+    {{$parties->links()}}
 </div>
 </body>
 </html>
