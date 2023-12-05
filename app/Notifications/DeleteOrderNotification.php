@@ -36,11 +36,10 @@ class DeleteOrderNotification extends Notification implements ShouldQueue
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->greeting('hello dear '.$notifiable->name)
-                    ->line('your order declined by '.$this->order->restaurant->name .' restaurant')
-                    ->line('we are sorry 😢')
-                    ->line('your money will paid back soon ')
-            ;
+            ->greeting('hello dear ' . $notifiable->name)
+            ->line('your order declined by ' . $this->order->restaurant->name . ' restaurant')
+            ->line('we are sorry 😢')
+            ->line('your money will paid back soon ');
 
     }
 

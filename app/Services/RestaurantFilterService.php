@@ -13,7 +13,7 @@ class RestaurantFilterService
     {
         $restaurants = Restaurant::all();
         if (isset($validated['is_open'])) {
-            $restaurants = Restaurant::query()->where('is_open', $validated['is_open'])->get();
+            $restaurants = Restaurant::query()->get()->where('is_open', $validated['is_open']);
         }
         if (isset($validated['type'])) {
             $restaurantsType = RestaurantCategory::query()->where('name', $validated['type'])->first()->restaurants;

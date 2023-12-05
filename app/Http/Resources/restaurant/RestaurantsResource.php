@@ -5,7 +5,7 @@ namespace App\Http\Resources\restaurant;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class RestaurantResource extends JsonResource
+class RestaurantsResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -23,7 +23,6 @@ class RestaurantResource extends JsonResource
             'image'=>$this->image,
             'score'=>$this->score,
             'comment_count'=>count($this->orders()->has('comment')->get()->pluck('comment')->flatten()),
-            'schedules'=>TimeRestaurantResource::collection($this->times)
         ];
     }
 }

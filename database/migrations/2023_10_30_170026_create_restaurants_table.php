@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('account_number');
             $table->unsignedInteger('delivery_cost')->nullable();
             $table->foreignId('user_id')->constrained();
-            $table->boolean('is_open')->default(0);
             $table->float('score')->nullable();
             $table->timestamps();
         });
