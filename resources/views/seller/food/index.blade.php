@@ -100,7 +100,7 @@ background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, F
                   d="m237.248 512l265.408 265.344a32 32 0 0 1-45.312 45.312l-288-288a32 32 0 0 1 0-45.312l288-288a32 32 0 1 1 45.312 45.312L237.248 512z"/>
         </svg>
     </a>
-    <h1 class="text-3xl mt-5">Foods </h1>
+    <h1 class="text-3xl mt-5">Food </h1>
     <a style="margin-top: 14px" href="{{route('food.create')}}">
         <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48">
             <mask id="ipSAdd0">

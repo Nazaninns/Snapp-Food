@@ -4,9 +4,11 @@ namespace App\Http\Controllers\seller;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PaginateRequest;
+use App\Http\Requests\seller\FilterFoodRequest;
 use App\Http\Requests\seller\FoodRequest;
 use App\Models\Food;
 use App\Models\FoodCategory;
+use App\Services\FoodService;
 use App\Services\PaginateService;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,22 +17,11 @@ class FoodController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(PaginateRequest $request)
+    public function index(FilterFoodRequest $foodRequest, PaginateRequest $request)
     {
-
-        if (\request()->get('sort') == 'asc')
-            $foods =Food::query()->where(['restaurant_id'=>Auth::user()->restaurant->id])->orderBy('name');
-        elseif (\request()->get('sort') == 'desc')
-            $foods = Food::query()->where(['restaurant_id'=>Auth::user()->restaurant->id])->orderByDesc('name');
-        else
-        $foods = Food::query()->where(['restaurant_id'=>Auth::user()->restaurant->id]);
-        if (\request()->get('filter')!== null)
-            $foods=Food::query()->where([
-                'food_category_id'=>\request()->get('filter'),
-                'restaurant_id'=>Auth::user()->restaurant->id
-                ]);
+        $foods = FoodService::filterFood($foodRequest);
         $foodCategories = FoodCategory::all();
-        $foods=PaginateService::paginate($request->validated('paginate'),$foods);
+        $foods = PaginateService::paginate($request->validated('paginate'), $foods);
         return view('seller.food.index', compact('foods', 'foodCategories'));
     }
 
