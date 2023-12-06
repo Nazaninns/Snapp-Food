@@ -2,7 +2,10 @@
 
 namespace App\Policies;
 
+use App\Models\Food;
+use App\Models\Restaurant;
 use App\Models\User;
+use App\Services\RestaurantFilterService;
 
 class CartPolicy
 {
@@ -14,8 +17,14 @@ class CartPolicy
         //
     }
 
-    public function add(User $user)
+    public function add(User $user, $foodId)
     {
-       return ($user->getCurrentAddress());
+        $restaurants = RestaurantFilterService::nearRestaurants(Restaurant::all());
+        $restaurants = $restaurants->filter(function (Restaurant $restaurant) use ($foodId) {
+            return $restaurant->food->contains($foodId);
+        });
+        if ($restaurants->isEmpty()) return false;
+        return ($user->getCurrentAddress());
     }
+
 }

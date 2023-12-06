@@ -63,4 +63,9 @@ class CartService
         $oldCount = $cart->food()->find($validated['food_id'])?->pivot->count;
         DB::table('food_carts')->updateOrInsert(['cart_id' => $cart->id, 'food_id' => $validated['food_id']], ['count' => $oldCount + $validated['count']]);
     }
+
+    public static function updateFoodParty($cart)
+    {
+        $cart->food->filter(fn (Food $food) => $food->foodParty !== null)->map(fn ($food) => $food->foodParty->decreament('count',$food->pivot->count));
+    }
 }

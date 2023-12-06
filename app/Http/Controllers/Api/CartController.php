@@ -37,8 +37,8 @@ class CartController extends Controller
      */
     public function add(CartRequest $request)
     {
-        $this->authorize('add',[Cart::class]);
         $validated = $request->validated();
+        $this->authorize('add',[Cart::class,$validated['food_id']]);
         $cart = CartService::getCart($validated['food_id']);
         CartService::upsert($validated, $cart);
         return \response()->json(['data'=>[
@@ -67,6 +67,7 @@ class CartController extends Controller
         if (Auth::user()->getCurrentAddress() === null) return \response()->json(['msg' => 'set current address first'], 404);
         $discountId = Discount::query()->where('code', $request->validated('code'))->first()?->id;
         CartService::updateCartForPay($cart, $discountId);
+        //CartService::updateFoodParty($cart);
         OrderService::create($cart);
         $cart->delete();
         return \response()->json(['msg' => 'submitted']);
