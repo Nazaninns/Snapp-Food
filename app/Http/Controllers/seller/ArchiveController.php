@@ -23,7 +23,7 @@ class ArchiveController extends Controller
 
     public function show(Order $order)
     {
-        $this->authorize('show', [Order::class, $order]);
+        $this->authorize('show',  $order);
         return view('seller.archive.show', compact('order'));
     }
 }

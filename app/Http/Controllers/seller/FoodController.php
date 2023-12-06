@@ -17,6 +17,11 @@ class FoodController extends Controller
     /**
      * Display a listing of the resource.
      */
+    public function __construct()
+    {
+        $this->authorizeResource(Food::class, 'food');
+    }
+
     public function index(FilterFoodRequest $foodRequest, PaginateRequest $request)
     {
         $foods = FoodService::filterFood($foodRequest);
