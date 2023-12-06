@@ -4,6 +4,7 @@ namespace App\Policies;
 
 use App\Http\Requests\api\comment\AddCommentRequest;
 use App\Models\Cart;
+use App\Models\Comment;
 use App\Models\Food;
 use App\Models\Order;
 use App\Models\User;
@@ -29,12 +30,17 @@ class CommentPolicy
 
     public function reply(User $user, $comment)
     {
-        return $user->restaurant->carts()->has('comment')->get()->pluck('comment')->flatten()->contains($comment);
+        return $user->restaurant->orders()->has('comment')->get()->pluck('comment')->flatten()->contains($comment);
     }
 
     public function show(User $user, int $foodId)
     {
         return $user->restaurant->food->contains($foodId);
+    }
+
+    public function update(User $user,Comment $comment)
+    {
+        return ($user->restaurant->orders()->has('comment')->get()->pluck('comment')->flatten()->contains($comment));
     }
 
 }

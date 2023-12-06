@@ -31,13 +31,14 @@ class CommentController extends Controller
 
     public function reply(Comment $comment, StoreReplyRequest $request)
     {
-        $this->authorize('reply',[Comment::class,$comment]);
+        $this->authorize('reply',$comment);
         CommentService::reply($request->validated(), $comment);;
         return redirect()->route('comments.index');
     }
 
     public function accept(Comment $comment)
     {
+        $this->authorize('update',$comment);
         $comment->update([
             'situation' => 'no_reply'
         ]);
@@ -46,6 +47,7 @@ class CommentController extends Controller
 
     public function deleteRequest(Comment $comment)
     {
+        $this->authorize('update',$comment);
         $comment->update(['situation' => 'delete_request']);
         return redirect()->route('comments.index');
     }
