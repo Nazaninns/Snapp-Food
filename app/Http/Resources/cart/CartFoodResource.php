@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\cart;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class CartResource extends JsonResource
+class CartFoodResource extends JsonResource
 {
-    public static $wrap='carts';
+    public static $wrap='food';
     /**
      * Transform the resource into an array.
      *
@@ -16,9 +16,10 @@ class CartResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id'=>$this->id,
-            'restaurant'=>new RestaurantResource($this->restaurant),
-            'food'=> CartFoodResource::collection($this->food)
+                'id'=>$this->id,
+                'title'=>$this->name,
+                'count'=>$this->pivot->count,
+                'price'=>$this->price
         ];
     }
 }

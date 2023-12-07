@@ -3,11 +3,8 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\FoodCollection;
-use App\Http\Resources\FoodResource;
-use App\Models\Food;
+use App\Http\Resources\food\FoodResource;
 use App\Models\Restaurant;
-use Illuminate\Http\Request;
 
 class FoodController extends Controller
 {

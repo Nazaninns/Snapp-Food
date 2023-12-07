@@ -2,25 +2,17 @@
 
 namespace App\Http\Controllers\api;
 
-use App\Events\SituationChangeEvent;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\api\cart\CartRequest;
 use App\Http\Requests\api\cart\CartUpdateRequest;
 use App\Http\Requests\api\cart\PayRequest;
-use App\Http\Resources\CartResource;
+use App\Http\Resources\cart\CartResource;
+use App\Http\Resources\cart\ShowCartResource;
 use App\Models\Cart;
 use App\Models\Discount;
-use App\Models\Food;
-use App\Models\FoodParty;
-use App\Models\Order;
-use App\Models\User;
 use App\Services\CartService;
 use App\Services\OrderService;
-use http\Env\Response;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Psy\Readline\Hoa\Event;
 
 class CartController extends Controller
 {
@@ -38,10 +30,10 @@ class CartController extends Controller
     public function add(CartRequest $request)
     {
         $validated = $request->validated();
-        $this->authorize('add',[Cart::class,$validated['food_id']]);
+        $this->authorize('add', [Cart::class, $validated['food_id']]);
         $cart = CartService::getCart($validated['food_id']);
         CartService::upsert($validated, $cart);
-        return \response()->json(['data'=>[
+        return \response()->json(['data' => [
             'msg' => 'food added to cart successfully',
             'cart_id' => $cart->id
         ]]);
@@ -54,17 +46,17 @@ class CartController extends Controller
     {
 
         $validated = $request->validated();
-        $cart = CartService::updateCart($validated['food_id'],$validated['count']);
-        CartService::checkCount($validated['count'],$validated['food_id'],$cart);
-        $cart=CartService::checkCartHasFood($cart);
+        $cart = CartService::updateCart($validated['food_id'], $validated['count']);
+        CartService::checkCount($validated['count'], $validated['food_id'], $cart);
+        $cart = CartService::checkCartHasFood($cart);
         if (!$cart)
-            return \response()->json(['data'=>['msg' => 'please create a new cart']]);
-        return response()->json(['data'=>['msg' => 'updated cart']]);
+            return \response()->json(['data' => ['msg' => 'please create a new cart']]);
+        return response()->json(['data' => ['msg' => 'updated cart']]);
     }
 
     public function pay(Cart $cart, PayRequest $request)
     {
-        $this->authorize('pay',$cart);
+        $this->authorize('pay', $cart);
         if (Auth::user()->getCurrentAddress() === null) return \response()->json(['msg' => 'set current address first'], 404);
         $discountId = Discount::query()->where('code', $request->validated('code'))->first()?->id;
         CartService::updateCartForPay($cart, $discountId);
@@ -80,7 +72,7 @@ class CartController extends Controller
      */
     public function info(Cart $cart)
     {
-        $this->authorize('show',$cart);
-        return \response()->json(['data'=>$cart]);
+        $this->authorize('show', $cart);
+        return \response()->json(['data' => new ShowCartResource($cart)]);
     }
 }
