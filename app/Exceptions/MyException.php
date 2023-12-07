@@ -9,11 +9,11 @@ class MyException extends Exception
 {
     public function report()
     {
-        Log::info('ex folan shd');
+        Log::info('something');
     }
 
     public function render()
     {
-        return response('hehe');
+        return response('sth for customer');
     }
 }
