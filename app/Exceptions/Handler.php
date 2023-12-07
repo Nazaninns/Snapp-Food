@@ -29,7 +29,7 @@ class Handler extends ExceptionHandler
             if (request()->acceptsJson())
                 return response()->json(['data'=>[
                     'msg'=>'not found'
-                ]]);
+                ]],404);
 
         });
 //        $this->renderable(function (Throwable $e){

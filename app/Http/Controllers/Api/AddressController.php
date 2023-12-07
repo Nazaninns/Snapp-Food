@@ -8,6 +8,7 @@ use App\Http\Requests\api\address\UpdateAddressRequest;
 use App\Http\Resources\address\AddressResource;
 use App\Models\Address;
 use App\Models\User;
+use http\Env\Response;
 use Illuminate\Support\Facades\Auth;
 
 class AddressController extends Controller
@@ -17,6 +18,7 @@ class AddressController extends Controller
      */
     public function index()
     {
+        if (Auth::user()->addresses->isEmpty()) return \response()->json(['data' => ['msg' => 'not found']], 404);
         return response()->json(
             ['data' =>
                 AddressResource::collection(Auth::user()->addresses)
@@ -38,7 +40,7 @@ class AddressController extends Controller
 
     public function current(Address $address)
     {
-        $this->authorize('update',  $address);
+        $this->authorize('update', $address);
         Auth::user()->addresses()->update([
             'current_address' => 0
         ]);

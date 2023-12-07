@@ -21,6 +21,7 @@ class CartController extends Controller
      */
     public function index()
     {
+        if (Auth::user()->carts->isEmpty()) return response()->json(['data'=>['msg'=>'not found']],404);
         return response()->json(['data' => ['carts' => CartResource::collection(Auth::user()->carts)]]);
     }
 
@@ -44,7 +45,7 @@ class CartController extends Controller
      */
     public function update(CartUpdateRequest $request)
     {
-
+        if (Auth::user()->carts->isEmpty()) return response()->json(['data'=>['msg'=>'select a cart first']],404);
         $validated = $request->validated();
         $cart = CartService::updateCart($validated['food_id'], $validated['count']);
         CartService::checkCount($validated['count'], $validated['food_id'], $cart);
