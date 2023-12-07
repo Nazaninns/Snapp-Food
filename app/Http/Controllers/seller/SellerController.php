@@ -30,8 +30,6 @@ class SellerController extends Controller
 
     public function restaurantProfile()
     {
-        if (Auth::user()->restaurant !== null)
-            return redirect()->route('seller.setting');
         $categories = RestaurantCategory::all();
         return view('seller.profile', compact('categories'));
     }

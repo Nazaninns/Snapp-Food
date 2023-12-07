@@ -17,6 +17,7 @@ class SituationController extends Controller
 {
     public function changeSituation(Order $order,SituationRequest $request)
     {
+        $this->authorize('update',$order);
         $order->update(['situation'=>$request->post('situation')]);
         SituationChangeEvent::dispatch($order);
         return redirect()->route('seller.dashboard');
@@ -24,6 +25,7 @@ class SituationController extends Controller
 
     public function delete(Order $order)
     {
+        $this->authorize('delete',$order);
         $order->food()->detach();
         Notification::send($order->user,new DeleteOrderNotification($order));
         $order->delete();

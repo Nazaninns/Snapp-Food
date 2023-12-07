@@ -24,4 +24,13 @@ class OrderPolicy
             return $user->orders->contains($order);
     }
 
+    public function update(User $user,Order $order)
+    {
+        return $user->restaurant->orders->contains($order);
+    }
+
+    public function delete(User $user,Order $order)
+    {
+        return $user->restaurant->orders->contains($order);
+    }
 }
