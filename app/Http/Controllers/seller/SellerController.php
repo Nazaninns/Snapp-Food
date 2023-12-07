@@ -56,8 +56,9 @@ class SellerController extends Controller
         return view('seller.setting', compact('restaurant', 'restaurantCategories'));
     }
 
-    public function updateSetting(RestaurantSettingRequest $request, Restaurant $restaurant)
+    public function updateSetting(RestaurantSettingRequest $request)
     {
+        $restaurant=Auth::user()->restaurant;
         $validated = $request->validated();
         $types = $validated['type'];
         $restaurant->address()->update([

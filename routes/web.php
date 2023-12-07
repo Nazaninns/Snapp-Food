@@ -69,18 +69,18 @@ Route::middleware('auth')->middleware('role:seller')->prefix('seller')->group(fu
         Route::get('profile', 'restaurantProfile')->name('profile');
         Route::post('profile', 'profileStore')->name('storeProfile');
         Route::get('setting', 'restaurantSetting')->name('setting');
-        Route::post('setting/{restaurant}', 'updateSetting')->name('updateSetting');
+        Route::post('setting', 'updateSetting')->name('updateSetting');
     });
 
     Route::resource('food', FoodController::class);
 
-    Route::controller(FoodPartyController::class)->name('party.')->group(function () {
-        Route::get('party/{food}', 'create')->name('create');
-        Route::get('party', 'index')->name('index');
-        Route::post('food/{food}/party', 'partyStore')->name('submit');
-        Route::get('party/{food}/edit', 'edit')->name('edit');
-        Route::post('food/{food}/party/edit', 'partyUpdate')->name('update');
-        Route::delete('food/{foodParty}/party', 'delete')->name('delete');
+    Route::controller(FoodPartyController::class)->prefix('party')->name('party.')->group(function () {
+        Route::get('/{food}', 'create')->name('create');
+        Route::get('/', 'index')->name('index');
+        Route::post('/{food}', 'partyStore')->name('submit');
+        Route::get('/{foodParty}/edit', 'edit')->name('edit');
+        Route::post('/{foodParty}/edit', 'partyUpdate')->name('update');
+        Route::delete('/{foodParty}/destroy', 'delete')->name('delete');
     });
 
     Route::patch('dashboard/situation/{order}', [SituationController::class, 'changeSituation'])->name('change.situation');
@@ -101,10 +101,10 @@ Route::middleware('auth')->middleware('role:seller')->prefix('seller')->group(fu
         Route::get('/', 'index')->name('index');
         Route::patch('/accept/{time}', 'update')->name('update');
         Route::patch('/close/{time}', 'close')->name('close');
-        Route::post('/some-day/accept','someDay')->name('someDay');
-        Route::post('/some-day/close','someDayClose')->name('someDay.close');
-        Route::post('/all-day/accept','allDay')->name('allDay');
-        Route::post('/all-day/close','allDayClose')->name('allDay.close');
+        Route::post('/some-day/accept', 'someDay')->name('someDay');
+        Route::post('/some-day/close', 'someDayClose')->name('someDay.close');
+        Route::post('/all-day/accept', 'allDay')->name('allDay');
+        Route::post('/all-day/close', 'allDayClose')->name('allDay.close');
     });
 
 });
