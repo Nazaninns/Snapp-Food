@@ -11,14 +11,14 @@ class OrderController extends Controller
 {
     public function active()
     {
-        if (Auth::user()->orders->isEmpty()) return response()->json(['data' => ['msg' => 'not found']], 404);
+        if (Auth::user()->orders->where('situation', '!=', 'delivered')->isEmpty()) return response()->json(['data' => ['msg' => 'not found']], 404);
         $orders = Auth::user()->orders()->where('situation', '!=', 'delivered')->get();
         return response()->json(['data' => $orders]);
     }
 
     public function deActive()
     {
-        if (Auth::user()->orders->isEmpty()) return response()->json(['data' => ['msg' => 'not found']], 404);
+        if (Auth::user()->orders->where('situation', '==', 'delivered')->isEmpty()) return response()->json(['data' => ['msg' => 'not found']], 404);
         $orders = Auth::user()->orders()->where('situation', 'delivered')->get();
         return response()->json(['data' => $orders]);
     }

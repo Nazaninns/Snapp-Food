@@ -20,7 +20,9 @@ class CommentResource extends JsonResource
             'food'=>CommentFoodResource::collection($this->order?->food),
             'created_at'=>$this->created_at,
             'score'=>$this->score,
-            'content'=>$this->text
+            'content'=>$this->text,
+            //'reply'=>$this->when($this->reply,$this->reply->text),
+            'reply'=>$this->reply->text
         ];
     }
 }

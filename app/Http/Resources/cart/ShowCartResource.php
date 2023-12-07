@@ -18,10 +18,9 @@ class ShowCartResource extends JsonResource
     {
         return [
             'cart_id' => $this->id,
-            'restaurant ' => [
-                new  RestaurantResource($this->restaurant),
+            'restaurant ' => new  RestaurantResource($this->restaurant),
                 'restaurant_id' => $this->restaurant_id
-            ],
+            ,
             'food' => CartFoodResource::collection($this->food),
             'user' => [
                 'user_id' => $this->user_id,
