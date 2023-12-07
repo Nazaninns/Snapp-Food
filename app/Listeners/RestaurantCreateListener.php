@@ -6,7 +6,7 @@ use App\Events\RestaurantCreateEvent;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 
-class RestaurantCreateListener implements ShouldQueue
+class RestaurantCreateListener
 {
     /**
      * Create the event listener.
