@@ -62,12 +62,12 @@ Route::middleware('auth')->middleware('role:admin')->prefix('admin')->name('admi
     Route::resource('banners', BannerController::class)->except('edit', 'update', 'show');
     //seller
 });
-Route::middleware('auth')->middleware('role:seller')->prefix('seller')->group(function () {
+Route::middleware('auth')->middleware(['role:seller', 'can:access_routes'])->prefix('seller')->group(function () {
 
     Route::controller(SellerController::class)->name('seller.')->group(function () {
-        Route::get('dashboard', 'dashboard')->name('dashboard');
-        Route::get('profile', 'restaurantProfile')->name('profile');
-        Route::post('profile', 'profileStore')->name('storeProfile');
+        Route::get('dashboard', 'dashboard')->name('dashboard')->withoutMiddleware('can:access_routes');
+        Route::get('profile', 'restaurantProfile')->name('profile')->withoutMiddleware('can:access_routes');
+        Route::post('profile', 'profileStore')->name('storeProfile')->withoutMiddleware('can:access_routes');
         Route::get('setting', 'restaurantSetting')->name('setting');
         Route::post('setting', 'updateSetting')->name('updateSetting');
     });
