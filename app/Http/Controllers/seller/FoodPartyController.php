@@ -19,29 +19,35 @@ class FoodPartyController extends Controller
 
     public function create(Food $food)
     {
+        $this->authorize('create',[FoodParty::class,$food]);
         return view('seller.party.create', compact('food'));
     }
 
     public function partyStore(Food $food, FoodPartyRequest $request)
     {
+        $this->authorize('create',[FoodParty::class,$food]);
         $validated = $request->validated();
         $validated['food_id'] = $food->id;
         FoodParty::query()->create($validated);
         return redirect()->route('food.index');
     }
 
-    public function edit(Food $food,FoodParty $foodParty)
+    public function edit(FoodParty $foodParty)
     {
+        $food=$foodParty->food;
+        $this->authorize('update',$foodParty);
         return view('seller.party.edit',compact('food','foodParty'));
     }
 
     public function partyUpdate(FoodPartyRequest $request , FoodParty $foodParty)
     {
+        $this->authorize('update',$foodParty);
         $foodParty->update($request->validated());
         return redirect()->route('food.index');
     }
     public function delete(FoodParty $foodParty)
     {
+        $this->authorize('delete',$foodParty);
         $foodParty->delete();
         return redirect()->route('food.index');
     }

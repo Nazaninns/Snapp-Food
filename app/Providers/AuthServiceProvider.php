@@ -7,10 +7,12 @@ use App\Models\Address;
 use App\Models\Cart;
 use App\Models\Comment;
 use App\Models\Food;
+use App\Models\FoodParty;
 use App\Models\Order;
 use App\Models\Restaurant;
 use App\Models\Time;
 use App\Policies\AddressPolicy;
+use App\Policies\FoodPartyPolicy;
 use App\Policies\FoodPolicy;
 use App\Policies\OrderPolicy;
 use App\Policies\CartPolicy;
@@ -33,7 +35,8 @@ class AuthServiceProvider extends ServiceProvider
         Cart::class=>CartPolicy::class,
         Restaurant::class=>RestaurantPolicy::class,
         Time::class=>TimePolicy::class,
-        Food::class=>FoodPolicy::class
+        Food::class=>FoodPolicy::class,
+        FoodParty::class=>FoodPartyPolicy::class
 
     ];
 
