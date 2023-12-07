@@ -154,7 +154,13 @@
                           d="M123.6 391.3c12.9-9.4 29.6-11.8 44.6-6.4c26.5 9.6 56.2 15.1 87.8 15.1c124.7 0 208-80.5 208-160S380.7 80 256 80S48 160.5 48 240c0 32 12.4 62.8 35.7 89.2c8.6 9.7 12.8 22.5 11.8 35.5c-1.4 18.1-5.7 34.7-11.3 49.4c17-7.9 31.1-16.7 39.4-22.7zM21.2 431.9c1.8-2.7 3.5-5.4 5.1-8.1c10-16.6 19.5-38.4 21.4-62.9C17.7 326.8 0 285.1 0 240C0 125.1 114.6 32 256 32s256 93.1 256 208s-114.6 208-256 208c-37.1 0-72.3-6.4-104.1-17.9c-11.9 8.7-31.3 20.6-54.3 30.6c-15.1 6.6-32.3 12.6-50.1 16.1c-.8.2-1.6.3-2.4.5c-4.4.8-8.7 1.5-13.2 1.9c-.2 0-.5.1-.7.1c-5.1.5-10.2.8-15.3.8c-6.5 0-12.3-3.9-14.8-9.9S0 457.4 4.5 452.8c4.1-4.2 7.8-8.7 11.3-13.5c1.7-2.3 3.3-4.6 4.8-6.9c.1-.2.2-.3.3-.5z"/>
                 </svg>
             </a>
-            <a href="{{route('time.index')}}">Time</a>
+            <a href="{{route('time.index')}}">
+
+                <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24">
+                    <path fill="currentColor"
+                          d="M12 20a8 8 0 0 0 8-8a8 8 0 0 0-8-8a8 8 0 0 0-8 8a8 8 0 0 0 8 8m0-18a10 10 0 0 1 10 10a10 10 0 0 1-10 10C6.47 22 2 17.5 2 12A10 10 0 0 1 12 2m.5 5v5.25l4.5 2.67l-.75 1.23L11 13V7h1.5Z"/>
+                </svg>
+            </a>
         </div>
         <div class="text-2xl font-semibold"> {{$user->restaurant->name }} resturant</div> <!-- Title in the middle -->
         <div class=" flex gap-4">
@@ -243,7 +249,8 @@
                                 <g fill="none" stroke="#ea8685" stroke-linecap="round" stroke-width="2">
                                     <path stroke-dasharray="60" stroke-dashoffset="60"
                                           d="M5.63604 5.63603C9.15076 2.12131 14.8492 2.12131 18.364 5.63603C21.8787 9.15075 21.8787 14.8492 18.364 18.364C14.8492 21.8787 9.15076 21.8787 5.63604 18.364C2.12132 14.8492 2.12132 9.15075 5.63604 5.63603Z">
-                                        <animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s" values="60;0"/>
+                                        <animate fill="freeze" attributeName="stroke-dashoffset" dur="0.5s"
+                                                 values="60;0"/>
                                     </path>
                                     <path stroke-dasharray="18" stroke-dashoffset="18" d="M6 6L18 18">
                                         <animate fill="freeze" attributeName="stroke-dashoffset" begin="0.6s" dur="0.2s"

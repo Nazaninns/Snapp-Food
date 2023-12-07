@@ -80,9 +80,9 @@ background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, F
     <h1 class="text-2xl mt-3">Set Time</h1>
     <div></div>
 </nav>
-<div class="mt-5 w-11/12 mx-auto">
-    <table class="w-full bg-gray-700 text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+<div class="mt-5 w-11/12 mx-auto  ">
+    <table class="w-full rounded-2xl bg-gray-900 text-sm text-left text-gray-200 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-300 dark:text-gray-800">
         <tr>
             @foreach($times as $time)
                 <td class="px-6 py-3">{{$time->day}}</td>
@@ -94,40 +94,60 @@ background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, F
         <tr>
             @foreach($times as $time)
                 <td class="px-6 py-3">
-                    <div class="flex flex-col">
+                    <div class="flex flex-col ">
                         <form class="" action="{{route('time.update',$time)}}" method="post">
                             @csrf
                             @method('PATCH')
-                            <label for="">start</label>
-                            <input type="time" value="{{$time->start_time}}" name="start_time" class="w-24">
-                            @error('start_time')
-                            {{$message}}
-                            @enderror
-                            <label for="">end</label>
-                            <input type="time" value="{{$time->end_time}}" name="end_time" class="w-24">
+                            <div class="flex gap-4">
+                                <label for="">start</label>
+                                <input type="time" value="{{$time->start_time}}" name="start_time"
+                                       class="w-28 bg-gray-900 text-gray-300 border border-gray-300 rounded">
+                            </div>
+                            <div class="flex gap-5 mt-1">
+                                <label for="">end</label>
+                                <input type="time" value="{{$time->end_time}}" name="end_time"
+                                       class="w-28 bg-gray-900 text-gray-300 border border-gray-300 rounded">
+                            </div>
                             <div>
-                                <button type="submit">accept</button>
+                                <button type="submit">
+
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                                         viewBox="0 0 2048 2048">
+                                        <path fill="white"
+                                              d="m1902 196l121 120L683 1657L25 999l121-121l537 537L1902 196z"/>
+                                    </svg>
+                                </button>
                             </div>
                         </form>
-                        <form action="{{route('time.close',$time)}}" method="post">
+                        <form action="{{route('time.close',$time)}}" method="post" class="">
                             @csrf
                             @method('PATCH')
-
-                            <button type="submit">close</button>
-
+                            <div>
+                                <button type="submit">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 14 14">
+                                        <path fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round"
+                                              d="m13.5.5l-13 13m0-13l13 13"/>
+                                    </svg>
+                                </button>
+                            </div>
                         </form>
 
                     </div>
                 </td>
             @endforeach
         </tr>
-
+        @error('start_time')
+        {{$message}}
+        @enderror
+        @error('end_time')
+        {{$message}}
+        @enderror
         </tbody>
     </table>
 </div>
 <div class="mt-5 w-11/12 mx-auto">
-    <table class="w-full bg-gray-700 text-sm text-left text-gray-500 dark:text-gray-400">
-        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+    <table class="w-full rounded-2xl bg-gray-900 text-sm text-left text-gray-200 dark:text-gray-400">
+        <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-300 dark:text-gray-800">
         <tr>
 
             <td class="px-6 py-3">saturday_wednesday</td>
@@ -142,18 +162,35 @@ background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, F
                 <div class="flex flex-col">
                     <form class="" action="{{route('time.someDay')}}" method="post">
                         @csrf
-                        <input type="time" name="start_time" class="w-24">
+                        <div class="flex gap-4">
+                            <label for="">start</label>
+                        <input type="time" name="start_time" class="w-28 bg-gray-900 text-gray-300 border border-gray-300 rounded">
+                        </div>
                         @error('start_time')
                         {{$message}}
                         @enderror
-                        <input type="time" name="end_time" class="w-24">
+                        <div class="flex gap-5 mt-1">
+                            <label for="">end</label>
+                        <input type="time" name="end_time" class="w-28 bg-gray-900 text-gray-300 border border-gray-300 rounded">
+                        </div>
                         <div>
-                            <button type="submit">accept</button>
+                            <button type="submit">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                                     viewBox="0 0 2048 2048">
+                                    <path fill="white"
+                                          d="m1902 196l121 120L683 1657L25 999l121-121l537 537L1902 196z"/>
+                                </svg>
+                            </button>
                         </div>
                     </form>
                     <form action="{{route('time.someDay.close')}}" method="post">
                         @csrf
-                        <button type="submit">close</button>
+                        <button type="submit">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 14 14">
+                                <path fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round"
+                                      d="m13.5.5l-13 13m0-13l13 13"/>
+                            </svg>
+                        </button>
                     </form>
                 </div>
             </td>
@@ -163,18 +200,35 @@ background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, F
                 <div class="flex flex-col">
                     <form class="" action="{{route('time.allDay')}}" method="post">
                         @csrf
-                        <input type="time" name="start_time" class="w-24">
+                        <div class="flex gap-4">
+                            <label for="">start</label>
+                        <input type="time" name="start_time" class="w-28 bg-gray-900 text-gray-300 border border-gray-300 rounded">
+                        </div>
                         @error('start_time')
                         {{$message}}
                         @enderror
-                        <input type="time" name="end_time" class="w-24">
+                        <div class="flex gap-5 mt-1">
+                            <label for="">end</label>
+                        <input type="time" name="end_time" class="w-28 bg-gray-900 text-gray-300 border border-gray-300 rounded">
+                        </div>
                         <div>
-                            <button type="submit">accept</button>
+                            <button type="submit">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22"
+                                     viewBox="0 0 2048 2048">
+                                    <path fill="white"
+                                          d="m1902 196l121 120L683 1657L25 999l121-121l537 537L1902 196z"/>
+                                </svg>
+                            </button>
                         </div>
                     </form>
                     <form action="{{route('time.allDay.close')}}" method="post">
                         @csrf
-                        <button type="submit">close</button>
+                        <button type="submit">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 14 14">
+                                <path fill="none" stroke="white" stroke-linecap="round" stroke-linejoin="round"
+                                      d="m13.5.5l-13 13m0-13l13 13"/>
+                            </svg>
+                        </button>
                     </form>
                 </div>
             </td>
