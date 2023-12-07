@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Models\Cart;
 use App\Models\Food;
 use App\Models\Restaurant;
 use App\Models\User;
@@ -25,6 +26,16 @@ class CartPolicy
         });
         if ($restaurants->isEmpty()) return false;
         return ($user->getCurrentAddress());
+    }
+
+    public function show(User $user, Cart $cart)
+    {
+        return $user->carts->contains($cart);
+    }
+
+    public function pay(User $user, Cart $cart)
+    {
+        return $user->carts->contains($cart);
     }
 
 }

@@ -64,6 +64,7 @@ class CartController extends Controller
 
     public function pay(Cart $cart, PayRequest $request)
     {
+        $this->authorize('pay',$cart);
         if (Auth::user()->getCurrentAddress() === null) return \response()->json(['msg' => 'set current address first'], 404);
         $discountId = Discount::query()->where('code', $request->validated('code'))->first()?->id;
         CartService::updateCartForPay($cart, $discountId);
@@ -79,6 +80,7 @@ class CartController extends Controller
      */
     public function info(Cart $cart)
     {
+        $this->authorize('show',$cart);
         return \response()->json(['data'=>$cart]);
     }
 }
