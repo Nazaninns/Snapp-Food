@@ -23,7 +23,7 @@ class OrderController extends Controller
 
     public function show(Order $order)
     {
-        $this->authorize('show', [Order::class, $order]);
+        $this->authorize('show', $order);
         return response()->json(['data' => $order]);
     }
 }

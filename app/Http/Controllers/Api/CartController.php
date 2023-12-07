@@ -48,8 +48,8 @@ class CartController extends Controller
         $validated = $request->validated();
         $cart = CartService::updateCart($validated['food_id'], $validated['count']);
         CartService::checkCount($validated['count'], $validated['food_id'], $cart);
-        $cart = CartService::checkCartHasFood($cart);
-        if (!$cart)
+        $cartHasFood = CartService::checkCartHasFood($cart);
+        if (!$cartHasFood)
             return \response()->json(['data' => ['msg' => 'please create a new cart']]);
         return response()->json(['data' => ['msg' => 'updated cart']]);
     }

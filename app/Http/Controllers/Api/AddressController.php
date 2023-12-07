@@ -38,7 +38,7 @@ class AddressController extends Controller
 
     public function current(Address $address)
     {
-        $this->authorize('update', [Address::class, $address]);
+        $this->authorize('update',  $address);
         Auth::user()->addresses()->update([
             'current_address' => 0
         ]);

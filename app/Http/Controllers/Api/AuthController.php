@@ -35,8 +35,8 @@ class AuthController extends Controller
     {
         $user = User::query()->create($request->validated());
         $user->assignRole('customer');
-        WelcomeCustomerEvent::dispatch($user);
         $token = $user->createToken($user->name);
+        WelcomeCustomerEvent::dispatch($user);
         return response()->json([
             'token' => $token->plainTextToken
         ],201);
