@@ -124,10 +124,12 @@ background: linear-gradient(to right, #182848, #4b6cb7); /* W3C, IE 10+/ Edge, F
     @endforeach
 
 </div>
+@if($comments->isNotEmpty())
 <x-paginate />
 <div class="container w-2/12 mx-auto">
     {{$comments->links()}}
 </div>
+@endif
 </body>
 </html>
 

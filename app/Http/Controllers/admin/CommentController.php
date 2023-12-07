@@ -14,7 +14,7 @@ class CommentController extends Controller
     public function commentRequest(PaginateRequest $request)
     {
         $comments = Comment::query()->where('situation', 'delete_request')->get()->sortByDesc('created_at');
-        $comments = (new Collection($comments))->toQuery();
+        if ($comments->isNotEmpty()) $comments = $comments->toQuery();
         $comments = PaginateService::paginate($request->validated('paginate'), $comments);
         return view('admin.comments.index', compact('comments'));
     }
